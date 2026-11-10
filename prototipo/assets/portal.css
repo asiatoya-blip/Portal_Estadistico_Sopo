@@ -93,7 +93,16 @@
 .nxgov-page .nxgov-home__title { margin: 0; font: 700 clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem)/1.15 var(--nxgov-font-display); letter-spacing: -0.02em; color: var(--nxgov-color-text); }
 .nxgov-home__lead { margin: 0.375rem 0 0; color: var(--nxgov-color-muted); }
 
-.nxgov-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+/* Fila flexible: las tarjetas crecen para llenar la fila, haya 3, 4 o más */
+.nxgov-kpis { display: flex; flex-wrap: wrap; gap: 1rem; container-type: inline-size; }
+.nxgov-kpis > .nxgov-kpi { flex: 1 1 14rem; min-width: 0; }
+/* Con un número par de cifras que no cabe en una fila, se reparten por pares (2 + 2) en vez de 3 + 1 */
+@container (width < 60rem) {
+  .nxgov-kpis:has(> :nth-child(2n):last-child) > .nxgov-kpi { flex-basis: calc(50% - 0.5rem); }
+}
+@container (width < 30rem) {
+  .nxgov-kpis:has(> :nth-child(2n):last-child) > .nxgov-kpi { flex-basis: 100%; }
+}
 .nxgov-kpi { display: flex; flex-direction: column; padding: 0.875rem 1.125rem 0.75rem; background: var(--nxgov-color-surface); border: 1px solid var(--nxgov-color-line); border-radius: var(--nxgov-radius); color: var(--nxgov-color-text); text-decoration: none; box-shadow: var(--nxgov-shadow); transition: box-shadow var(--nxgov-motion-fast) var(--nxgov-ease), border-color var(--nxgov-motion-fast) var(--nxgov-ease), transform var(--nxgov-motion-fast) var(--nxgov-ease); }
 a.nxgov-kpi:hover { transform: translateY(-2px); }
 .nxgov-kpi:hover { color: var(--nxgov-color-text); border-color: var(--nxgov-color-line-strong); box-shadow: var(--nxgov-shadow-hover); }
@@ -169,7 +178,7 @@ a.nxgov-kpi:hover { transform: translateY(-2px); }
 @keyframes nxgov-rise { from { transform: translateY(0.5rem); } to { transform: none; } }
 
 @media (max-width: 75rem) {
-  .nxgov-kpis, .nxgov-collections { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nxgov-collections { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 64rem) {
   .nxgov-shell { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding-top: 1rem; }
@@ -183,7 +192,7 @@ a.nxgov-kpi:hover { transform: translateY(-2px); }
   .nxgov-nav__note { display: none; }
 }
 @media (max-width: 40rem) {
-  .nxgov-kpis, .nxgov-collections { grid-template-columns: minmax(0, 1fr); }
+  .nxgov-collections { grid-template-columns: minmax(0, 1fr); }
   .nxgov-header__name { font-size: 1rem; }
   .nxgov-board__hint { display: block; margin: 0; padding: 0.5rem 1.25rem; font-size: 0.8125rem; color: var(--nxgov-color-muted); background: var(--nxgov-color-neutral-soft); }
   .nxgov-board__stage { aspect-ratio: auto; height: 34rem; max-height: none; overflow-x: auto; -webkit-overflow-scrolling: touch; }
