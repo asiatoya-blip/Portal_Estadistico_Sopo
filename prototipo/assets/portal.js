@@ -1,99 +1,47 @@
-// Mejora progresiva: sin JS todos los temas y tableros se ven apilados y "Abrir en Tableau Public" funciona.
+// Mejora progresiva: sin JS todas las vistas se ven apiladas y los enlaces del riel llevan a cada tablero.
 (function () {
   'use strict';
   document.documentElement.classList.add('nxgov-js');
-  var TABLEAU = /^https:\/\/public\.tableau\.com\/views\/[A-Za-z0-9_]+\/[A-Za-z0-9_]+\?[^#@\\]*$/;
-  var links = Array.prototype.slice.call(document.querySelectorAll('.nxgov-themes__link'));
-  var panels = Array.prototype.slice.call(document.querySelectorAll('.nxgov-theme'));
-  if (!links.length || !panels.length) return;
+  var views = Array.prototype.slice.call(document.querySelectorAll('.nxgov-view'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nxgov-rail__link'));
+  var menu = document.querySelector('.nxgov-rail__menu');
+  var narrow = window.matchMedia('(max-width: 64rem)');
+  if (!views.length) return;
 
-  function emit(name, detail) {
-    document.dispatchEvent(new CustomEvent('nxgov:' + name, { detail: detail }));
-  }
-
-  // Tema activo: el hash puede ser un tema (#finanzas) o una hoja (#finanzas-finanzasidf)
-  function resolve(hash) {
+  function show(hash, animate) {
     var id = (hash || '').replace(/^#/, '');
-    var target = id && document.getElementById(id);
-    if (!target) return { panel: panels[0], sheet: null };
-    var panel = target.closest('.nxgov-theme');
-    if (!panel) return { panel: panels[0], sheet: null };
-    return { panel: panel, sheet: target.classList.contains('nxgov-viz') ? target : null };
-  }
-
-  function showSheet(panel, index) {
-    panel.querySelectorAll('.nxgov-viz').forEach(function (v) {
-      v.classList.toggle('nxgov-is-hidden', v.getAttribute('data-nxgov-sheet') !== String(index));
-    });
-    panel.querySelectorAll('.nxgov-sheets__btn').forEach(function (b) {
-      b.setAttribute('aria-pressed', b.getAttribute('data-nxgov-sheet') === String(index) ? 'true' : 'false');
-    });
-  }
-
-  function activate(state, animate) {
-    panels.forEach(function (p) { p.classList.toggle('nxgov-is-hidden', p !== state.panel); });
+    var target = (id && document.getElementById(id)) || views[0];
+    var view = target.closest('.nxgov-view') || views[0];
+    views.forEach(function (v) { v.classList.toggle('nxgov-is-hidden', v !== view); });
     links.forEach(function (a) {
-      if (a.getAttribute('href') === '#' + state.panel.id) a.setAttribute('aria-current', 'true');
+      if (a.getAttribute('href') === '#' + view.id) a.setAttribute('aria-current', 'true');
       else a.removeAttribute('aria-current');
     });
-    showSheet(state.panel, state.sheet ? state.sheet.getAttribute('data-nxgov-sheet') : '0');
-    if (animate) {
-      state.panel.classList.remove('nxgov-is-entering');
-      void state.panel.offsetWidth;
-      state.panel.classList.add('nxgov-is-entering');
+    if (animate && view.classList.contains('nxgov-view--home')) {
+      view.classList.remove('nxgov-is-entering');
+      void view.offsetWidth;
+      view.classList.add('nxgov-is-entering');
     }
-    emit('themes:change', { tema: state.panel.id });
+    document.title = (view.id === 'resumen' ? '' : view.querySelector('h2').textContent + ' · ') + 'Portal Estadístico de Sopó';
+    document.dispatchEvent(new CustomEvent('nxgov:views:change', { detail: { vista: view.id } }));
+    return view;
   }
 
-  links.forEach(function (a) {
-    a.addEventListener('click', function (ev) {
-      ev.preventDefault();
-      var id = a.getAttribute('href');
-      history.replaceState(null, '', id);
-      var state = resolve(id);
-      activate(state, true);
-      // En pantallas angostas el panel queda debajo de la barra: llevar al visitante a él
-      if (state.panel.getBoundingClientRect().top > window.innerHeight * 0.6) {
-        var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        state.panel.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
-      }
-    });
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest('a[href^="#"]');
+    if (!a || a.classList.contains('nxgov-skip')) return;
+    var id = a.getAttribute('href');
+    if (!document.getElementById(id.slice(1))) return;
+    ev.preventDefault();
+    history.pushState(null, '', id);
+    var view = show(id, true);
+    if (narrow.matches && menu) menu.open = false;
+    window.scrollTo(0, 0);
+    var heading = view.querySelector('h1, h2');
+    if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
   });
 
-  document.querySelectorAll('.nxgov-sheets__btn').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var panel = b.closest('.nxgov-theme');
-      var index = b.getAttribute('data-nxgov-sheet');
-      showSheet(panel, index);
-      var sheet = panel.querySelector('.nxgov-viz[data-nxgov-sheet="' + index + '"]');
-      if (sheet) history.replaceState(null, '', '#' + sheet.id);
-    });
-  });
-
-  // El iframe de Tableau se crea solo cuando el visitante lo pide (privacidad y peso)
-  document.querySelectorAll('.nxgov-viz__load').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var src = btn.getAttribute('data-nxgov-src');
-      if (!TABLEAU.test(src)) return;
-      var ev = new CustomEvent('nxgov:action:load-viz', { cancelable: true, detail: { src: src } });
-      if (!document.dispatchEvent(ev)) return;
-      var stage = btn.closest('.nxgov-viz__stage');
-      var frame = document.createElement('iframe');
-      frame.className = 'nxgov-viz__frame';
-      frame.src = src;
-      frame.title = btn.getAttribute('data-nxgov-title');
-      frame.setAttribute('lang', 'es');
-      frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
-      frame.setAttribute('referrerpolicy', 'strict-origin');
-      frame.setAttribute('allow', 'fullscreen');
-      frame.setAttribute('allowfullscreen', '');
-      stage.replaceChildren(frame);
-      stage.classList.add('nxgov-is-loaded');
-      frame.focus();
-      emit('viz:loaded', { src: src });
-    });
-  });
-
-  window.addEventListener('hashchange', function () { activate(resolve(location.hash), true); });
-  activate(resolve(location.hash), false);
+  window.addEventListener('popstate', function () { show(location.hash, false); });
+  if (menu && narrow.matches) menu.open = false;
+  show(location.hash, true);
 })();

@@ -5,25 +5,19 @@ primary_target: "prototipo/index.html"
 related_targets: []
 ---
 
-# Surface brief — Portal Estadístico de Sopó (página única)
+# Surface brief — Portal Estadístico de Sopó (v2, tablero de producto)
 
-Scope: `prototipo/index.html` (propuesta publicable en GitHub Pages; luego se porta a Eleventy). Mode: Operate.
-Audiencia: ciudadanía y funcionarios por igual. Tarea: encontrar la cifra de un tema y explorar su tablero de Tableau.
-Restricciones: chrome GOV.CO intacto; CSP estricta (sin inline); iframes de Tableau solo tras clic, con aviso de tercero;
-Programas Sociales oculto; cada hoja con resumen en texto fuera del iframe.
+Scope: `prototipo/index.html`. Mode: Operate. Reemplaza la v1 "Temas que juntan cifra y tablero" (rechazada por el
+usuario el 2026-11-10: tableros ocultos tras botón, chrome GOV.CO simulado, diseño soso).
+Audiencia: ciudadanía y funcionarios. Preguntas que responde: ¿cómo va Sopó?, ¿qué cambió?, ¿dónde exploro el detalle?
+Restricciones: barra superior y pie GOV.CO reales del CDN; tableros de Tableau visibles sin clic (iframe directo);
+Programas Sociales oculto; resumen en texto junto a cada tablero; WCAG 2.1 AA.
 
 ## Direction contract
 
-THESIS: La barra de temas es el resumen de Sopó: cada tema trae su cifra, y al abrirlo la cifra y su tablero quedan lado a lado. Rechaza la franja de 6 tarjetas sueltas + secciones con mundos de color distintos.
-OWN-WORLD: Kit GOV.CO 9.2 en modo restringido: fondo #F4F6FB, superficies blancas con borde #C3CFE5, Cobalt #0943B5 para acción y selección, Marino oscuro #0A1A3F para texto y la pestaña activa, amarillo #FDBF2D solo en la fecha de corte; rojo #A5361A solo para "desfavorable". Work Sans en títulos y cifras, Nunito Sans en texto.
-STORY: El visitante ve en la barra las 8 cifras de Sopó, toca un tema, lee la cifra con su fuente y su resumen, y si quiere carga el tablero.
-FIRST VIEWPORT: Chrome GOV.CO arriba; título "Portal Estadístico de Sopó" con fecha de corte a la derecha; debajo la barra de 8 temas, cada uno con nombre + cifra; panel del tema activo: columna izquierda (≈1/3) con cifra grande, variación con valoración, fuente y resumen; columna derecha con selector de hojas y el marco del tablero con botón "Cargar el tablero" como acción principal.
-FORM: Temas que juntan cifra y tablero, posición 2 de mi lista ordenada; seed:93046ec3089052a6. Señal propia: la pestaña-cifra (cada tema muestra su número en la barra).
+THESIS: Un tablero de producto, como la banca y la salud digitales: shell con navegación lateral de temas, un resumen que responde "¿cómo va Sopó?" con estados (mejora / empeora / estable) y los libros de Tableau visibles y grandes. Rechaza la página-documento con tableros escondidos.
+OWN-WORLD: Fondo gris azulado #EEF2F8; riel lateral marino #0A1A3F con texto claro y el tema activo en Cobalt #0943B5; tarjetas blancas con radio 16px y sombra suave; estados con chip (verde #1B6B3A mejora, rojo #A5361A empeora, gris estable); amarillo #FDBF2D solo para la fecha de corte y el foco; Work Sans en cifras y títulos, Nunito Sans en texto; mini tendencias SVG de TerriData en cada tarjeta.
+STORY: Llega y ve en una línea cuántos indicadores mejoraron y cuántos empeoraron; lee las 6 cifras con su tendencia; ve el tablero destacado ya cargado; elige un tema en el riel y el tablero de ese tema ocupa el área principal.
+FIRST VIEWPORT: Barra GOV.CO real; riel lateral izquierdo (≈260px) con marca del portal y temas agrupados por libro; área principal: título "¿Cómo va Sopó?" + fecha de corte + franja de estado; fila de 6 tarjetas con valor, chip de estado y mini tendencia; debajo, tablero destacado (Demografía) cargado a la izquierda y columna derecha "¿Sabías que…?".
+FORM: Tablero con shell lateral inspirado en Mercury, Monarch, Copilot Money, Perplexity Health y Mixpanel (referentes Mobbin 2026-11-10). seed: none (pinned) — "dashboard … banking, medical care … que muestren gráficas y tengan una excelente arquitectura de contenido" (usuario, 2026-11-10).
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
-
-## Desviaciones citadas (revisión final 2026-11-10)
-
-- Población sin valoración: el crecimiento de la población no es favorable ni desfavorable; solo se muestra la dirección.
-- Verde #1B6B3A para "Favorable": verde de éxito del Kit; siempre va con texto e ícono, nunca solo color.
-- Asistente IA: no hay enlace porque aún no existe (PRODUCT.md, principio 4). Datos abiertos enlaza a TerriData (DNP).
-- Tipografía: Work Sans (OFL) alojada en `assets/fonts/` desde 2026-11-10; Nunito Sans en texto corrido.
