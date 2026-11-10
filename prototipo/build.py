@@ -11,6 +11,17 @@ CDN = "https://cdn.www.gov.co/layout-govco-v5"
 HOJAS = {h["id"]: (g, h) for g in D["grupos"] for h in g["hojas"]}
 ESTADO = {"mejora": "Mejora", "empeora": "Empeora", "estable": "Sin valoración"}
 FLECHA = {"sube": "M12 19V5M5 12l7-7 7 7", "baja": "M12 5v14M5 12l7 7 7-7"}
+# Íconos de trazo propios (24×24), uno por entrada del menú
+ICONO = {
+    "resumen": "M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z",
+    "Indicadores territoriales": "M4 20V10M10 20V4M16 20v-7M22 20H2",
+    "Deporte y recreación": "M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5",
+    "Datos curiosos": "M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z",
+}
+
+
+def svg(path, clase="nxgov-icon"):
+    return f'<svg class="{clase}" aria-hidden="true" viewBox="0 0 24 24"><path d="{path}"/></svg>'
 
 
 def url(h, embed):
@@ -24,7 +35,7 @@ def miles(v):
 
 
 def tendencia(serie, w=160, h=44, pad=4):
-    """Mini tendencia SVG de una serie anual de TerriData; devuelve (puntos, ultimo_x, ultimo_y, descripción)."""
+    """Mini tendencia SVG de una serie anual de TerriData; devuelve (puntos, ultimo_xy, descripción)."""
     anos = sorted(serie)
     vals = [serie[a] for a in anos]
     lo, hi = min(vals), max(vals)
@@ -41,90 +52,92 @@ assert abs(_x - 156) < 0.01 and "máximo 3" in _d and _p.split()[1].endswith(",4
 
 def kpi(k):
     puntos, (lx, ly), desc = tendencia(k["serie"])
+    area = f"4,44 {puntos} 156,44"
     sentido = "baja" if k["cambio"].startswith("−") else "sube"
-    g, h = HOJAS[k["hoja"]]
+    h = HOJAS[k["hoja"]][1]
     return f"""
-          <article class="nxgov-kpi nxgov-kpi--{k['estado']}">
-            <div class="nxgov-kpi__top">
-              <h3 class="nxgov-kpi__label">{e(k['etiqueta'])}</h3>
-              <span class="nxgov-kpi__chip">{ESTADO[k['estado']]}</span>
-            </div>
-            <p class="nxgov-kpi__value">{e(k['valor'])}</p>
-            <p class="nxgov-kpi__unit">{e(k['unidad'])}</p>
-            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" role="img" aria-label="{e(desc)}"><polyline points="{puntos}"/><circle cx="{lx:.1f}" cy="{ly:.1f}" r="3.5"/></svg>
-            <p class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="{FLECHA[sentido]}"/></svg>{e(k['cambio'])}</p>
-            <p class="nxgov-kpi__foot"><span>{e(k['fuente'])}</span><a href="#{h['id']}">Ver tablero<span class="nxgov-sr-only"> de {e(h['titulo'])}</span></a></p>
-          </article>"""
+          <a class="nxgov-kpi nxgov-kpi--{k['estado']}" href="#{h['id']}">
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">{e(k['etiqueta'])}</span><span class="nxgov-kpi__chip">{ESTADO[k['estado']]}</span></span>
+            <span class="nxgov-kpi__value">{e(k['valor'])}</span>
+            <span class="nxgov-kpi__unit">{e(k['unidad'])}</span>
+            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="{e(desc)}"><polygon points="{area}"/><polyline points="{puntos}"/><circle cx="{lx:.1f}" cy="{ly:.1f}" r="3"/></svg>
+            <span class="nxgov-kpi__change">{svg(FLECHA[sentido])}{e(k['cambio'])}</span>
+            <span class="nxgov-kpi__source">{e(k['fuente'])} · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de {e(h['titulo'])}</span></span></span>
+          </a>"""
 
 
-def iframe(h, clase="nxgov-board__frame"):
-    return (f'<iframe class="{clase}" src="{e(url(h, True))}" title="Tablero interactivo: {e(h["titulo"])}" lang="es" '
+def iframe(h):
+    return (f'<iframe class="nxgov-board__frame" src="{e(url(h, True))}" title="Tablero interactivo: {e(h["titulo"])}" lang="es" '
             f'loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" '
             f'referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe>')
 
 
 def resumen(h):
     if h["resumen"]:
-        return f'<p class="nxgov-board__summary">{e(h["resumen"])}</p>'
-    return ('<p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará '
+        return f'<p class="nxgov-view__summary">{e(h["resumen"])}</p>'
+    return ('<p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará '
             'aquí, en texto, lo que muestra este tablero.</p>')
 
 
 def vista_hoja(g, h, i, lista):
+    tabs = ""
+    if len(lista) > 1:
+        tabs = '<nav class="nxgov-tabs" aria-label="Tableros de ' + e(g["nombre"]) + '"><ul class="nxgov-tabs__list">' + "".join(
+            f'<li><a class="nxgov-tabs__link" href="#{x["id"]}"{" aria-current=\"page\"" if x is h else ""}>{e(x["titulo"])}</a></li>'
+            for x in lista) + "</ul></nav>"
     prev_h, next_h = lista[i - 1] if i else None, lista[i + 1] if i + 1 < len(lista) else None
-    nav = ""
+    pager = ""
     if prev_h or next_h:
-        nav = '<nav class="nxgov-pager" aria-label="Otros tableros de este grupo">' + \
-              (f'<a class="nxgov-pager__link" href="#{prev_h["id"]}"><span class="nxgov-pager__dir">Anterior</span>{e(prev_h["titulo"])}</a>' if prev_h else "<span></span>") + \
-              (f'<a class="nxgov-pager__link nxgov-pager__link--next" href="#{next_h["id"]}"><span class="nxgov-pager__dir">Siguiente</span>{e(next_h["titulo"])}</a>' if next_h else "") + "</nav>"
+        pager = '<nav class="nxgov-pager" aria-label="Tablero anterior y siguiente">' + \
+            (f'<a class="nxgov-pager__link" href="#{prev_h["id"]}"><span class="nxgov-pager__dir">← Anterior</span>{e(prev_h["titulo"])}</a>' if prev_h else "<span></span>") + \
+            (f'<a class="nxgov-pager__link nxgov-pager__link--next" href="#{next_h["id"]}"><span class="nxgov-pager__dir">Siguiente →</span>{e(next_h["titulo"])}</a>' if next_h else "") + "</nav>"
     return f"""
-        <section class="nxgov-view" id="{h['id']}" aria-labelledby="{h['id']}-h">
+        <section class="nxgov-view" id="{h['id']}" aria-labelledby="{h['id']}-h" data-nxgov-group="{e(g['nombre'])}">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">{e(g['nombre'])} · {e(g['fuente'])}</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> {e(g['nombre'])}</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="{h['id']}-h">{e(h['titulo'])}</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="{e(url(h, False))}" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="{e(url(h, False))}" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          {tabs}
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              {resumen(h)}
-              <p class="nxgov-board__meta">Fuente: {e(h['fuente'])} · Corte: {e(D['corte'])}</p>
-            </div>
+            <div class="nxgov-board__info">{resumen(h)}<p class="nxgov-view__meta">Fuente: {e(h['fuente'])} · Corte: {e(D['corte'])}</p></div>
             <div class="nxgov-board__stage">{iframe(h)}</div>
           </div>
-          {nav}
+          {pager}
         </section>"""
 
 
-def rail():
-    grupos = ""
+def menu():
+    out = f'<ul class="nxgov-nav__list"><li><a class="nxgov-nav__item" href="#resumen">{svg(ICONO["resumen"])}Resumen</a></li></ul>'
     for g in D["grupos"]:
-        enlaces = "".join(f'<li><a class="nxgov-rail__link" href="#{h["id"]}">{e(h["titulo"])}</a></li>' for h in g["hojas"])
-        grupos += f'<p class="nxgov-rail__group">{e(g["nombre"])} <span>{len(g["hojas"])}</span></p><ul class="nxgov-rail__list">{enlaces}</ul>'
-    return f"""
-    <aside class="nxgov-rail">
-      <div class="nxgov-rail__brand">
-        <img class="nxgov-rail__logo" src="assets/logo-sopo.png" width="1080" height="589" alt="Alcaldía de Sopó">
-        <p class="nxgov-rail__name">Portal Estadístico</p>
-      </div>
-      <details class="nxgov-rail__menu" open>
-        <summary class="nxgov-rail__toggle">Temas y tableros</summary>
-        <nav aria-label="Temas y tableros">
-          <ul class="nxgov-rail__list"><li><a class="nxgov-rail__link nxgov-rail__link--home" href="#resumen">¿Cómo va Sopó?</a></li></ul>
-          {grupos}
-        </nav>
-      </details>
-      <p class="nxgov-rail__note">Datos a {e(D['corte'])}. Fuentes: TerriData (DNP) y libros de la Alcaldía en Tableau Public.</p>
-    </aside>"""
+        hijos = "".join(f'<li><a class="nxgov-nav__sub" href="#{h["id"]}">{e(h["titulo"])}</a></li>' for h in g["hojas"])
+        out += (f'<details class="nxgov-nav__group" data-nxgov-group="{e(g["nombre"])}"><summary class="nxgov-nav__item">'
+                f'{svg(ICONO[g["nombre"]])}<span class="nxgov-nav__label">{e(g["nombre"])}</span><span class="nxgov-nav__count">{len(g["hojas"])}</span></summary>'
+                f'<ul class="nxgov-nav__sublist">{hijos}</ul></details>')
+    return out
+
+
+def colecciones():
+    out = ""
+    for g in D["grupos"]:
+        primeros = "".join(f'<li><a href="#{h["id"]}">{e(h["titulo"])}</a></li>' for h in g["hojas"][:4])
+        mas = f'<li class="nxgov-collection__more">y {len(g["hojas"]) - 4} más</li>' if len(g["hojas"]) > 4 else ""
+        out += f"""
+            <article class="nxgov-collection">
+              <span class="nxgov-collection__icon">{svg(ICONO[g['nombre']])}</span>
+              <h3 class="nxgov-collection__title"><a href="#{g['hojas'][0]['id']}">{e(g['nombre'])}</a></h3>
+              <p class="nxgov-collection__meta">{len(g['hojas'])} {'tablero' if len(g['hojas']) == 1 else 'tableros'} · {e(g['fuente'])}</p>
+              <ul class="nxgov-collection__list">{primeros}{mas}</ul>
+            </article>"""
+    return out
 
 
 k = D["kpis"]
 mejoran = sum(x["estado"] == "mejora" for x in k)
 empeoran = sum(x["estado"] == "empeora" for x in k)
 dest = HOJAS["demografia"][1]
-gen = HOJAS["generaciones"][1]
-esc = HOJAS["escenarios"][1]
 vistas = "".join(vista_hoja(g, h, i, g["hojas"]) for g in D["grupos"] for i, h in enumerate(g["hojas"]))
 
 pagina = f"""<!doctype html>
@@ -132,12 +145,13 @@ pagina = f"""<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdn.www.gov.co; font-src 'self' https://cdn.www.gov.co; img-src 'self' data: https://cdn.www.gov.co; frame-src https://public.tableau.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.www.gov.co; style-src 'self' https://cdn.www.gov.co; font-src 'self' https://cdn.www.gov.co; img-src 'self' data: https://cdn.www.gov.co; frame-src https://public.tableau.com; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Portal Estadístico de Sopó</title>
   <meta name="description" content="¿Cómo va Sopó? Cifras oficiales y tableros de Sopó, Cundinamarca, con su fuente y su fecha de corte.">
   <link rel="stylesheet" href="{CDN}/all.css">
   <link rel="stylesheet" href="assets/portal.css">
+  <script src="{CDN}/script.js" defer></script>
   <script src="assets/portal.js" defer></script>
 </head>
 <body class="nxgov-page">
@@ -145,50 +159,57 @@ pagina = f"""<!doctype html>
   <div class="barra-superior-govco">
     <a href="https://www.gov.co/" target="_blank" rel="noopener" aria-label="Portal del Estado Colombiano - GOV.CO"></a>
   </div>
-  <div class="nxgov-shell">{rail()}
+  <div class="nxgov-a11y">
+    <div class="barra-accesibilidad-govco">
+      <button class="contrast" type="button" aria-label="Cambiar contraste"><span class="govco-contrast"></span></button>
+      <button class="decrease-font-size" type="button" aria-label="Disminuir letra" data-decrease-limit="-5"><span class="govco-font-minimize"></span></button>
+      <button class="increase-font-size" type="button" aria-label="Aumentar letra" data-increase-limit="5"><span class="govco-font-maximize"></span></button>
+    </div>
+  </div>
+  <header class="nxgov-header">
+    <div class="nxgov-container nxgov-header__inner">
+      <a class="nxgov-header__brand" href="#resumen"><img class="nxgov-header__logo" src="assets/logo-sopo.png" width="1080" height="589" alt="Alcaldía de Sopó"><span class="nxgov-header__name">Portal Estadístico</span></a>
+      <p class="nxgov-header__cut"><span class="nxgov-header__dot" aria-hidden="true"></span>Datos a {e(D['corte'])}</p>
+    </div>
+  </header>
+  <div class="nxgov-container nxgov-shell">
+    <aside class="nxgov-nav">
+      <details class="nxgov-nav__menu" open>
+        <summary class="nxgov-nav__toggle">Menú de tableros</summary>
+        <nav aria-label="Tableros">{menu()}</nav>
+      </details>
+      <p class="nxgov-nav__note">Fuentes: TerriData (DNP) y libros de la Alcaldía en Tableau Public.</p>
+    </aside>
     <main class="nxgov-main" id="contenido">
       <section class="nxgov-view nxgov-view--home" id="resumen" aria-labelledby="resumen-h">
-        <header class="nxgov-hero">
-          <div>
-            <h1 class="nxgov-hero__title" id="resumen-h">¿Cómo va Sopó?</h1>
-            <p class="nxgov-hero__lead">Las cifras oficiales del municipio, con su fuente, su tendencia y los tableros para explorarlas.</p>
-          </div>
-          <p class="nxgov-hero__cut">Datos a {e(D['corte'])}</p>
+        <header class="nxgov-home__head">
+          <h1 class="nxgov-home__title" id="resumen-h">¿Cómo va Sopó?</h1>
+          <p class="nxgov-home__lead">Cifras oficiales del municipio con su fuente y su tendencia. Toca una cifra para ver su tablero.</p>
+          <ul class="nxgov-pulse" aria-label="Estado frente al año anterior">
+            <li class="nxgov-pulse__item nxgov-pulse__item--mejora"><strong>{mejoran}</strong> mejoraron</li>
+            <li class="nxgov-pulse__item nxgov-pulse__item--empeora"><strong>{empeoran}</strong> empeoraron</li>
+            <li class="nxgov-pulse__item"><strong>{len(k) - mejoran - empeoran}</strong> sin valoración</li>
+          </ul>
         </header>
-        <p class="nxgov-pulse" role="status">
-          <span class="nxgov-pulse__item nxgov-pulse__item--mejora"><strong>{mejoran}</strong> indicadores mejoraron</span>
-          <span class="nxgov-pulse__item nxgov-pulse__item--empeora"><strong>{empeoran}</strong> empeoraron</span>
-          <span class="nxgov-pulse__item"><strong>{len(k) - mejoran - empeoran}</strong> sin valoración</span>
-          <span class="nxgov-pulse__note">frente al año anterior</span>
-        </p>
         <h2 class="nxgov-sr-only">Cifras principales</h2>
         <div class="nxgov-kpis">{''.join(kpi(x) for x in k)}
         </div>
-        <div class="nxgov-feature">
-          <article class="nxgov-card nxgov-card--board" aria-labelledby="destacado-h">
-            <div class="nxgov-card__head">
-              <div><h2 class="nxgov-card__title" id="destacado-h">{e(dest['titulo'])} de Sopó</h2><p class="nxgov-card__meta">Tablero destacado · TerriData (DNP)</p></div>
-              <a class="nxgov-btn nxgov-btn--ghost" href="#demografia">Ver a pantalla completa</a>
-            </div>
-            <div class="nxgov-board__stage nxgov-board__stage--feature">{iframe(dest)}</div>
-          </article>
-          <div class="nxgov-feature__side">
-            <article class="nxgov-card nxgov-card--fact" aria-labelledby="sabias-h">
-              <h2 class="nxgov-card__title" id="sabias-h">¿Sabías que…?</h2>
-              <p class="nxgov-fact__value">5.931</p>
-              <p class="nxgov-fact__text">soposeños son de la Generación Z, la más numerosa del municipio. Les siguen los Millennials, con 5.599.</p>
-              <a class="nxgov-btn" href="#{gen['id']}">Ver los 6 datos curiosos</a>
-            </article>
-            <article class="nxgov-card nxgov-card--map" aria-labelledby="mapa-h">
-              <h2 class="nxgov-card__title" id="mapa-h">¿Dónde hacer deporte?</h2>
-              <p>{e(esc['resumen'])}</p>
-              <a class="nxgov-btn nxgov-btn--ghost" href="#{esc['id']}">Ver el mapa de escenarios</a>
-            </article>
+        <section class="nxgov-feature" aria-labelledby="destacado-h">
+          <div class="nxgov-section-head">
+            <h2 class="nxgov-section-head__title" id="destacado-h">Tablero destacado: {e(dest['titulo'])}</h2>
+            <a class="nxgov-link" href="#{dest['id']}">Abrir en el visor →</a>
           </div>
-        </div>
+          <div class="nxgov-board nxgov-board--feature"><div class="nxgov-board__stage">{iframe(dest)}</div></div>
+        </section>
+        <section aria-labelledby="explorar-h">
+          <div class="nxgov-section-head"><h2 class="nxgov-section-head__title" id="explorar-h">Explorar tableros</h2></div>
+          <div class="nxgov-collections">{colecciones()}
+          </div>
+        </section>
       </section>{vistas}
     </main>
   </div>
+  <div class="nxgov-totop"><button class="volver-arriba-govco" type="button" aria-label="Volver arriba"><span class="govco-expand_circle_up"></span></button></div>
   <footer class="pie-pagina-govco">
     <div class="first-section">
       <h4>Alcaldía Municipal de Sopó · Portal Estadístico</h4>

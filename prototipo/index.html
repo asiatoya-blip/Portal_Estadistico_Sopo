@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdn.www.gov.co; font-src 'self' https://cdn.www.gov.co; img-src 'self' data: https://cdn.www.gov.co; frame-src https://public.tableau.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.www.gov.co; style-src 'self' https://cdn.www.gov.co; font-src 'self' https://cdn.www.gov.co; img-src 'self' data: https://cdn.www.gov.co; frame-src https://public.tableau.com; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Portal Estadístico de Sopó</title>
   <meta name="description" content="¿Cómo va Sopó? Cifras oficiales y tableros de Sopó, Cundinamarca, con su fuente y su fecha de corte.">
   <link rel="stylesheet" href="https://cdn.www.gov.co/layout-govco-v5/all.css">
   <link rel="stylesheet" href="assets/portal.css">
+  <script src="https://cdn.www.gov.co/layout-govco-v5/script.js" defer></script>
   <script src="assets/portal.js" defer></script>
 </head>
 <body class="nxgov-page">
@@ -16,419 +17,378 @@
   <div class="barra-superior-govco">
     <a href="https://www.gov.co/" target="_blank" rel="noopener" aria-label="Portal del Estado Colombiano - GOV.CO"></a>
   </div>
-  <div class="nxgov-shell">
-    <aside class="nxgov-rail">
-      <div class="nxgov-rail__brand">
-        <img class="nxgov-rail__logo" src="assets/logo-sopo.png" width="1080" height="589" alt="Alcaldía de Sopó">
-        <p class="nxgov-rail__name">Portal Estadístico</p>
-      </div>
-      <details class="nxgov-rail__menu" open>
-        <summary class="nxgov-rail__toggle">Temas y tableros</summary>
-        <nav aria-label="Temas y tableros">
-          <ul class="nxgov-rail__list"><li><a class="nxgov-rail__link nxgov-rail__link--home" href="#resumen">¿Cómo va Sopó?</a></li></ul>
-          <p class="nxgov-rail__group">Indicadores territoriales <span>10</span></p><ul class="nxgov-rail__list"><li><a class="nxgov-rail__link" href="#demografia">Demografía</a></li><li><a class="nxgov-rail__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-rail__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-rail__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-rail__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-rail__link" href="#educacion">Educación</a></li><li><a class="nxgov-rail__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-rail__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-rail__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-rail__link" href="#catastro">Avalúo catastral</a></li></ul><p class="nxgov-rail__group">Deporte y recreación <span>1</span></p><ul class="nxgov-rail__list"><li><a class="nxgov-rail__link" href="#escenarios">Escenarios deportivos y recreativos</a></li></ul><p class="nxgov-rail__group">Datos curiosos <span>6</span></p><ul class="nxgov-rail__list"><li><a class="nxgov-rail__link" href="#generaciones">Generaciones</a></li><li><a class="nxgov-rail__link" href="#signo">Signo zodiacal</a></li><li><a class="nxgov-rail__link" href="#dia-nacimiento">Día de nacimiento</a></li><li><a class="nxgov-rail__link" href="#dia-cumpleanos">Día de cumpleaños</a></li><li><a class="nxgov-rail__link" href="#mes-cumpleanos">Mes de cumpleaños</a></li><li><a class="nxgov-rail__link" href="#altitud">Altitud</a></li></ul>
-        </nav>
+  <div class="nxgov-a11y">
+    <div class="barra-accesibilidad-govco">
+      <button class="contrast" type="button" aria-label="Cambiar contraste"><span class="govco-contrast"></span></button>
+      <button class="decrease-font-size" type="button" aria-label="Disminuir letra" data-decrease-limit="-5"><span class="govco-font-minimize"></span></button>
+      <button class="increase-font-size" type="button" aria-label="Aumentar letra" data-increase-limit="5"><span class="govco-font-maximize"></span></button>
+    </div>
+  </div>
+  <header class="nxgov-header">
+    <div class="nxgov-container nxgov-header__inner">
+      <a class="nxgov-header__brand" href="#resumen"><img class="nxgov-header__logo" src="assets/logo-sopo.png" width="1080" height="589" alt="Alcaldía de Sopó"><span class="nxgov-header__name">Portal Estadístico</span></a>
+      <p class="nxgov-header__cut"><span class="nxgov-header__dot" aria-hidden="true"></span>Datos a octubre de 2026</p>
+    </div>
+  </header>
+  <div class="nxgov-container nxgov-shell">
+    <aside class="nxgov-nav">
+      <details class="nxgov-nav__menu" open>
+        <summary class="nxgov-nav__toggle">Menú de tableros</summary>
+        <nav aria-label="Tableros"><ul class="nxgov-nav__list"><li><a class="nxgov-nav__item" href="#resumen"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/></svg>Resumen</a></li></ul><details class="nxgov-nav__group" data-nxgov-group="Indicadores territoriales"><summary class="nxgov-nav__item"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="nxgov-nav__label">Indicadores territoriales</span><span class="nxgov-nav__count">10</span></summary><ul class="nxgov-nav__sublist"><li><a class="nxgov-nav__sub" href="#demografia">Demografía</a></li><li><a class="nxgov-nav__sub" href="#densidad">Densidad de población</a></li><li><a class="nxgov-nav__sub" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-nav__sub" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-nav__sub" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-nav__sub" href="#educacion">Educación</a></li><li><a class="nxgov-nav__sub" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-nav__sub" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-nav__sub" href="#ambiente">Ambiente</a></li><li><a class="nxgov-nav__sub" href="#catastro">Avalúo catastral</a></li></ul></details><details class="nxgov-nav__group" data-nxgov-group="Deporte y recreación"><summary class="nxgov-nav__item"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg><span class="nxgov-nav__label">Deporte y recreación</span><span class="nxgov-nav__count">1</span></summary><ul class="nxgov-nav__sublist"><li><a class="nxgov-nav__sub" href="#escenarios">Escenarios deportivos y recreativos</a></li></ul></details><details class="nxgov-nav__group" data-nxgov-group="Datos curiosos"><summary class="nxgov-nav__item"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg><span class="nxgov-nav__label">Datos curiosos</span><span class="nxgov-nav__count">6</span></summary><ul class="nxgov-nav__sublist"><li><a class="nxgov-nav__sub" href="#generaciones">Generaciones</a></li><li><a class="nxgov-nav__sub" href="#signo">Signo zodiacal</a></li><li><a class="nxgov-nav__sub" href="#dia-nacimiento">Día de nacimiento</a></li><li><a class="nxgov-nav__sub" href="#dia-cumpleanos">Día de cumpleaños</a></li><li><a class="nxgov-nav__sub" href="#mes-cumpleanos">Mes de cumpleaños</a></li><li><a class="nxgov-nav__sub" href="#altitud">Altitud</a></li></ul></details></nav>
       </details>
-      <p class="nxgov-rail__note">Datos a octubre de 2026. Fuentes: TerriData (DNP) y libros de la Alcaldía en Tableau Public.</p>
+      <p class="nxgov-nav__note">Fuentes: TerriData (DNP) y libros de la Alcaldía en Tableau Public.</p>
     </aside>
     <main class="nxgov-main" id="contenido">
       <section class="nxgov-view nxgov-view--home" id="resumen" aria-labelledby="resumen-h">
-        <header class="nxgov-hero">
-          <div>
-            <h1 class="nxgov-hero__title" id="resumen-h">¿Cómo va Sopó?</h1>
-            <p class="nxgov-hero__lead">Las cifras oficiales del municipio, con su fuente, su tendencia y los tableros para explorarlas.</p>
-          </div>
-          <p class="nxgov-hero__cut">Datos a octubre de 2026</p>
+        <header class="nxgov-home__head">
+          <h1 class="nxgov-home__title" id="resumen-h">¿Cómo va Sopó?</h1>
+          <p class="nxgov-home__lead">Cifras oficiales del municipio con su fuente y su tendencia. Toca una cifra para ver su tablero.</p>
+          <ul class="nxgov-pulse" aria-label="Estado frente al año anterior">
+            <li class="nxgov-pulse__item nxgov-pulse__item--mejora"><strong>3</strong> mejoraron</li>
+            <li class="nxgov-pulse__item nxgov-pulse__item--empeora"><strong>2</strong> empeoraron</li>
+            <li class="nxgov-pulse__item"><strong>1</strong> sin valoración</li>
+          </ul>
         </header>
-        <p class="nxgov-pulse" role="status">
-          <span class="nxgov-pulse__item nxgov-pulse__item--mejora"><strong>3</strong> indicadores mejoraron</span>
-          <span class="nxgov-pulse__item nxgov-pulse__item--empeora"><strong>2</strong> empeoraron</span>
-          <span class="nxgov-pulse__item"><strong>1</strong> sin valoración</span>
-          <span class="nxgov-pulse__note">frente al año anterior</span>
-        </p>
         <h2 class="nxgov-sr-only">Cifras principales</h2>
         <div class="nxgov-kpis">
-          <article class="nxgov-kpi nxgov-kpi--estable">
-            <div class="nxgov-kpi__top">
-              <h3 class="nxgov-kpi__label">Población</h3>
-              <span class="nxgov-kpi__chip">Sin valoración</span>
-            </div>
-            <p class="nxgov-kpi__value">34.015</p>
-            <p class="nxgov-kpi__unit">habitantes en 2026</p>
-            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" role="img" aria-label="Tendencia 2018–2026: de 27.249 a 34.015; máximo 34.015."><polyline points="4.0,40.0 23.0,30.0 42.0,23.5 61.0,19.5 80.0,16.2 99.0,13.0 118.0,9.7 137.0,6.7 156.0,4.0"/><circle cx="156.0" cy="4.0" r="3.5"/></svg>
-            <p class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+504 frente a 2025</p>
-            <p class="nxgov-kpi__foot"><span>DANE, proyecciones CNPV 2018</span><a href="#demografia">Ver tablero<span class="nxgov-sr-only"> de Demografía</span></a></p>
-          </article>
-          <article class="nxgov-kpi nxgov-kpi--mejora">
-            <div class="nxgov-kpi__top">
-              <h3 class="nxgov-kpi__label">Valor agregado</h3>
-              <span class="nxgov-kpi__chip">Mejora</span>
-            </div>
-            <p class="nxgov-kpi__value">$1,28 bill.</p>
-            <p class="nxgov-kpi__unit">pesos corrientes, 2023</p>
-            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" role="img" aria-label="Tendencia 2015–2023: de 813,5 a 1.281,7; máximo 1.281,7."><polyline points="4.0,40.0 23.0,30.8 42.0,33.0 61.0,30.3 80.0,32.1 99.0,33.9 118.0,24.5 137.0,12.0 156.0,4.0"/><circle cx="156.0" cy="4.0" r="3.5"/></svg>
-            <p class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+8,8 % frente a 2022</p>
-            <p class="nxgov-kpi__foot"><span>DANE, valor agregado municipal</span><a href="#valor-agregado">Ver tablero<span class="nxgov-sr-only"> de Economía: valor agregado</span></a></p>
-          </article>
-          <article class="nxgov-kpi nxgov-kpi--mejora">
-            <div class="nxgov-kpi__top">
-              <h3 class="nxgov-kpi__label">Ciudades Modernas</h3>
-              <span class="nxgov-kpi__chip">Mejora</span>
-            </div>
-            <p class="nxgov-kpi__value">67,7</p>
-            <p class="nxgov-kpi__unit">de 100 puntos, 2024</p>
-            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" role="img" aria-label="Tendencia 2016–2024: de 58,3 a 67,7; máximo 67,7."><polyline points="4.0,33.7 23.0,35.5 42.0,40.0 61.0,32.1 80.0,32.7 99.0,14.3 118.0,18.5 137.0,9.5 156.0,4.0"/><circle cx="156.0" cy="4.0" r="3.5"/></svg>
-            <p class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+1,7 puntos frente a 2023</p>
-            <p class="nxgov-kpi__foot"><span>DNP, Observatorio de Ciudades Modernas</span><a href="#catastro">Ver tablero<span class="nxgov-sr-only"> de Avalúo catastral</span></a></p>
-          </article>
-          <article class="nxgov-kpi nxgov-kpi--empeora">
-            <div class="nxgov-kpi__top">
-              <h3 class="nxgov-kpi__label">Desempeño fiscal</h3>
-              <span class="nxgov-kpi__chip">Empeora</span>
-            </div>
-            <p class="nxgov-kpi__value">61,4</p>
-            <p class="nxgov-kpi__unit">de 100 puntos, 2024</p>
-            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" role="img" aria-label="Tendencia 2020–2024: de 71,5 a 61,4; máximo 78,5."><polyline points="4.0,18.8 42.0,4.0 80.0,38.9 118.0,9.6 156.0,40.0"/><circle cx="156.0" cy="40.0" r="3.5"/></svg>
-            <p class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>−14,5 puntos frente a 2023</p>
-            <p class="nxgov-kpi__foot"><span>DNP, Nuevo Índice de Desempeño Fiscal</span><a href="#desempeno-fiscal">Ver tablero<span class="nxgov-sr-only"> de Índice de Desempeño Fiscal</span></a></p>
-          </article>
-          <article class="nxgov-kpi nxgov-kpi--mejora">
-            <div class="nxgov-kpi__top">
-              <h3 class="nxgov-kpi__label">Cobertura en primaria</h3>
-              <span class="nxgov-kpi__chip">Mejora</span>
-            </div>
-            <p class="nxgov-kpi__value">86,9 %</p>
-            <p class="nxgov-kpi__unit">cobertura neta, 2024</p>
-            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" role="img" aria-label="Tendencia 2016–2024: de 121,8 a 86,9; máximo 121,8."><polyline points="4.0,4.0 23.0,7.5 42.0,16.3 61.0,25.0 80.0,27.2 99.0,34.1 118.0,36.3 137.0,40.0 156.0,38.4"/><circle cx="156.0" cy="38.4" r="3.5"/></svg>
-            <p class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+1,6 puntos frente a 2023</p>
-            <p class="nxgov-kpi__foot"><span>Ministerio de Educación Nacional</span><a href="#educacion">Ver tablero<span class="nxgov-sr-only"> de Educación</span></a></p>
-          </article>
-          <article class="nxgov-kpi nxgov-kpi--empeora">
-            <div class="nxgov-kpi__top">
-              <h3 class="nxgov-kpi__label">Hurto a personas</h3>
-              <span class="nxgov-kpi__chip">Empeora</span>
-            </div>
-            <p class="nxgov-kpi__value">277,5</p>
-            <p class="nxgov-kpi__unit">por 100.000 habitantes, 2025</p>
-            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" role="img" aria-label="Tendencia 2017–2025: de 578,8 a 277,5; máximo 794,2."><polyline points="4.0,19.0 23.0,30.4 42.0,19.0 61.0,39.1 80.0,37.7 99.0,4.0 118.0,8.5 137.0,40.0 156.0,39.9"/><circle cx="156.0" cy="39.9" r="3.5"/></svg>
-            <p class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+1,2 frente a 2024</p>
-            <p class="nxgov-kpi__foot"><span>MinDefensa y DANE</span><a href="#convivencia">Ver tablero<span class="nxgov-sr-only"> de Convivencia y seguridad</span></a></p>
-          </article>
+          <a class="nxgov-kpi nxgov-kpi--estable" href="#demografia">
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">Población</span><span class="nxgov-kpi__chip">Sin valoración</span></span>
+            <span class="nxgov-kpi__value">34.015</span>
+            <span class="nxgov-kpi__unit">habitantes en 2026</span>
+            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="Tendencia 2018–2026: de 27.249 a 34.015; máximo 34.015."><polygon points="4,44 4.0,40.0 23.0,30.0 42.0,23.5 61.0,19.5 80.0,16.2 99.0,13.0 118.0,9.7 137.0,6.7 156.0,4.0 156,44"/><polyline points="4.0,40.0 23.0,30.0 42.0,23.5 61.0,19.5 80.0,16.2 99.0,13.0 118.0,9.7 137.0,6.7 156.0,4.0"/><circle cx="156.0" cy="4.0" r="3"/></svg>
+            <span class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+504 frente a 2025</span>
+            <span class="nxgov-kpi__source">DANE, proyecciones CNPV 2018 · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de Demografía</span></span></span>
+          </a>
+          <a class="nxgov-kpi nxgov-kpi--mejora" href="#valor-agregado">
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">Valor agregado</span><span class="nxgov-kpi__chip">Mejora</span></span>
+            <span class="nxgov-kpi__value">$1,28 bill.</span>
+            <span class="nxgov-kpi__unit">pesos corrientes, 2023</span>
+            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="Tendencia 2015–2023: de 813,5 a 1.281,7; máximo 1.281,7."><polygon points="4,44 4.0,40.0 23.0,30.8 42.0,33.0 61.0,30.3 80.0,32.1 99.0,33.9 118.0,24.5 137.0,12.0 156.0,4.0 156,44"/><polyline points="4.0,40.0 23.0,30.8 42.0,33.0 61.0,30.3 80.0,32.1 99.0,33.9 118.0,24.5 137.0,12.0 156.0,4.0"/><circle cx="156.0" cy="4.0" r="3"/></svg>
+            <span class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+8,8 % frente a 2022</span>
+            <span class="nxgov-kpi__source">DANE, valor agregado municipal · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de Economía: valor agregado</span></span></span>
+          </a>
+          <a class="nxgov-kpi nxgov-kpi--mejora" href="#catastro">
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">Ciudades Modernas</span><span class="nxgov-kpi__chip">Mejora</span></span>
+            <span class="nxgov-kpi__value">67,7</span>
+            <span class="nxgov-kpi__unit">de 100 puntos, 2024</span>
+            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="Tendencia 2016–2024: de 58,3 a 67,7; máximo 67,7."><polygon points="4,44 4.0,33.7 23.0,35.5 42.0,40.0 61.0,32.1 80.0,32.7 99.0,14.3 118.0,18.5 137.0,9.5 156.0,4.0 156,44"/><polyline points="4.0,33.7 23.0,35.5 42.0,40.0 61.0,32.1 80.0,32.7 99.0,14.3 118.0,18.5 137.0,9.5 156.0,4.0"/><circle cx="156.0" cy="4.0" r="3"/></svg>
+            <span class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+1,7 puntos frente a 2023</span>
+            <span class="nxgov-kpi__source">DNP, Observatorio de Ciudades Modernas · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de Avalúo catastral</span></span></span>
+          </a>
+          <a class="nxgov-kpi nxgov-kpi--empeora" href="#desempeno-fiscal">
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">Desempeño fiscal</span><span class="nxgov-kpi__chip">Empeora</span></span>
+            <span class="nxgov-kpi__value">61,4</span>
+            <span class="nxgov-kpi__unit">de 100 puntos, 2024</span>
+            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="Tendencia 2020–2024: de 71,5 a 61,4; máximo 78,5."><polygon points="4,44 4.0,18.8 42.0,4.0 80.0,38.9 118.0,9.6 156.0,40.0 156,44"/><polyline points="4.0,18.8 42.0,4.0 80.0,38.9 118.0,9.6 156.0,40.0"/><circle cx="156.0" cy="40.0" r="3"/></svg>
+            <span class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>−14,5 puntos frente a 2023</span>
+            <span class="nxgov-kpi__source">DNP, Nuevo Índice de Desempeño Fiscal · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de Índice de Desempeño Fiscal</span></span></span>
+          </a>
+          <a class="nxgov-kpi nxgov-kpi--mejora" href="#educacion">
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">Cobertura en primaria</span><span class="nxgov-kpi__chip">Mejora</span></span>
+            <span class="nxgov-kpi__value">86,9 %</span>
+            <span class="nxgov-kpi__unit">cobertura neta, 2024</span>
+            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="Tendencia 2016–2024: de 121,8 a 86,9; máximo 121,8."><polygon points="4,44 4.0,4.0 23.0,7.5 42.0,16.3 61.0,25.0 80.0,27.2 99.0,34.1 118.0,36.3 137.0,40.0 156.0,38.4 156,44"/><polyline points="4.0,4.0 23.0,7.5 42.0,16.3 61.0,25.0 80.0,27.2 99.0,34.1 118.0,36.3 137.0,40.0 156.0,38.4"/><circle cx="156.0" cy="38.4" r="3"/></svg>
+            <span class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+1,6 puntos frente a 2023</span>
+            <span class="nxgov-kpi__source">Ministerio de Educación Nacional · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de Educación</span></span></span>
+          </a>
+          <a class="nxgov-kpi nxgov-kpi--empeora" href="#convivencia">
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">Hurto a personas</span><span class="nxgov-kpi__chip">Empeora</span></span>
+            <span class="nxgov-kpi__value">277,5</span>
+            <span class="nxgov-kpi__unit">por 100.000 habitantes, 2025</span>
+            <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="Tendencia 2017–2025: de 578,8 a 277,5; máximo 794,2."><polygon points="4,44 4.0,19.0 23.0,30.4 42.0,19.0 61.0,39.1 80.0,37.7 99.0,4.0 118.0,8.5 137.0,40.0 156.0,39.9 156,44"/><polyline points="4.0,19.0 23.0,30.4 42.0,19.0 61.0,39.1 80.0,37.7 99.0,4.0 118.0,8.5 137.0,40.0 156.0,39.9"/><circle cx="156.0" cy="39.9" r="3"/></svg>
+            <span class="nxgov-kpi__change"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>+1,2 frente a 2024</span>
+            <span class="nxgov-kpi__source">MinDefensa y DANE · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de Convivencia y seguridad</span></span></span>
+          </a>
         </div>
-        <div class="nxgov-feature">
-          <article class="nxgov-card nxgov-card--board" aria-labelledby="destacado-h">
-            <div class="nxgov-card__head">
-              <div><h2 class="nxgov-card__title" id="destacado-h">Demografía de Sopó</h2><p class="nxgov-card__meta">Tablero destacado · TerriData (DNP)</p></div>
-              <a class="nxgov-btn nxgov-btn--ghost" href="#demografia">Ver a pantalla completa</a>
-            </div>
-            <div class="nxgov-board__stage nxgov-board__stage--feature"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/Demografa?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Demografía" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
-          </article>
-          <div class="nxgov-feature__side">
-            <article class="nxgov-card nxgov-card--fact" aria-labelledby="sabias-h">
-              <h2 class="nxgov-card__title" id="sabias-h">¿Sabías que…?</h2>
-              <p class="nxgov-fact__value">5.931</p>
-              <p class="nxgov-fact__text">soposeños son de la Generación Z, la más numerosa del municipio. Les siguen los Millennials, con 5.599.</p>
-              <a class="nxgov-btn" href="#generaciones">Ver los 6 datos curiosos</a>
+        <section class="nxgov-feature" aria-labelledby="destacado-h">
+          <div class="nxgov-section-head">
+            <h2 class="nxgov-section-head__title" id="destacado-h">Tablero destacado: Demografía</h2>
+            <a class="nxgov-link" href="#demografia">Abrir en el visor →</a>
+          </div>
+          <div class="nxgov-board nxgov-board--feature"><div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/Demografa?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Demografía" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div></div>
+        </section>
+        <section aria-labelledby="explorar-h">
+          <div class="nxgov-section-head"><h2 class="nxgov-section-head__title" id="explorar-h">Explorar tableros</h2></div>
+          <div class="nxgov-collections">
+            <article class="nxgov-collection">
+              <span class="nxgov-collection__icon"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+              <h3 class="nxgov-collection__title"><a href="#demografia">Indicadores territoriales</a></h3>
+              <p class="nxgov-collection__meta">10 tableros · TerriData (DNP)</p>
+              <ul class="nxgov-collection__list"><li><a href="#demografia">Demografía</a></li><li><a href="#densidad">Densidad de población</a></li><li><a href="#valor-agregado">Economía: valor agregado</a></li><li><a href="#finanzas">Finanzas públicas</a></li><li class="nxgov-collection__more">y 6 más</li></ul>
             </article>
-            <article class="nxgov-card nxgov-card--map" aria-labelledby="mapa-h">
-              <h2 class="nxgov-card__title" id="mapa-h">¿Dónde hacer deporte?</h2>
-              <p>La mayoría de los escenarios está en el casco urbano; también hay en las veredas La Carolina, Bellavista, Centro Alto y El Chuscal.</p>
-              <a class="nxgov-btn nxgov-btn--ghost" href="#escenarios">Ver el mapa de escenarios</a>
+            <article class="nxgov-collection">
+              <span class="nxgov-collection__icon"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/></svg></span>
+              <h3 class="nxgov-collection__title"><a href="#escenarios">Deporte y recreación</a></h3>
+              <p class="nxgov-collection__meta">1 tablero · IMRD Sopó</p>
+              <ul class="nxgov-collection__list"><li><a href="#escenarios">Escenarios deportivos y recreativos</a></li></ul>
+            </article>
+            <article class="nxgov-collection">
+              <span class="nxgov-collection__icon"><svg class="nxgov-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></span>
+              <h3 class="nxgov-collection__title"><a href="#generaciones">Datos curiosos</a></h3>
+              <p class="nxgov-collection__meta">6 tableros · Alcaldía de Sopó</p>
+              <ul class="nxgov-collection__list"><li><a href="#generaciones">Generaciones</a></li><li><a href="#signo">Signo zodiacal</a></li><li><a href="#dia-nacimiento">Día de nacimiento</a></li><li><a href="#dia-cumpleanos">Día de cumpleaños</a></li><li class="nxgov-collection__more">y 2 más</li></ul>
             </article>
           </div>
-        </div>
+        </section>
       </section>
-        <section class="nxgov-view" id="demografia" aria-labelledby="demografia-h">
+        <section class="nxgov-view" id="demografia" aria-labelledby="demografia-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="demografia-h">Demografía</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/Demografa?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/Demografa?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia" aria-current="page">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: DANE, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: DANE, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/Demografa?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Demografía" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><span></span><a class="nxgov-pager__link nxgov-pager__link--next" href="#densidad"><span class="nxgov-pager__dir">Siguiente</span>Densidad de población</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><span></span><a class="nxgov-pager__link nxgov-pager__link--next" href="#densidad"><span class="nxgov-pager__dir">Siguiente →</span>Densidad de población</a></nav>
         </section>
-        <section class="nxgov-view" id="densidad" aria-labelledby="densidad-h">
+        <section class="nxgov-view" id="densidad" aria-labelledby="densidad-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="densidad-h">Densidad de población</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/DemografaDensidad?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/DemografaDensidad?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad" aria-current="page">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: DANE e IGAC, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: DANE e IGAC, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/DemografaDensidad?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Densidad de población" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#demografia"><span class="nxgov-pager__dir">Anterior</span>Demografía</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#valor-agregado"><span class="nxgov-pager__dir">Siguiente</span>Economía: valor agregado</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#demografia"><span class="nxgov-pager__dir">← Anterior</span>Demografía</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#valor-agregado"><span class="nxgov-pager__dir">Siguiente →</span>Economía: valor agregado</a></nav>
         </section>
-        <section class="nxgov-view" id="valor-agregado" aria-labelledby="valor-agregado-h">
+        <section class="nxgov-view" id="valor-agregado" aria-labelledby="valor-agregado-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="valor-agregado-h">Economía: valor agregado</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/EconomaValorAgregado?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/EconomaValorAgregado?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado" aria-current="page">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: DANE, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: DANE, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/EconomaValorAgregado?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Economía: valor agregado" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#densidad"><span class="nxgov-pager__dir">Anterior</span>Densidad de población</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#finanzas"><span class="nxgov-pager__dir">Siguiente</span>Finanzas públicas</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#densidad"><span class="nxgov-pager__dir">← Anterior</span>Densidad de población</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#finanzas"><span class="nxgov-pager__dir">Siguiente →</span>Finanzas públicas</a></nav>
         </section>
-        <section class="nxgov-view" id="finanzas" aria-labelledby="finanzas-h">
+        <section class="nxgov-view" id="finanzas" aria-labelledby="finanzas-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="finanzas-h">Finanzas públicas</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/Finanzas?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/Finanzas?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas" aria-current="page">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: DNP y FUT, en TerriData · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: DNP y FUT, en TerriData · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/Finanzas?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Finanzas públicas" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#valor-agregado"><span class="nxgov-pager__dir">Anterior</span>Economía: valor agregado</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#desempeno-fiscal"><span class="nxgov-pager__dir">Siguiente</span>Índice de Desempeño Fiscal</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#valor-agregado"><span class="nxgov-pager__dir">← Anterior</span>Economía: valor agregado</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#desempeno-fiscal"><span class="nxgov-pager__dir">Siguiente →</span>Índice de Desempeño Fiscal</a></nav>
         </section>
-        <section class="nxgov-view" id="desempeno-fiscal" aria-labelledby="desempeno-fiscal-h">
+        <section class="nxgov-view" id="desempeno-fiscal" aria-labelledby="desempeno-fiscal-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="desempeno-fiscal-h">Índice de Desempeño Fiscal</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/FinanzasIDF?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/FinanzasIDF?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal" aria-current="page">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: DNP, en TerriData · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: DNP, en TerriData · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/FinanzasIDF?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Índice de Desempeño Fiscal" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#finanzas"><span class="nxgov-pager__dir">Anterior</span>Finanzas públicas</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#educacion"><span class="nxgov-pager__dir">Siguiente</span>Educación</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#finanzas"><span class="nxgov-pager__dir">← Anterior</span>Finanzas públicas</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#educacion"><span class="nxgov-pager__dir">Siguiente →</span>Educación</a></nav>
         </section>
-        <section class="nxgov-view" id="educacion" aria-labelledby="educacion-h">
+        <section class="nxgov-view" id="educacion" aria-labelledby="educacion-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="educacion-h">Educación</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/Educacin?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/Educacin?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion" aria-current="page">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: Ministerio de Educación Nacional, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: Ministerio de Educación Nacional, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/Educacin?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Educación" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#desempeno-fiscal"><span class="nxgov-pager__dir">Anterior</span>Índice de Desempeño Fiscal</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#convivencia"><span class="nxgov-pager__dir">Siguiente</span>Convivencia y seguridad</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#desempeno-fiscal"><span class="nxgov-pager__dir">← Anterior</span>Índice de Desempeño Fiscal</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#convivencia"><span class="nxgov-pager__dir">Siguiente →</span>Convivencia y seguridad</a></nav>
         </section>
-        <section class="nxgov-view" id="convivencia" aria-labelledby="convivencia-h">
+        <section class="nxgov-view" id="convivencia" aria-labelledby="convivencia-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="convivencia-h">Convivencia y seguridad</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/ConvivenciaySeguridadCiudadana?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/ConvivenciaySeguridadCiudadana?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia" aria-current="page">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: MinDefensa y DANE, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: MinDefensa y DANE, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/ConvivenciaySeguridadCiudadana?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Convivencia y seguridad" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#educacion"><span class="nxgov-pager__dir">Anterior</span>Educación</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#medidas-correctivas"><span class="nxgov-pager__dir">Siguiente</span>Medidas correctivas</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#educacion"><span class="nxgov-pager__dir">← Anterior</span>Educación</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#medidas-correctivas"><span class="nxgov-pager__dir">Siguiente →</span>Medidas correctivas</a></nav>
         </section>
-        <section class="nxgov-view" id="medidas-correctivas" aria-labelledby="medidas-correctivas-h">
+        <section class="nxgov-view" id="medidas-correctivas" aria-labelledby="medidas-correctivas-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="medidas-correctivas-h">Medidas correctivas</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/ConvivenciaMedidasCorrectivas?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/ConvivenciaMedidasCorrectivas?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas" aria-current="page">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: Policía Nacional, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: Policía Nacional, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/ConvivenciaMedidasCorrectivas?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Medidas correctivas" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#convivencia"><span class="nxgov-pager__dir">Anterior</span>Convivencia y seguridad</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#ambiente"><span class="nxgov-pager__dir">Siguiente</span>Ambiente</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#convivencia"><span class="nxgov-pager__dir">← Anterior</span>Convivencia y seguridad</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#ambiente"><span class="nxgov-pager__dir">Siguiente →</span>Ambiente</a></nav>
         </section>
-        <section class="nxgov-view" id="ambiente" aria-labelledby="ambiente-h">
+        <section class="nxgov-view" id="ambiente" aria-labelledby="ambiente-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="ambiente-h">Ambiente</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/Ambiente?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/Ambiente?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente" aria-current="page">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: IDEAM y autoridades ambientales, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: IDEAM y autoridades ambientales, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/Ambiente?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Ambiente" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#medidas-correctivas"><span class="nxgov-pager__dir">Anterior</span>Medidas correctivas</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#catastro"><span class="nxgov-pager__dir">Siguiente</span>Avalúo catastral</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#medidas-correctivas"><span class="nxgov-pager__dir">← Anterior</span>Medidas correctivas</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#catastro"><span class="nxgov-pager__dir">Siguiente →</span>Avalúo catastral</a></nav>
         </section>
-        <section class="nxgov-view" id="catastro" aria-labelledby="catastro-h">
+        <section class="nxgov-view" id="catastro" aria-labelledby="catastro-h" data-nxgov-group="Indicadores territoriales">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Indicadores territoriales · TerriData (DNP)</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Indicadores territoriales</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="catastro-h">Avalúo catastral</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/TerriData2026_sopo/Catastro?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/TerriData2026_sopo/Catastro?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Indicadores territoriales"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#demografia">Demografía</a></li><li><a class="nxgov-tabs__link" href="#densidad">Densidad de población</a></li><li><a class="nxgov-tabs__link" href="#valor-agregado">Economía: valor agregado</a></li><li><a class="nxgov-tabs__link" href="#finanzas">Finanzas públicas</a></li><li><a class="nxgov-tabs__link" href="#desempeno-fiscal">Índice de Desempeño Fiscal</a></li><li><a class="nxgov-tabs__link" href="#educacion">Educación</a></li><li><a class="nxgov-tabs__link" href="#convivencia">Convivencia y seguridad</a></li><li><a class="nxgov-tabs__link" href="#medidas-correctivas">Medidas correctivas</a></li><li><a class="nxgov-tabs__link" href="#ambiente">Ambiente</a></li><li><a class="nxgov-tabs__link" href="#catastro" aria-current="page">Avalúo catastral</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary">El avalúo catastral total pasó de 1,26 a 1,99 billones de pesos entre 2020 y 2024. La mayor parte corresponde a predios rurales: 1,52 billones en 2024.</p>
-              <p class="nxgov-board__meta">Fuente: IGAC, en TerriData (DNP) · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary">El avalúo catastral total pasó de 1,26 a 1,99 billones de pesos entre 2020 y 2024. La mayor parte corresponde a predios rurales: 1,52 billones en 2024.</p><p class="nxgov-view__meta">Fuente: IGAC, en TerriData (DNP) · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/TerriData2026_sopo/Catastro?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Avalúo catastral" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#ambiente"><span class="nxgov-pager__dir">Anterior</span>Ambiente</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#ambiente"><span class="nxgov-pager__dir">← Anterior</span>Ambiente</a></nav>
         </section>
-        <section class="nxgov-view" id="escenarios" aria-labelledby="escenarios-h">
+        <section class="nxgov-view" id="escenarios" aria-labelledby="escenarios-h" data-nxgov-group="Deporte y recreación">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Deporte y recreación · IMRD Sopó</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Deporte y recreación</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="escenarios-h">Escenarios deportivos y recreativos</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/EscenariosDeportivosyRecreativosdeSop2026/Hoja1?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/EscenariosDeportivosyRecreativosdeSop2026/Hoja1?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary">La mayoría de los escenarios está en el casco urbano; también hay en las veredas La Carolina, Bellavista, Centro Alto y El Chuscal.</p>
-              <p class="nxgov-board__meta">Fuente: Instituto Municipal de Recreación y Deporte de Sopó · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary">La mayoría de los escenarios está en el casco urbano; también hay en las veredas La Carolina, Bellavista, Centro Alto y El Chuscal.</p><p class="nxgov-view__meta">Fuente: Instituto Municipal de Recreación y Deporte de Sopó · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/EscenariosDeportivosyRecreativosdeSop2026/Hoja1?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Escenarios deportivos y recreativos" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
           
         </section>
-        <section class="nxgov-view" id="generaciones" aria-labelledby="generaciones-h">
+        <section class="nxgov-view" id="generaciones" aria-labelledby="generaciones-h" data-nxgov-group="Datos curiosos">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Datos curiosos · Alcaldía de Sopó</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Datos curiosos</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="generaciones-h">Generaciones</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/SopoDatosCuriosos2026/Generacin?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/SopoDatosCuriosos2026/Generacin?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Datos curiosos"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#generaciones" aria-current="page">Generaciones</a></li><li><a class="nxgov-tabs__link" href="#signo">Signo zodiacal</a></li><li><a class="nxgov-tabs__link" href="#dia-nacimiento">Día de nacimiento</a></li><li><a class="nxgov-tabs__link" href="#dia-cumpleanos">Día de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#mes-cumpleanos">Mes de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#altitud">Altitud</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary">La Generación Z (nacidos entre 1997 y 2012) es la más numerosa, con 5.931 personas, seguida de los Millennials (5.599).</p>
-              <p class="nxgov-board__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary">La Generación Z (nacidos entre 1997 y 2012) es la más numerosa, con 5.931 personas, seguida de los Millennials (5.599).</p><p class="nxgov-view__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/SopoDatosCuriosos2026/Generacin?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Generaciones" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><span></span><a class="nxgov-pager__link nxgov-pager__link--next" href="#signo"><span class="nxgov-pager__dir">Siguiente</span>Signo zodiacal</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><span></span><a class="nxgov-pager__link nxgov-pager__link--next" href="#signo"><span class="nxgov-pager__dir">Siguiente →</span>Signo zodiacal</a></nav>
         </section>
-        <section class="nxgov-view" id="signo" aria-labelledby="signo-h">
+        <section class="nxgov-view" id="signo" aria-labelledby="signo-h" data-nxgov-group="Datos curiosos">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Datos curiosos · Alcaldía de Sopó</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Datos curiosos</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="signo-h">Signo zodiacal</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/SopoDatosCuriosos2026/signo?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/SopoDatosCuriosos2026/signo?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Datos curiosos"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#generaciones">Generaciones</a></li><li><a class="nxgov-tabs__link" href="#signo" aria-current="page">Signo zodiacal</a></li><li><a class="nxgov-tabs__link" href="#dia-nacimiento">Día de nacimiento</a></li><li><a class="nxgov-tabs__link" href="#dia-cumpleanos">Día de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#mes-cumpleanos">Mes de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#altitud">Altitud</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/SopoDatosCuriosos2026/signo?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Signo zodiacal" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#generaciones"><span class="nxgov-pager__dir">Anterior</span>Generaciones</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#dia-nacimiento"><span class="nxgov-pager__dir">Siguiente</span>Día de nacimiento</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#generaciones"><span class="nxgov-pager__dir">← Anterior</span>Generaciones</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#dia-nacimiento"><span class="nxgov-pager__dir">Siguiente →</span>Día de nacimiento</a></nav>
         </section>
-        <section class="nxgov-view" id="dia-nacimiento" aria-labelledby="dia-nacimiento-h">
+        <section class="nxgov-view" id="dia-nacimiento" aria-labelledby="dia-nacimiento-h" data-nxgov-group="Datos curiosos">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Datos curiosos · Alcaldía de Sopó</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Datos curiosos</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="dia-nacimiento-h">Día de nacimiento</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/SopoDatosCuriosos2026/da?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/SopoDatosCuriosos2026/da?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Datos curiosos"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#generaciones">Generaciones</a></li><li><a class="nxgov-tabs__link" href="#signo">Signo zodiacal</a></li><li><a class="nxgov-tabs__link" href="#dia-nacimiento" aria-current="page">Día de nacimiento</a></li><li><a class="nxgov-tabs__link" href="#dia-cumpleanos">Día de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#mes-cumpleanos">Mes de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#altitud">Altitud</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/SopoDatosCuriosos2026/da?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Día de nacimiento" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#signo"><span class="nxgov-pager__dir">Anterior</span>Signo zodiacal</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#dia-cumpleanos"><span class="nxgov-pager__dir">Siguiente</span>Día de cumpleaños</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#signo"><span class="nxgov-pager__dir">← Anterior</span>Signo zodiacal</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#dia-cumpleanos"><span class="nxgov-pager__dir">Siguiente →</span>Día de cumpleaños</a></nav>
         </section>
-        <section class="nxgov-view" id="dia-cumpleanos" aria-labelledby="dia-cumpleanos-h">
+        <section class="nxgov-view" id="dia-cumpleanos" aria-labelledby="dia-cumpleanos-h" data-nxgov-group="Datos curiosos">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Datos curiosos · Alcaldía de Sopó</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Datos curiosos</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="dia-cumpleanos-h">Día de cumpleaños</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/SopoDatosCuriosos2026/diacumpleaos?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/SopoDatosCuriosos2026/diacumpleaos?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Datos curiosos"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#generaciones">Generaciones</a></li><li><a class="nxgov-tabs__link" href="#signo">Signo zodiacal</a></li><li><a class="nxgov-tabs__link" href="#dia-nacimiento">Día de nacimiento</a></li><li><a class="nxgov-tabs__link" href="#dia-cumpleanos" aria-current="page">Día de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#mes-cumpleanos">Mes de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#altitud">Altitud</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/SopoDatosCuriosos2026/diacumpleaos?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Día de cumpleaños" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#dia-nacimiento"><span class="nxgov-pager__dir">Anterior</span>Día de nacimiento</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#mes-cumpleanos"><span class="nxgov-pager__dir">Siguiente</span>Mes de cumpleaños</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#dia-nacimiento"><span class="nxgov-pager__dir">← Anterior</span>Día de nacimiento</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#mes-cumpleanos"><span class="nxgov-pager__dir">Siguiente →</span>Mes de cumpleaños</a></nav>
         </section>
-        <section class="nxgov-view" id="mes-cumpleanos" aria-labelledby="mes-cumpleanos-h">
+        <section class="nxgov-view" id="mes-cumpleanos" aria-labelledby="mes-cumpleanos-h" data-nxgov-group="Datos curiosos">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Datos curiosos · Alcaldía de Sopó</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Datos curiosos</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="mes-cumpleanos-h">Mes de cumpleaños</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/SopoDatosCuriosos2026/mescumpleaos?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/SopoDatosCuriosos2026/mescumpleaos?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Datos curiosos"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#generaciones">Generaciones</a></li><li><a class="nxgov-tabs__link" href="#signo">Signo zodiacal</a></li><li><a class="nxgov-tabs__link" href="#dia-nacimiento">Día de nacimiento</a></li><li><a class="nxgov-tabs__link" href="#dia-cumpleanos">Día de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#mes-cumpleanos" aria-current="page">Mes de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#altitud">Altitud</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/SopoDatosCuriosos2026/mescumpleaos?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Mes de cumpleaños" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#dia-cumpleanos"><span class="nxgov-pager__dir">Anterior</span>Día de cumpleaños</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#altitud"><span class="nxgov-pager__dir">Siguiente</span>Altitud</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#dia-cumpleanos"><span class="nxgov-pager__dir">← Anterior</span>Día de cumpleaños</a><a class="nxgov-pager__link nxgov-pager__link--next" href="#altitud"><span class="nxgov-pager__dir">Siguiente →</span>Altitud</a></nav>
         </section>
-        <section class="nxgov-view" id="altitud" aria-labelledby="altitud-h">
+        <section class="nxgov-view" id="altitud" aria-labelledby="altitud-h" data-nxgov-group="Datos curiosos">
           <header class="nxgov-view__head">
-            <p class="nxgov-view__crumb">Datos curiosos · Alcaldía de Sopó</p>
+            <p class="nxgov-view__crumb"><a href="#resumen">Resumen</a> <span aria-hidden="true">/</span> Datos curiosos</p>
             <div class="nxgov-view__title-row">
               <h2 class="nxgov-view__title" id="altitud-h">Altitud</h2>
-              <a class="nxgov-btn nxgov-btn--ghost" href="https://public.tableau.com/views/SopoDatosCuriosos2026/Altitud?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
+              <a class="nxgov-btn" href="https://public.tableau.com/views/SopoDatosCuriosos2026/Altitud?:language=es-ES" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a>
             </div>
           </header>
+          <nav class="nxgov-tabs" aria-label="Tableros de Datos curiosos"><ul class="nxgov-tabs__list"><li><a class="nxgov-tabs__link" href="#generaciones">Generaciones</a></li><li><a class="nxgov-tabs__link" href="#signo">Signo zodiacal</a></li><li><a class="nxgov-tabs__link" href="#dia-nacimiento">Día de nacimiento</a></li><li><a class="nxgov-tabs__link" href="#dia-cumpleanos">Día de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#mes-cumpleanos">Mes de cumpleaños</a></li><li><a class="nxgov-tabs__link" href="#altitud" aria-current="page">Altitud</a></li></ul></nav>
           <div class="nxgov-board">
-            <div class="nxgov-board__text">
-              <p class="nxgov-board__summary nxgov-board__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p>
-              <p class="nxgov-board__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p>
-            </div>
+            <div class="nxgov-board__info"><p class="nxgov-view__summary nxgov-view__summary--pending">Resumen pendiente: la Alcaldía publicará aquí, en texto, lo que muestra este tablero.</p><p class="nxgov-view__meta">Fuente: Alcaldía de Sopó · Corte: octubre de 2026</p></div>
             <div class="nxgov-board__stage"><iframe class="nxgov-board__frame" src="https://public.tableau.com/views/SopoDatosCuriosos2026/Altitud?:showVizHome=no&amp;:embed=y&amp;:tabs=n&amp;:toolbar=n&amp;:language=es-ES" title="Tablero interactivo: Altitud" lang="es" loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="strict-origin" allow="fullscreen" allowfullscreen></iframe></div>
           </div>
-          <nav class="nxgov-pager" aria-label="Otros tableros de este grupo"><a class="nxgov-pager__link" href="#mes-cumpleanos"><span class="nxgov-pager__dir">Anterior</span>Mes de cumpleaños</a></nav>
+          <nav class="nxgov-pager" aria-label="Tablero anterior y siguiente"><a class="nxgov-pager__link" href="#mes-cumpleanos"><span class="nxgov-pager__dir">← Anterior</span>Mes de cumpleaños</a></nav>
         </section>
     </main>
   </div>
+  <div class="nxgov-totop"><button class="volver-arriba-govco" type="button" aria-label="Volver arriba"><span class="govco-expand_circle_up"></span></button></div>
   <footer class="pie-pagina-govco">
     <div class="first-section">
       <h4>Alcaldía Municipal de Sopó · Portal Estadístico</h4>
