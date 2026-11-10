@@ -217,7 +217,7 @@ pagina = f"""<!doctype html>
     <div class="first-section">
       <h4>Alcaldía Municipal de Sopó · Portal Estadístico</h4>
       <div class="logo-container">
-        <span class="govco-logo-potencia"></span><span class="separator"></span><img class="nxgov-footer-logo" src="assets/logo-sopo.png" width="944" height="267" alt="Alcaldía de Sopó">
+        <img class="nxgov-footer-logo" src="assets/logo-sopo.png" width="944" height="267" alt="Alcaldía de Sopó">
       </div>
       <h5>Sede principal</h5>
       <ul class="contact-data-container">
