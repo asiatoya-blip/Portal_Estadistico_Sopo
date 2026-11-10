@@ -9,7 +9,8 @@ D = json.loads((AQUI / "portal.json").read_text(encoding="utf-8"))
 SEGURO = re.compile(r"^[A-Za-z0-9_]{1,80}$")  # libro y hoja: lista blanca (revisión de seguridad 2026-11-10)
 CDN = "https://cdn.www.gov.co/layout-govco-v5"
 HOJAS = {h["id"]: (g, h) for g in D["grupos"] for h in g["hojas"]}
-ESTADO = {"mejora": "Mejora", "empeora": "Empeora", "estable": "Sin valoración"}
+# En la portada solo se etiqueta lo positivo; los cambios desfavorables se leen en los tableros (decisión 2026-11-10)
+ESTADO = {"mejora": "Mejora"}
 FLECHA = {"sube": "M12 19V5M5 12l7-7 7 7", "baja": "M12 5v14M5 12l7 7 7-7"}
 DERECHA, IZQUIERDA, CHEVRON = "M5 12h14M13 6l6 6-6 6", "M19 12H5M11 6l-6 6 6 6", "M6 9l6 6 6-6"
 # Íconos de trazo propios (24×24), uno por entrada del menú
@@ -56,11 +57,12 @@ def kpi(k):
     area = f"4,44 {puntos} 156,44"
     sentido = "baja" if k["cambio"].startswith("−") else "sube"
     h = HOJAS[k["hoja"]][1] if k["hoja"] else None
+    chip = f'<span class="nxgov-kpi__chip">{ESTADO[k["estado"]]}</span>' if k["estado"] in ESTADO else ""
     tag, attrs = ("a", f' href="#{h["id"]}"') if h else ("article", "")
     ir = f' <span class="nxgov-kpi__go">· Ver tablero<span class="nxgov-sr-only"> de {e(h["titulo"])}</span></span>' if h else ""
     return f"""
           <{tag} class="nxgov-kpi nxgov-kpi--{k['estado']}"{attrs}>
-            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">{e(k['etiqueta'])}</span><span class="nxgov-kpi__chip">{ESTADO[k['estado']]}</span></span>
+            <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">{e(k['etiqueta'])}</span>{chip}</span>
             <span class="nxgov-kpi__value">{e(k['valor'])}</span>
             <span class="nxgov-kpi__unit">{e(k['unidad'])}</span>
             <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="{e(desc)}"><polygon points="{area}"/><polyline points="{puntos}"/><circle cx="{lx:.1f}" cy="{ly:.1f}" r="3"/></svg>
@@ -139,8 +141,6 @@ def colecciones():
 
 
 k = D["kpis"]
-mejoran = sum(x["estado"] == "mejora" for x in k)
-empeoran = sum(x["estado"] == "empeora" for x in k)
 dest = HOJAS["demografia"][1]
 vistas = "".join(vista_hoja(g, h, i, g["hojas"]) for g in D["grupos"] for i, h in enumerate(g["hojas"]))
 
@@ -189,11 +189,6 @@ pagina = f"""<!doctype html>
         <header class="nxgov-home__head">
           <div><h1 class="nxgov-home__title" id="resumen-h">¿Cómo va Sopó?</h1>
           <p class="nxgov-home__lead">Cifras oficiales del municipio con su fuente y su tendencia. Las cifras con tablero se abren al tocarlas.</p></div>
-          <ul class="nxgov-pulse" aria-label="Estado frente al año anterior">
-            <li class="nxgov-pulse__item nxgov-pulse__item--mejora"><strong>{mejoran}</strong> mejoraron</li>
-            <li class="nxgov-pulse__item nxgov-pulse__item--empeora"><strong>{empeoran}</strong> empeoraron</li>
-            <li class="nxgov-pulse__item"><strong>{len(k) - mejoran - empeoran}</strong> sin valoración</li>
-          </ul>
         </header>
         <h2 class="nxgov-sr-only">Cifras principales</h2>
         <div class="nxgov-kpis">{''.join(kpi(x) for x in k)}
