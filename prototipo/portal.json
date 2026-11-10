@@ -1,5 +1,5 @@
 {
- "corte": "octubre de 2026",
+ "corte": "agosto de 2026",
  "kpis": [
   {
    "id": "poblacion",
@@ -11,15 +11,24 @@
    "hoja": "demografia",
    "fuente": "DANE, proyecciones CNPV 2018",
    "serie": {
-    "2018": 27249,
-    "2019": 29120,
-    "2020": 30355,
-    "2021": 31102,
-    "2022": 31729,
-    "2023": 32323,
-    "2024": 32937,
-    "2025": 33511,
-    "2026": 34015
+    "2018": 27249.0,
+    "2019": 29252.0,
+    "2020": 30355.0,
+    "2021": 31102.0,
+    "2022": 31729.0,
+    "2023": 32323.0,
+    "2024": 32937.0,
+    "2025": 33511.0,
+    "2026": 34015.0
+   },
+   "terridata": {
+    "indicador": "Población total",
+    "dimension": "Descripción general",
+    "formato": "entero",
+    "cambio": "absoluto",
+    "sentido": 0,
+    "unidad": "habitantes en {año}",
+    "desde": 2018
    }
   },
   {
@@ -41,6 +50,14 @@
     "2021": 1014.5,
     "2022": 1178.25,
     "2023": 1281.67
+   },
+   "terridata": {
+    "indicador": "Valor agregado",
+    "formato": "billones",
+    "cambio": "porcentual",
+    "sentido": 1,
+    "unidad": "pesos corrientes, {año}",
+    "desde": 2015
    }
   },
   {
@@ -62,6 +79,14 @@
     "2022": 63.1,
     "2023": 65.95,
     "2024": 67.67
+   },
+   "terridata": {
+    "indicador": "Índice de Ciudades Modernas",
+    "formato": "decimal1",
+    "cambio": "puntos",
+    "sentido": 1,
+    "unidad": "de 100 puntos, {año}",
+    "desde": 2016
    }
   },
   {
@@ -79,6 +104,14 @@
     "2022": 61.89,
     "2023": 75.87,
     "2024": 61.39
+   },
+   "terridata": {
+    "indicador": "Puntaje nuevo Índice de Desempeño Fiscal",
+    "formato": "decimal1",
+    "cambio": "puntos",
+    "sentido": 1,
+    "unidad": "de 100 puntos, {año}",
+    "desde": 2020
    }
   },
   {
@@ -100,6 +133,14 @@
     "2022": 89.01,
     "2023": 85.27,
     "2024": 86.89
+   },
+   "terridata": {
+    "indicador": "Cobertura neta en educación primaria",
+    "formato": "porcentaje1",
+    "cambio": "puntos",
+    "sentido": 1,
+    "unidad": "cobertura neta, {año}",
+    "desde": 2016
    }
   },
   {
@@ -121,6 +162,14 @@
     "2023": 730.1,
     "2024": 276.3,
     "2025": 277.5
+   },
+   "terridata": {
+    "indicador": "Tasa de hurto a personas por cada 100.000 habitantes",
+    "formato": "decimal1",
+    "cambio": "absoluto1",
+    "sentido": -1,
+    "unidad": "por 100.000 habitantes, {año}",
+    "desde": 2017
    }
   }
  ],

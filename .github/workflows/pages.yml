@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths: ["prototipo/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
+  # Los commits del bot de TerriData no disparan "push"; se publica cuando ese flujo termina
+  workflow_run:
+    workflows: ["Actualizar TerriData"]
+    types: [completed]
 permissions:
   contents: read
   pages: write

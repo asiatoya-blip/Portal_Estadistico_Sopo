@@ -1,0 +1,31 @@
+# Actualiza las cifras desde TerriData (DNP) cada mes; si cambian, guarda la instantánea y dispara la publicación.
+name: Actualizar TerriData
+on:
+  schedule:
+    - cron: "0 11 1 * *" # día 1 de cada mes, 6:00 a. m. hora de Colombia
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: terridata
+  cancel-in-progress: false
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Descargar, validar y actualizar cifras
+        run: python scripts/data/terridata.py
+      - name: Regenerar la página
+        run: python prototipo/build.py
+      - name: Guardar cambios
+        run: |
+          if git diff --quiet; then echo "TerriData sin cambios"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add prototipo/portal.json prototipo/index.html data_base/terridata/
+          git commit -m "datos: actualización de TerriData $(date +%F)"
+          git push

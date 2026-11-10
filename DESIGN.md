@@ -1,52 +1,53 @@
 ---
 name: Portal Estadístico de Sopó
-description: Las cifras oficiales de Sopó, cada una junto a su tablero, dentro del Kit GOV.CO 9.2.
+description: Tablero claro y liviano con las cifras oficiales de Sopó y sus libros de Tableau, dentro del chrome GOV.CO v5.
 colors:
-  cobalt: "#0943B5"
-  cobalt-hover: "#07368F"
-  ink: "#0A1A3F"
-  ink-soft: "#33415C"
-  ground: "#F4F6FB"
+  accent: "#0943B5"
+  accent-hover: "#07368F"
+  accent-soft: "#EEF3FD"
+  text: "#101828"
+  muted: "#5B6478"
+  ground: "#F6F7F9"
   surface: "#FFFFFF"
-  tint: "#EAF0FB"
-  line: "#C3CFE5"
-  control: "#6F7D99"
+  line: "#E6E9EF"
+  line-strong: "#CDD3DE"
+  neutral-soft: "#F1F3F6"
   cut: "#FDBF2D"
-  bad: "#A5361A"
-  bad-tint: "#FBEAE5"
-  good: "#1B6B3A"
-  good-tint: "#E4F2E9"
+  good: "#0F7A55"
+  good-soft: "#E8F6EF"
+  bad: "#B42318"
+  bad-soft: "#FDECEA"
 typography:
   display:
     fontFamily: "Work Sans, Nunito Sans, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(1.875rem, 1.4rem + 1.6vw, 2.75rem)"
-    fontWeight: 800
-    lineHeight: 1.1
+    fontSize: "clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem)"
+    fontWeight: 700
+    lineHeight: 1.15
+    letterSpacing: "-0.02em"
+  headline:
+    fontFamily: "Work Sans, Nunito Sans, Segoe UI, system-ui, sans-serif"
+    fontSize: "clamp(1.625rem, 1.3rem + 1vw, 2rem)"
+    fontWeight: 700
+    lineHeight: 1.2
     letterSpacing: "-0.02em"
   figure:
     fontFamily: "Work Sans, Nunito Sans, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 2rem + 1.6vw, 3.5rem)"
-    fontWeight: 700
-    lineHeight: 1
+    fontSize: "2rem"
+    fontWeight: 600
+    lineHeight: 1.1
     letterSpacing: "-0.02em"
     fontFeature: "tnum"
-  headline:
-    fontFamily: "Work Sans, Nunito Sans, Segoe UI, system-ui, sans-serif"
-    fontSize: "1.75rem"
-    fontWeight: 800
-    lineHeight: 1.15
   title:
     fontFamily: "Work Sans, Nunito Sans, Segoe UI, system-ui, sans-serif"
-    fontSize: "1.375rem"
-    fontWeight: 700
+    fontSize: "1.25rem"
+    fontWeight: 600
     lineHeight: 1.3
-  tab-figure:
+  title-sm:
     fontFamily: "Work Sans, Nunito Sans, Segoe UI, system-ui, sans-serif"
-    fontSize: "1.375rem"
-    fontWeight: 700
-    lineHeight: 1.15
-    fontFeature: "tnum"
-  button:
+    fontSize: "1.0625rem"
+    fontWeight: 600
+    lineHeight: 1.3
+  label:
     fontFamily: "Work Sans, Nunito Sans, Segoe UI, system-ui, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 600
@@ -56,245 +57,261 @@ typography:
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
-  lead:
-    fontFamily: "Nunito Sans, Segoe UI, system-ui, sans-serif"
-    fontSize: "1.125rem"
-    fontWeight: 400
-    lineHeight: 1.6
-  label:
-    fontFamily: "Nunito Sans, Segoe UI, system-ui, sans-serif"
-    fontSize: "0.9375rem"
-    fontWeight: 700
-    lineHeight: 1.6
-  meta:
+  body-sm:
     fontFamily: "Nunito Sans, Segoe UI, system-ui, sans-serif"
     fontSize: "0.875rem"
     fontWeight: 400
     lineHeight: 1.6
+  caption:
+    fontFamily: "Nunito Sans, Segoe UI, system-ui, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 400
+    lineHeight: 1.6
 rounded:
-  md: "0.75rem"
-  lg: "1rem"
+  sm: "0.5rem"
+  md: "0.875rem"
   pill: "999px"
 spacing:
-  "1": "0.5rem"
-  "2": "1rem"
-  "3": "1.5rem"
-  "4": "2rem"
-  "5": "3rem"
-  wrap: "80rem"
+  xxs: "0.25rem"
+  xs: "0.5rem"
+  sm: "0.75rem"
+  md: "1rem"
+  lg: "1.25rem"
+  xl: "1.5rem"
+  2xl: "2rem"
+  3xl: "2.5rem"
+  4xl: "3rem"
+  gutter: "clamp(1rem, 3vw, 2.5rem)"
+  container: "90rem"
+  nav-width: "15rem"
 components:
-  theme-tab:
+  kpi-card:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
-    typography: "{typography.label}"
+    textColor: "{colors.text}"
     rounded: "{rounded.md}"
-    padding: "0.75rem 0.875rem"
-  theme-tab-hover:
-    backgroundColor: "{colors.tint}"
-    textColor: "{colors.ink}"
-  theme-tab-active:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.surface}"
-  theme-panel:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.4}"
-  button-load:
-    backgroundColor: "{colors.cobalt}"
-    textColor: "{colors.surface}"
-    typography: "{typography.button}"
-    rounded: "{rounded.pill}"
-    padding: "0.75rem 1.75rem"
-    height: "3rem"
-  button-load-hover:
-    backgroundColor: "{colors.cobalt-hover}"
-    textColor: "{colors.surface}"
-  sheet-chip:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.cobalt}"
-    typography: "{typography.button}"
-    rounded: "{rounded.pill}"
-    padding: "0.5rem 1rem"
-    height: "2.75rem"
-  sheet-chip-hover:
-    backgroundColor: "{colors.tint}"
-    textColor: "{colors.cobalt}"
-  sheet-chip-selected:
-    backgroundColor: "{colors.cobalt}"
-    textColor: "{colors.surface}"
-  cut-badge:
-    backgroundColor: "{colors.cut}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.pill}"
-    padding: "0.375rem 0.875rem"
-  verdict-favorable:
-    backgroundColor: "{colors.good-tint}"
+    padding: "0.875rem 1.125rem 0.75rem"
+  kpi-chip-mejora:
+    backgroundColor: "{colors.good-soft}"
     textColor: "{colors.good}"
     rounded: "{rounded.pill}"
-    padding: "0.125rem 0.625rem"
-  verdict-desfavorable:
-    backgroundColor: "{colors.bad-tint}"
+    padding: "0.125rem 0.5rem"
+  kpi-chip-empeora:
+    backgroundColor: "{colors.bad-soft}"
     textColor: "{colors.bad}"
     rounded: "{rounded.pill}"
-    padding: "0.125rem 0.625rem"
-  viz-stage:
-    backgroundColor: "{colors.tint}"
+    padding: "0.125rem 0.5rem"
+  kpi-chip-neutral:
+    backgroundColor: "{colors.neutral-soft}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.pill}"
+    padding: "0.125rem 0.5rem"
+  button:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    typography: "{typography.label}"
+    rounded: "{rounded.sm}"
+    padding: "0.5rem 1rem"
+    height: "2.5rem"
+  button-hover:
+    textColor: "{colors.accent}"
+  nav-item:
+    textColor: "{colors.text}"
+    typography: "{typography.label}"
+    rounded: "{rounded.sm}"
+    padding: "0.5rem 0.75rem"
+    height: "2.5rem"
+  nav-item-active:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.accent}"
+  nav-sub-active:
+    backgroundColor: "{colors.accent-soft}"
+    textColor: "{colors.accent}"
+    rounded: "{rounded.sm}"
+    padding: "0.375rem 0.625rem"
+  tab:
+    textColor: "{colors.muted}"
+    typography: "{typography.label}"
+    padding: "0.625rem 0.875rem"
+  tab-active:
+    textColor: "{colors.accent}"
+  board:
+    backgroundColor: "{colors.surface}"
     rounded: "{rounded.md}"
-    height: "15rem"
+  collection-card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.md}"
+    padding: "1.25rem"
+  pager-link:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    typography: "{typography.label}"
+    rounded: "{rounded.sm}"
+    padding: "0.75rem 1rem"
+  status-pill:
+    backgroundColor: "{colors.neutral-soft}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.pill}"
+    padding: "0.25rem 0.75rem"
 ---
 
 # Design System: Portal Estadístico de Sopó
 
-<!-- Registrado el 2026-11-10 desde el código publicado: prototipo/assets/portal.css, prototipo/index.html, prototipo/assets/portal.js. -->
-
 ## Overview
 
-**Creative North Star: "La Ventana Sencilla"**
+**Creative North Star: "La mesa de trabajo despejada"**
 
-El portal es una ventana oficial y tranquila a las cifras del municipio, dentro del Kit UI GOV.CO 9.2 en modo restringido. Su firma es la **pestaña-cifra**: cada tema de la barra trae su número, de modo que la barra misma es el resumen de Sopó; al abrir un tema, la cifra y su tablero de Tableau quedan lado a lado en un solo panel pegado a la pestaña.
+El portal es un tablero de producto claro y liviano, en la familia de Mercury, Wise o Monarch: un menú lateral sereno a la izquierda, cifras con su tendencia arriba y los libros de Tableau Public como protagonistas del área principal. Todo vive sobre un suelo gris muy pálido (`ground`), con superficies blancas recortadas por un borde fino y esquinas de 14px. El color casi no habla: Cobalt aparece solo donde hay selección o acción, y verde y rojo solo donde una cifra mejora o empeora.
 
-La densidad es media y ordenada: fondo gris azulado, superficies blancas con borde fino, un solo color de acción (Cobalt) y un marino oscuro que hace de tinta y de selección fuerte. El color no decora: marca acción, selección, fecha de corte y valoración, y cada valoración va con texto e ícono. Nada se mueve salvo la cifra cuando cambia de tema.
+La densidad es media: seis tarjetas en tres columnas, un tablero de proporción 16:11 y pestañas por hoja, sin decoración que compita con los datos. Work Sans da cuerpo a títulos, cifras y navegación; Nunito Sans lleva el texto corrido, las fuentes y los metadatos. El chrome GOV.CO v5 (barra superior, pie, barra de accesibilidad, volver arriba) se carga del CDN sin modificar y no forma parte de este sistema; lo único propio es su alineación al contenedor de 1440px.
 
-El chrome GOV.CO (barra superior, cabecera, pie, barra de accesibilidad, volver arriba) lo pone el CDN v5 sin modificar; en el prototipo se simula y no forma parte de este sistema.
+El sistema rechaza explícitamente dos extremos: la página-documento (texto largo con tableros escondidos tras un botón) y el tablero oscuro y pesado.
 
 **Key Characteristics:**
-- La cifra manda: Work Sans en cifras y títulos, Nunito Sans en todo el texto.
-- Un solo acento de acción (Cobalt); el marino marca la pestaña activa.
-- Amarillo solo para la fecha de corte; verde y rojo solo para la valoración, siempre con texto.
-- Plano: profundidad por borde y tono, sin sombras.
-- Píldoras para acciones y etiquetas; esquinas suaves para superficies.
-- Contenido de terceros (Tableau) detrás de una puerta con aviso, nunca cargado solo.
+- Suelo gris pálido, superficies blancas, borde fino de 1px, sombra casi imperceptible.
+- Cobalt reservado para selección, enlaces y acción; nunca como relleno decorativo.
+- Estado de cada cifra con texto + ícono SVG + color suave (nunca solo color).
+- Tableros de Tableau visibles sin clic, dentro de un marco con resumen, fuente y fecha.
+- Todo alineado a un contenedor de 90rem (1440px), incluido el chrome GOV.CO.
+- Tipografía en `rem`, tokens `--nxgov-*` en `:root`, BEM con prefijo `nxgov-`, sin estilos en línea.
 
 ## Colors
 
-Paleta restringida del Kit 9.2: un azul de acción, un marino de tinta, neutros fríos y tres colores de señal con trabajo fijo.
+Una paleta casi neutra, fría y luminosa, con un solo acento institucional y dos tonos de estado apagados.
 
 ### Primary
-- **Cobalt GOV.CO** (#0943B5): la única voz de acción. Enlaces, botón "Cargar el tablero", píldoras de hoja (borde, texto y relleno al seleccionar), cifras grandes y cifras de pestaña inactiva, anillo de foco. Su tono de presión **Cobalt profundo** (#07368F) solo aparece en hover.
+- **Cobalt Institucional** (`accent`): enlaces, pestaña y entrada de menú activas, botón al pasar el cursor, contorno de foco (3px) y la línea de tendencia de cada tarjeta. Es el Cobalt del Kit GOV.CO 9.2.
+- **Cobalt Profundo** (`accent-hover`): variante oscura reservada para estado de presión/hover en acciones rellenas.
+- **Bruma Cobalt** (`accent-soft`): fondo de la sub-entrada activa del menú, del contador de un grupo abierto, del ícono de colección y de la selección de texto.
 
 ### Secondary
-- **Marino tinta** (#0A1A3F): texto principal y, como relleno, la pestaña activa y el filo superior de 4px del panel del tema. Es la selección fuerte: pestaña y panel se leen como una sola pieza.
+- **Ámbar de Corte** (`cut`): solo el punto que acompaña la fecha de corte en la cabecera ("Datos a octubre de 2026"). Señal de vigencia, nunca texto ni fondo amplio.
 
 ### Tertiary
-- **Amarillo corte** (#FDBF2D): la fecha de corte ("Datos a octubre de 2026"), la cifra de la pestaña activa sobre marino y el fondo de `::selection`. Nada más.
-- **Verde favorable** (#1B6B3A) sobre **Verde velo** (#E4F2E9): variación valorada como favorable. Verde de éxito del Kit (desviación citada en el contrato).
-- **Rojo desfavorable** (#A5361A) sobre **Rojo velo** (#FBEAE5): variación valorada como desfavorable.
+- **Verde Mejora** (`good`) sobre **Verde Bruma** (`good-soft`): chip, variación y franja de estado de una cifra que mejoró.
+- **Rojo Alerta** (`bad`) sobre **Rojo Bruma** (`bad-soft`): chip, variación y franja de estado de una cifra que empeoró.
 
 ### Neutral
-- **Gris pizarra** (#33415C): texto secundario (entrada, etiqueta de la cifra, fuente, metadatos, aviso de tercero).
-- **Fondo GOV** (#F4F6FB): fondo de página.
-- **Superficie** (#FFFFFF): cabecera, panel del tema, pestañas inactivas, pie.
-- **Velo Cobalt** (#EAF0FB): hover de pestañas y píldoras; fondo del escenario del tablero antes de cargar.
-- **Línea** (#C3CFE5): bordes de superficies y divisores de la cifra.
-- **Control** (#6F7D99): bordes de elementos interactivos (pestañas, resumen pendiente) y barra de desplazamiento; cumple 3:1 sin texto.
+- **Tinta Pizarra** (`text`): texto principal, cifras y títulos.
+- **Gris Pizarra** (`muted`): texto secundario, etiquetas, fuentes, metadatos, pestañas inactivas, íconos del menú.
+- **Suelo Niebla** (`ground`): fondo de la página bajo todo el cuerpo.
+- **Blanco Superficie** (`surface`): tarjetas, tablero, botones, cabecera y entrada de menú activa.
+- **Línea Fina** (`line`): bordes de tarjetas y tablero, divisores internos, raíl de pestañas, borde de la cabecera.
+- **Línea Firme** (`line-strong`): borde de botones, separador del nombre en la cabecera, borde de tarjeta al pasar el cursor.
+- **Gris Lavado** (`neutral-soft`): chips sin valoración, contadores, fondo del escenario del tablero mientras carga.
 
 ### Named Rules
-**La Regla de la Voz Única.** Cobalt es el único color de acción. Si algo se puede tocar y no es la pestaña activa, es Cobalt o tiene borde Cobalt al pasar.
+**La Regla del Acento Escaso.** Cobalt marca solo lo seleccionado o accionable. Si un elemento no se puede tocar ni está activo, no es Cobalt.
 
-**La Regla del Amarillo con Oficio.** El amarillo solo marca el corte de los datos (y la cifra activa sobre marino). Nunca fondo de sección, nunca alerta.
+**La Regla del Estado Triple.** Una mejora o un empeoramiento se dice siempre con palabra ("Mejora", "Empeora"), ícono SVG de flecha y color; ninguna de las tres señales va sola.
 
-**La Regla de la Valoración Dicha.** Verde y rojo solo acompañan una valoración escrita ("Favorable", "Desfavorable") y una flecha SVG. Si un indicador no tiene valoración (Población), solo se muestra la dirección en tinta.
-
-**La Regla de los Colores Vetados.** #004884 y #3366CC (mockup v4) no existen en este sistema; su lugar lo ocupa Cobalt.
+**La Regla del Contraste Alto.** En modo `contrast-govco` del CDN solo se redefinen los tokens `--nxgov-color-*` (fondo negro, texto blanco, acento amarillo `#FFE14D`, estados `#7CF2C2` / `#FF9B90`); ningún componente lleva reglas propias de contraste.
 
 ## Typography
 
-**Display Font:** Work Sans variable (OFL, alojada en `assets/fonts/`), con Nunito Sans, Segoe UI y system-ui de respaldo
-**Body Font:** Nunito Sans (400, 700, 900, alojada), con Segoe UI y system-ui de respaldo
+**Display Font:** Work Sans variable (con Nunito Sans, Segoe UI, system-ui)
+**Body Font:** Nunito Sans (con Segoe UI, system-ui)
 
-**Character:** Work Sans da a títulos y cifras un peso firme y geométrico; Nunito Sans lleva el texto con calidez y buena lectura en celular. Toda medida en `rem`.
+**Character:** Work Sans aporta un trazo geométrico y técnico a títulos, cifras y navegación; Nunito Sans, redondeada y abierta, hace legible el texto institucional. Ambas se sirven localmente con `font-display: swap`.
 
 ### Hierarchy
-- **Display** (800, clamp(1.875rem → 2.75rem), 1.1, -0.02em, `text-wrap: balance`): título de la página, una vez.
-- **Figure** (700, clamp(2.5rem → 3.5rem), 1, -0.02em, cifras tabulares, Cobalt): la cifra principal del tema. La unidad va debajo en cuerpo 1rem tinta.
-- **Headline** (800, 1.75rem, 1.15): nombre del tema en su panel.
-- **Title** (700, 1.375rem, 1.3): título de cada hoja de tablero.
-- **Tab figure** (700, 1.375rem, 1.15, tabulares; 1.0625rem sin cortes de línea bajo 40rem): la cifra en la pestaña.
-- **Button** (Work Sans 600, 0.9375rem en píldoras de hoja, 1.0625rem en "Cargar el tablero", 1.3).
-- **Body** (Nunito 400, 1rem, 1.6): texto general. Notas y resúmenes a 1.0625rem; resúmenes hasta 70ch, notas 40ch.
-- **Lead** (Nunito 400, 1.125rem, Gris pizarra, 60ch, `text-wrap: pretty`): entrada bajo el título.
-- **Label** (Nunito 700, 0.9375rem): nombre del tema en la pestaña, enlaces de cabecera (700, 1rem), etiqueta de la cifra.
-- **Meta** (Nunito 400, 0.875rem, Gris pizarra): fuente, fecha y aviso de tercero.
+- **Display** (700, clamp 1.75–2.25rem, 1.15, -0.02em): el título "¿Cómo va Sopó?" del resumen; uno por página.
+- **Headline** (700, clamp 1.625–2rem, 1.2, -0.02em): título de cada vista de tablero.
+- **Figure** (600, 2rem, 1.1, -0.02em, cifras tabulares): el valor de cada tarjeta; nunca se parte (`nowrap`).
+- **Title** (600, 1.25rem, 1.3): encabezados de sección del resumen.
+- **Title-sm** (600, 1.0625rem, 1.3): título de cada colección/libro.
+- **Label** (600, 0.9375rem, 1.3, Work Sans): entradas del menú, pestañas, botones y paginador.
+- **Body** (400, 1rem, 1.6): texto corrido; el resumen de cada tablero se limita a 75ch con `text-wrap: pretty`.
+- **Body-sm** (400, 0.875rem): unidades, variación, migas, fecha de corte, franja de estado.
+- **Caption** (400, 0.8125rem): fuente de la cifra, metadatos del tablero, nota del menú, aviso de desplazamiento.
 
 ### Named Rules
-**La Regla de la Cifra en Work Sans.** Todo número que sea dato (cifra grande, cifra de pestaña) va en Work Sans con cifras tabulares; el texto corrido nunca.
+**La Regla de la Cifra Tabular.** Todo número que se compara (valores de tarjeta, contadores del menú) usa `font-variant-numeric: tabular-nums`.
 
-**La Regla del Tamaño Libre.** Sin alturas fijas en texto: la barra de accesibilidad del CDN escribe `font-size` en línea y todo debe crecer con ella.
+**La Regla del Rem.** Todo tamaño de texto va en `rem` y ninguna caja de texto tiene altura fija: la barra de accesibilidad del CDN escribe `font-size` en línea y el diseño debe crecer con ella.
 
 ## Layout
 
-Contenedor centrado de 80rem con margen lateral de 2rem (1rem bajo 40rem). Ritmo de espacio en cinco pasos (0.5, 1, 1.5, 2, 3rem); las secciones respiran con 3rem, los paneles con 2rem de relleno.
+Contenedor centrado de **90rem** (1440px) con margen lateral fluido `clamp(1rem, 3vw, 2.5rem)`. La barra superior GOV.CO conserva su fondo a todo el ancho pero alinea su contenido al mismo contenedor; el pie GOV.CO se limita a 90rem.
 
-Orden de la página: entrada (título y entrada a la izquierda, fecha de corte alineada abajo a la derecha) → barra de 8 pestañas-cifra en rejilla de columnas iguales con 0.5rem de separación → panel del tema activo. El panel es una rejilla de dos columnas (1 : 2.1): hechos a la izquierda (título, cifra, nota), tableros a la derecha (píldoras de hoja, título, resumen, metadatos, escenario).
+El cuerpo es un **shell de dos columnas**: menú lateral de 15rem, pegajoso (`sticky`, top 1.5rem, alto máximo `100vh - 3rem` con desplazamiento propio), y área principal flexible, con 2.5rem de separación. Las tarjetas y las colecciones usan una rejilla de 3 columnas con 1rem de separación.
 
-Respuesta:
-- **≤64rem:** la barra pasa a 4 columnas; las pestañas se vuelven tarjetas redondeadas por completo y el panel se separa (pierde el filo marino y gana esquinas en los cuatro lados).
-- **≤48rem:** el panel pasa a una columna; la cifra queda encima del tablero.
-- **≤40rem:** barra en 2 columnas, cifra de pestaña a 1.0625rem, enlaces de cabecera apilados, escenario cargado en 3:4.
+Ritmo de espaciado observado (en rem): 0.25 · 0.5 · 0.75 · 1 · 1.25 · 1.5 · 2 · 2.5 · 3. Las vistas consecutivas sin JS se separan 3rem; con JS solo se muestra una a la vez.
 
-El escenario del tablero mide al menos 15rem antes de cargar; cargado toma 4:3 (máximo 50rem de alto).
+Puntos de quiebre:
+- **≤75rem:** tarjetas y colecciones pasan a 2 columnas.
+- **≤64rem:** el shell se vuelve una columna; el menú lateral se convierte en un desplegable (`<details>`) con superficie blanca, que se cierra al elegir un tablero.
+- **≤40rem:** tarjetas y colecciones a 1 columna; las pestañas se vuelven una tira desplazable con desvanecido en los bordes; el paginador se apila; el escenario del tablero pasa a 34rem de alto con el iframe a ancho nativo de 60rem y desplazamiento horizontal, precedido por un aviso visible ("Desliza para ver el tablero completo o ábrelo en Tableau Public"). La barra de accesibilidad baja a 5rem del borde inferior.
+
+### Named Rules
+**La Regla de los 1440.** Cabecera, cuerpo, barra superior y pie comparten el mismo eje de 90rem; nada propio se sale de ese contenedor.
+
+**La Regla del Tablero Nativo.** En teléfono el libro de Tableau se muestra a su ancho de escritorio con desplazamiento horizontal y aviso; nunca con `:device=phone`, que Tableau Public entrega en blanco.
 
 ## Elevation & Depth
 
-Sistema plano. No hay `box-shadow` en ninguna parte. La profundidad sale de tres capas tonales (Fondo GOV → Superficie → Velo Cobalt) y de bordes de 1px. La única señal de jerarquía fuerte es el filo superior marino de 4px del panel, que lo cose a la pestaña activa.
+Sistema plano con capas tonales: la profundidad la dan el contraste suelo gris / superficie blanca y el borde fino, no las sombras. Existe una sombra de reposo apenas perceptible y una sombra difusa que solo aparece como respuesta al cursor.
+
+### Shadow Vocabulary
+- **Reposo** (`box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04)`): tarjetas, colecciones, tablero y entrada activa del menú.
+- **Elevación al cursor** (`box-shadow: 0 4px 16px rgba(16, 24, 40, 0.08)`): solo tarjetas de cifra al pasar el cursor, junto con el borde `line-strong`.
 
 ### Named Rules
-**La Regla Plana.** Ninguna superficie lleva sombra. Si algo necesita separarse, gana borde Línea o cambia de capa tonal.
+**La Regla de lo Plano por Defecto.** En reposo, las superficies son planas; la sombra visible es respuesta a un estado, nunca adorno.
 
 ## Shapes
 
-Dos familias de forma. **Superficies** con esquinas suaves: escenario y resumen pendiente a 0.75rem, panel del tema a 1rem. **Acciones y etiquetas** en píldora completa: botón de carga, píldoras de hoja, fecha de corte, valoración.
+Esquinas suavemente redondeadas en dos tamaños y una píldora. Las superficies grandes (tarjetas, tablero, colecciones, menú desplegable) usan **0.875rem** (14px); los controles y elementos internos (botones, entradas del menú, paginador, ícono de colección, contorno de foco) usan **0.5rem**; chips, contadores, franja de estado y la fecha de corte son píldoras. El tablero recorta su contenido (`overflow: hidden`) para que el iframe respete la esquina. Bordes siempre de 1px; la única línea de 2px es el subrayado de la pestaña activa.
 
-Las pestañas de escritorio tienen esquinas solo arriba (0.75rem) y el panel solo abajo (1rem): juntos forman una carpeta. Bajo 64rem cada pieza se redondea completa. El resumen pendiente usa borde discontinuo Control para decir "esto aún no está".
-
-Íconos: SVG en línea de 24×24 con trazo `currentColor` de 2.6, extremos redondos, mostrados a 1.25rem. Sin fuentes de íconos.
+Los íconos son SVG de trazo (1.125rem, trazo 1.8, extremos redondeados, `currentColor`), nunca fuentes de íconos ni glifos de texto.
 
 ## Components
 
-### Pestaña-cifra (firma)
-Cada tema es un enlace con nombre (Label) y cifra (Tab figure Cobalt). Superficie blanca, borde Control, esquinas superiores 0.75rem, relleno 0.75rem × 0.875rem.
-- **Hover:** fondo Velo Cobalt, borde Cobalt.
-- **Activa** (`aria-current="true"`): relleno y borde Marino tinta, nombre blanco, cifra amarilla. Foco Cobalt.
-- **Transición:** fondo y borde en 180ms con `cubic-bezier(0.16, 1, 0.3, 1)`.
-
-### Panel del tema
-Superficie blanca, borde Línea, filo superior marino de 4px, esquinas inferiores 1rem, relleno 2rem. Al cambiar de tema, el título y la cifra suben 0.5rem y aparecen en 320ms (`.nxgov-is-entering`); nada más se anima, y `prefers-reduced-motion` lo apaga.
-
-### Cifra (stat)
-Bloque entre dos líneas Línea con 1.5rem de aire: etiqueta (Label, Gris pizarra), cifra (Figure), unidad, variación con flecha SVG y valoración en píldora, y fuente (Meta). La variación sin valoración va en tinta.
-
 ### Buttons
-- **Shape:** píldora (999px).
-- **Primario "Cargar el tablero":** relleno Cobalt, texto blanco, Work Sans 600 1.0625rem, alto mínimo 3rem, relleno 0.75rem × 1.75rem. Hover Cobalt profundo en 180ms. Es la acción principal del escenario.
-- **Píldora de hoja** (`aria-pressed`): borde y texto Cobalt sobre blanco, alto mínimo 2.75rem; hover Velo Cobalt; seleccionada en relleno Cobalt y texto blanco.
+Discretos y de contorno: el botón nunca es un bloque de color.
+- **Shape:** esquina suave (0.5rem), alto mínimo 2.5rem.
+- **Default:** fondo blanco, borde `line-strong`, texto `text` en Label (Work Sans 600, 0.875rem).
+- **Hover / Focus:** el borde y el texto pasan a Cobalt (transición de 150ms); el foco es un contorno Cobalt de 3px separado 2px.
+- **Uso:** "Abrir en Tableau Public" junto al título de cada tablero.
 
 ### Chips
-- **Fecha de corte:** píldora amarilla, texto tinta 700 0.9375rem.
-- **Valoración:** píldora con velo verde o rojo y texto del color pleno, 0.875rem, siempre junto a la flecha.
+- **Estado de cifra:** píldora de 0.75rem en negrita: Verde Bruma/Verde Mejora para "Mejora", Rojo Bruma/Rojo Alerta para "Empeora", Gris Lavado/Gris Pizarra para "Sin valoración".
+- **Franja de estado:** píldoras de 0.875rem en el encabezado del resumen ("3 mejoraron", "2 empeoraron", "1 sin valoración") con el número en negrita.
+- **Contador del menú:** píldora tabular gris que pasa a Bruma Cobalt cuando su grupo está abierto.
 
-### Escenario del tablero (`nxgov-viz`)
-Encabezado (título de hoja + "Abrir en Tableau Public"), resumen en texto fuera del iframe, metadatos de fuente y corte, y el escenario: Velo Cobalt, borde Línea, esquinas 0.75rem, con una puerta centrada (botón de carga + aviso de tercero a 36ch). Al cargar (`.nxgov-is-loaded`) el escenario pasa a blanco y el iframe ocupa todo. La carga emite `nxgov:action:load-viz` (cancelable).
+### Cards / Containers
+- **Tarjeta de cifra (firma del sistema):** superficie blanca, borde `line`, radio 0.875rem, sombra de reposo, relleno `0.875rem 1.125rem 0.75rem`. De arriba abajo: etiqueta + chip de estado, valor (Figure), unidad, línea de tendencia SVG (Cobalt con relleno al 8% y punto final), variación con ícono de flecha, y pie con fuente separado por una línea fina y el enlace "Ver tablero". Si tiene tablero, toda la tarjeta es un enlace; al cursor gana borde `line-strong`, sombra difusa y sube 2px. La tendencia lleva `aria-label` con el rango y el máximo.
+- **Colección:** superficie blanca, radio 0.875rem, relleno 1.25rem, ícono SVG sobre Bruma Cobalt, título del libro, metadato y lista de hojas como enlaces Cobalt.
 
 ### Navigation
-Enlaces de cabecera en Label 700 Cobalt subrayados (grosor 0.08em, 0.14em en hover, desfase 0.18em), apilados bajo 40rem. Salto al contenido en marino con texto blanco, visible al recibir foco.
+- **Menú lateral:** fondo transparente sobre el suelo. Entradas en Label con ícono gris; al cursor, fondo blanco; la activa (`aria-current="page"`) es blanca con texto e ícono Cobalt y sombra de reposo. Cada libro es un `<details>` plegable con contador; sus hojas cuelgan de una guía vertical de 1px y la activa usa Bruma Cobalt con texto Cobalt en negrita.
+- **Pestañas:** tira sobre un raíl `line` de 1px; pestaña inactiva en Gris Pizarra, activa en Cobalt con subrayado de 2px. Se conectan sin espacio con el tablero que controlan.
+- **Paginador:** dos tarjetas pequeñas (radio 0.5rem) "anterior / siguiente" con dirección en Caption; al cursor, borde y texto Cobalt.
+- **Móvil:** el menú se pliega en un desplegable con chevron que gira 180°.
+
+### Visor de tablero (firma)
+Marco blanco de radio 0.875rem que contiene: franja de información (resumen en texto de hasta 75ch + metadatos de fuente y fecha, enlace Cobalt), escenario 16:11 (alto máximo 85vh) con fondo Gris Lavado mientras carga, e iframe de Tableau Public a sangre. El resumen pendiente se marca en cursiva gris.
+
+### Motion
+Un solo momento: al llegar al resumen, las tarjetas suben 0.5rem y se asientan (320ms, `cubic-bezier(0.16, 1, 0.3, 1)`), sin ocultar contenido. Las transiciones de estado duran 150ms. Con `prefers-reduced-motion` se eliminan animación y transiciones.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** sacar todo valor de un token `--nxgov-*` en `:root`; tipografía y espacio en `rem`.
-- **Do** nombrar todo bloque con prefijo `nxgov-` y BEM estricto; estados con `.nxgov-is-*` o atributos ARIA (`aria-current`, `aria-pressed`).
-- **Do** acompañar cada valoración con texto y flecha SVG; el color nunca va solo.
-- **Do** poner junto a cada cifra su fuente y fecha de corte, y junto a cada tablero su resumen en texto fuera del iframe.
-- **Do** cargar Tableau solo tras clic, detrás de la puerta con aviso de tercero.
-- **Do** usar anillo de foco Cobalt de 3px con 3px de separación (amarillo sobre la barra Cobalt).
-- **Do** respetar `prefers-reduced-motion`: sin animación ni transición.
+- **Do** tomar todo color, radio, sombra y duración de los tokens `--nxgov-*` declarados en `:root`.
+- **Do** usar el prefijo `nxgov-`, BEM estricto y estados `.nxgov-is-*`; atributos `data-nxgov-*` y eventos `nxgov:<bloque>:<evento>`.
+- **Do** mostrar cada tablero de Tableau sin clic, con resumen en texto, fuente, fecha y enlace al libro.
+- **Do** acompañar cada estado de cifra con palabra, ícono SVG y color suave.
+- **Do** escribir tipografía en `rem` y dejar que el texto crezca sin alturas fijas.
+- **Do** alinear todo contenido propio y el chrome GOV.CO al contenedor de 90rem.
+- **Do** dar foco visible con contorno Cobalt de 3px y 2px de separación.
 
 ### Don't:
-- **Don't** usar #004884 ni #3366CC, ni cargar el CDN v4, Tailwind o Font Awesome.
-- **Don't** tocar ni reestilizar el chrome GOV.CO del CDN v5 ni clases `.govco-*`, `.btn`, `.d-*`.
-- **Don't** usar `style` o `script` en línea ni manejadores `on*` (CSP estricta).
-- **Don't** usar el amarillo fuera de la fecha de corte y la cifra activa, ni verde o rojo fuera de una valoración.
-- **Don't** añadir sombras; la profundidad es tonal.
-- **Don't** usar `!important` salvo en `.nxgov-sr-only` y `.nxgov-is-hidden`.
-- **Don't** fijar alturas a cajas de texto.
+- **Don't** modificar el chrome GOV.CO del CDN v5 ni las clases `.govco-*`; solo se ajusta su alineación desde contenedores propios.
+- **Don't** usar los colores del mockup v4 (`#004884`, `#3366CC`); el acento es Cobalt.
+- **Don't** usar estilos o scripts en línea ni manejadores `on*`; la CSP es estricta.
+- **Don't** esconder un tablero tras un botón ni convertir la página en un documento de texto largo.
+- **Don't** pasar a un tablero oscuro o pesado, ni usar sombras fuertes en reposo.
+- **Don't** usar Cobalt como relleno decorativo ni en elementos que no se pueden tocar.
+- **Don't** usar fuentes de íconos ni glifos de texto como íconos; solo SVG de trazo.
+- **Don't** cargar Tableau con `:device=phone`.
