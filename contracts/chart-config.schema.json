@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://portal-estadistico-sopo/contracts/chart-config.schema.json",
+  "title": "Configuración declarativa de gráfica nativa (Propuesta v0) — editable en Decap",
+  "type": "object",
+  "required": ["id", "titulo", "resumen", "tipo", "serie_id", "eje_x", "fuente_texto"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "titulo": { "type": "string", "maxLength": 90, "description": "Dice el hallazgo, no el tema" },
+    "resumen": { "type": "string", "minLength": 40, "description": "Alternativa textual (WCAG 1.1.1)" },
+    "tipo": { "enum": ["barras", "barras-horizontales", "barras-agrupadas", "lineas", "dona", "kpi-serie"] },
+    "serie_id": { "type": "string" },
+    "eje_x": { "enum": ["periodo", "categoria", "subcategoria"] },
+    "agrupar_por": { "enum": ["categoria", "subcategoria", null] },
+    "max_series": { "type": "integer", "minimum": 1, "maximum": 8, "default": 4 },
+    "orden": { "enum": ["original", "valor-desc", "valor-asc"], "default": "original" },
+    "unidad_eje": { "type": "string" },
+    "mostrar_etiquetas": { "type": "boolean", "default": true },
+    "fuente_texto": { "type": "string" },
+    "pestana": { "type": "string", "description": "Slug de la pestaña/tablero donde aparece" },
+    "visible": { "type": "boolean", "default": true }
+  }
+}

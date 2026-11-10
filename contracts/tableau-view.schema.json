@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://portal-estadistico-sopo/contracts/tableau-view.schema.json",
+  "title": "Vista de Tableau Public embebida (Propuesta v0) — editable en Decap",
+  "type": "object",
+  "required": ["slug", "libro", "titulo", "hoja", "url", "resumen", "csv_serie_id", "fuente_texto", "orden"],
+  "additionalProperties": false,
+  "properties": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "libro": { "enum": ["terridata", "programas-sociales"] },
+    "titulo": { "type": "string", "maxLength": 90 },
+    "hoja": { "type": "string", "description": "Nombre EXACTO de la hoja en Tableau (no renombrar)" },
+    "url": { "type": "string", "pattern": "^https://public\\.tableau\\.com/views/[^/]+/[^/?]+" },
+    "resumen": { "type": "string", "minLength": 40 },
+    "csv_serie_id": { "type": "string", "description": "Serie de la hoja que alimenta la tabla y el CSV alternativos" },
+    "fuente_texto": { "type": "string" },
+    "altura_px": { "type": "integer", "minimum": 400, "maximum": 1200, "default": 720 },
+    "movil": { "enum": ["tableau", "resumen-primero"], "default": "resumen-primero" },
+    "orden": { "type": "integer", "minimum": 1 },
+    "visible": { "type": "boolean", "default": true }
+  }
+}

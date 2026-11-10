@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://portal-estadistico-sopo/contracts/kpi.schema.json",
+  "title": "KPI del Portal Estadístico de Sopó (Propuesta v0)",
+  "type": "object",
+  "required": ["id", "titulo", "valor", "unidad", "decimales", "periodo", "fecha_corte", "sentido_positivo", "fuente", "responsable", "icono", "orden", "destacado", "estado"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "titulo": { "type": "string", "minLength": 3, "maxLength": 40 },
+    "valor": { "type": "number" },
+    "unidad": { "type": "string", "minLength": 1 },
+    "decimales": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "periodo": { "type": "string", "pattern": "^\\d{4}(-(0[1-9]|1[0-2]))?$" },
+    "fecha_corte": { "type": "string", "format": "date" },
+    "comparacion": {
+      "type": "object",
+      "required": ["valor", "tipo", "texto"],
+      "additionalProperties": false,
+      "properties": {
+        "valor": { "type": "number" },
+        "tipo": { "enum": ["porcentaje", "puntos", "absoluto", "referencia"] },
+        "texto": { "type": "string", "minLength": 3 }
+      }
+    },
+    "sentido_positivo": { "enum": ["sube", "baja", "neutro"] },
+    "fuente": { "type": "string", "minLength": 3 },
+    "fuente_url": { "type": "string", "format": "uri" },
+    "responsable": { "type": "string", "minLength": 3 },
+    "icono": { "type": "string" },
+    "orden": { "type": "integer", "minimum": 1 },
+    "destacado": { "type": "boolean" },
+    "estado": { "enum": ["publicado", "borrador", "preliminar"] }
+  }
+}

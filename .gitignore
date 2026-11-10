@@ -1,0 +1,16 @@
+node_modules/
+_site/
+.cache/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+CLAUDE.local.md
+.claude/worktrees/
+.claude/settings.local.json
+# secretos de servicio, nunca al repo
+*service-account*.json
+
+# rutas locales de la máquina de desarrollo
+.claude/launch.json

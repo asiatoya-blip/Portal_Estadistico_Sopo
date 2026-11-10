@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Estadístico de Sopó - Alcaldía Municipal de Sopó</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Work Sans / Inter for GOV.CO compliance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Chart.js CDN for interactive visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Tailwind Custom Configuration according to GOV.CO Design Kit v9.2 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gov: {
+              blue: '#004884',        // GOV.CO Primary Blue
+              darkblue: '#002B49',    // GOV.CO Dark Navy
+              lightblue: '#3366CC',   // GOV.CO Accent Blue
+              hoverblue: '#003366',   // Hover State Blue
+              bglight: '#F4F6F9',     // GOV.CO Neutral Light
+              cardbg: '#FFFFFF',
+              border: '#E2E8F0',
+              text: '#2D3748',
+              alertRed: '#A80521',
+              successGreen: '#008A3B',
+              warningYellow: '#D67D00'
+            }
+          },
+          fontFamily: {
+            sans: ['Work Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Work Sans', sans-serif;
+      background-color: #F4F6F9;
+      color: #2D3748;
+    }
+
+    /* High contrast mode styling */
+    .high-contrast {
+      filter: invert(1) hue-rotate(180deg);
+      background-color: #000 !important;
+    }
+    .high-contrast img, .high-contrast canvas {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
+    /* GOV.CO Official Blue Bar */
+    .gov-official-bar {
+      background-color: #0038A8;
+      color: #FFFFFF;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #004884;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen transition-all duration-300 relative" id="main-body">
+
+  <!-- HEADER OFICIAL DE LA SEDE ELECTRÓNICA DE SOPÓ -->
+  <header class="w-full">
+    <!-- 1. Barra Azul Superior GOV.CO Oficial -->
+    <div class="gov-official-bar py-1.5 px-4 sm:px-8 flex justify-between items-center z-50">
+      <div class="flex-1 text-center">
+        <a href="https://www.gov.co" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1">
+          <span class="text-white font-extrabold text-base tracking-tight">gov<span class="text-yellow-400">.</span>co</span>
+        </a>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="bg-white text-blue-900 font-bold text-[11px] px-2 py-0.5 rounded shadow hover:bg-gray-100 transition">EN</button>
+      </div>
+    </div>
+
+    <!-- 2. Header Principal Blanco (Marca Alcaldía de Sopó + Buscador + Login) -->
+    <div class="bg-white border-b border-gray-200 py-3 px-4 sm:px-8 shadow-sm">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        
+        <!-- Logotipo Oficial e Identidad Municipal -->
+        <div class="flex items-center space-x-4">
+          <a href="#" class="flex items-center space-x-3">
+            <!-- Logo oficial cargado -->
+            <img src="logo_sopo_2024_2027_1x.png" alt="Alcaldía de Sopó - Cundinamarca" 
+                 class="h-14 sm:h-16 w-auto object-contain max-w-[280px]"
+                 onerror="this.onerror=null; this.src='https://placehold.co/280x70/004884/ffffff?text=Alcaldia+de+Sopo';">
+          </a>
+        </div>
+
+        <!-- Enlaces de Usuario y Buscador Redondeado Oficial -->
+        <div class="flex flex-col items-end w-full md:w-auto gap-2">
+          <div class="text-xs text-blue-900 font-medium space-x-2">
+            <a href="#" class="hover:underline text-blue-800">Iniciar sesión</a>
+            <span>|</span>
+            <a href="#" class="hover:underline text-blue-800">Registrarse</a>
+          </div>
+          
+          <div class="relative w-full sm:w-80">
+            <input type="text" id="global-search" placeholder="Buscar..." 
+                   onkeyup="handleSearch()"
+                   class="w-full bg-white text-gray-800 text-sm rounded-full pl-4 pr-12 py-2 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-inner">
+            <button onclick="handleSearch()" class="absolute right-1 top-1/2 -translate-y-1/2 bg-gov-blue text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-blue-900 transition shadow">
+              <i class="fa-solid fa-magnifying-glass text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. Sub-Barra Institucional del Portal Estadístico con Selector de Vigencia -->
+    <div class="bg-gov-blue text-white shadow-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-chart-pie text-yellow-400 text-lg"></i>
+          <span class="font-bold text-base tracking-wide">PORTAL ESTADÍSTICO DE SOPÓ</span>
+          <span class="bg-yellow-400 text-gov-darkblue text-[10px] font-extrabold px-2 py-0.5 rounded">Vigencia 2026</span>
+        </div>
+        <div class="flex items-center space-x-2 text-xs">
+          <span class="font-medium text-blue-100">Ficha Territorial TerriData & Datos Locales</span>
+          <select id="year-selector" onchange="updateDashboardYear(this.value)" class="bg-gov-darkblue text-white text-xs rounded px-2.5 py-1 border border-blue-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 font-semibold">
+            <option value="2026" selected>2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ÁREA PRINCIPAL DEL DASHBOARD -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+
+    <!-- Fila de Resumen de Tarjetas KPI Rápidas (General Sopó) -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+        <div class="flex items-center justify-between text-gov-blue mb-1">
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Población Total</span>
+          <i class="fa-solid fa-users text-gov-blue"></i>
+        </div>
+        <div class="text-2xl font-bold text-gray-900">34.015</div>
+        <p class="text-[11px] text-gov-successGreen font-semibold mt-0.5">
+          <i class="fa-solid fa-arrow-trend-up"></i> +24,8% vs 2018
+        </p>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+        <div class="flex items-center justify-between text-gov-blue mb-1">
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Índice C. Modernas</span>
+          <i class="fa-solid fa-city text-gov-blue"></i>
+        </div>
+        <div class="text-2xl font-bold text-gray-900">67,7 <span class="text-xs font-normal text-gray-500">/100</span></div>
+        <p class="text-[11px] text-gov-successGreen font-semibold mt-0.5">
+          <i class="fa-solid fa-check"></i> Cundinamarca: 57,1
+        </p>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+        <div class="flex items-center justify-between text-gov-blue mb-1">
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Becas FOES</span>
+          <i class="fa-solid fa-graduation-cap text-gov-blue"></i>
+        </div>
+        <div class="text-2xl font-bold text-gray-900">1.280</div>
+        <p class="text-[11px] text-gov-blue font-semibold mt-0.5">
+          Estímulos Ed. Superior
+        </p>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+        <div class="flex items-center justify-between text-gov-blue mb-1">
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Esc. Deportivas</span>
+          <i class="fa-solid fa-person-running text-gov-blue"></i>
+        </div>
+        <div class="text-2xl font-bold text-gray-900">4.850</div>
+        <p class="text-[11px] text-gov-successGreen font-semibold mt-0.5">
+          Inscritos activos
+        </p>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+        <div class="flex items-center justify-between text-gov-blue mb-1">
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">Escuela Recrearte</span>
+          <i class="fa-solid fa-palette text-gov-blue"></i>
+        </div>
+        <div class="text-2xl font-bold text-gray-900">3.420</div>
+        <p class="text-[11px] text-gov-blue font-semibold mt-0.5">
+          Talleres de cultura
+        </p>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+        <div class="flex items-center justify-between text-gov-blue mb-1">
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-500">IDF Finanzas</span>
+          <i class="fa-solid fa-chart-line text-gov-blue"></i>
+        </div>
+        <div class="text-2xl font-bold text-gray-900">61,4</div>
+        <p class="text-[11px] text-gov-successGreen font-semibold mt-0.5">
+          Desempeño Fiscal 2024
+        </p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1: TERRIDATA (IFRAME TABLEAU INCORPORADO) -->
+    <section class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+      <!-- Encabezado de la Sección TerriData -->
+      <div class="bg-gov-darkblue text-white p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="bg-blue-500 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Visualizador Tableau Public</span>
+            <span class="bg-yellow-400 text-gov-darkblue text-[11px] font-black px-2.5 py-0.5 rounded-full">DNP TerriData Sopó</span>
+          </div>
+          <h2 class="text-xl font-bold text-white mt-1.5 flex items-center space-x-2">
+            <i class="fa-solid fa-chart-area text-yellow-400"></i>
+            <span>Tableros de Indicadores Territorial TerriData (Tableau)</span>
+          </h2>
+          <p class="text-xs text-blue-100 mt-0.5">Gráficas interactivas de Finanzas Públicas, Desempeño Fiscal, Demografía y Economía.</p>
+        </div>
+
+        <!-- Acciones e Integración del iframe -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="toggleTableauSource()" class="bg-blue-800 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition border border-blue-600 flex items-center space-x-1">
+            <i class="fa-solid fa-link"></i>
+            <span>Configurar Enlace Iframe</span>
+          </button>
+          <button onclick="reloadTableauIframe()" class="bg-blue-800 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition border border-blue-600 flex items-center space-x-1" title="Recargar gráfico">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>Recargar</span>
+          </button>
+          <button onclick="fullscreenTableau()" class="bg-yellow-400 hover:bg-yellow-300 text-gov-darkblue text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center space-x-1">
+            <i class="fa-solid fa-expand"></i>
+            <span>Pantalla Completa</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra emergente para cambiar/personalizar URL del Iframe de Tableau -->
+      <div id="tableau-url-bar" class="hidden bg-gray-100 p-3 border-b border-gray-200 text-xs flex flex-col sm:flex-row items-center gap-2">
+        <label for="tableau-url-input" class="font-bold text-gray-700 whitespace-nowrap">URL Embed de Tableau:</label>
+        <input type="text" id="tableau-url-input" value="https://public.tableau.com/views/FinanzasPublicasSopo/FinanzasIDF?:showVizHome=no&:embed=true" class="w-full bg-white border border-gray-300 rounded px-3 py-1.5 text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-gov-blue">
+        <button onclick="applyTableauUrl()" class="bg-gov-blue text-white font-bold px-4 py-1.5 rounded hover:bg-blue-900 whitespace-nowrap">Aplicar URL</button>
+      </div>
+
+      <!-- Contenedor Principal del Iframe de Tableau -->
+      <div class="relative w-full bg-slate-50 min-h-[580px] flex flex-col justify-between border-b border-gray-200" id="tableau-container">
+        
+        <!-- Iframe Real cargando Tableau Public (Con fallback renderizado) -->
+        <iframe id="tableau-iframe" 
+                src="about:blank" 
+                class="w-full h-[540px] border-0 hidden" 
+                title="Tableros de Tableau TerriData Sopó"
+                allowfullscreen></iframe>
+
+        <!-- Renderizado Mockup del Gráfico de Tableau (Finanzas Públicas / Nuevo Índice de Desempeño Fiscal) -->
+        <div id="tableau-mockup-view" class="w-full p-4 md:p-6 bg-white space-y-4">
+          
+          <!-- Encabezado del reporte dentro de Tableau -->
+          <div class="text-center border-b border-gray-200 pb-3">
+            <h3 class="text-xl md:text-2xl font-bold text-blue-700">Finanzas públicas / Nuevo Índice de Desempeño Fiscal / Todo</h3>
+          </div>
+
+          <!-- Matriz de Indicadores (Fiel al gráfico de Tableau subido) -->
+          <div class="overflow-x-auto">
+            <div class="min-w-[800px] space-y-2 text-xs">
+              
+              <!-- Fila 1: Puntaje nuevo IDF -->
+              <div class="grid grid-cols-12 items-center border-b border-gray-200 py-2">
+                <div class="col-span-3 font-semibold text-gray-700 pr-2">Puntaje nuevo Índice de Desempeño Fiscal</div>
+                <div class="col-span-9 h-16 bg-blue-100 rounded relative flex items-center justify-between px-6 border-t border-b border-blue-300">
+                  <div class="text-center font-bold text-blue-900">2020<br><span class="text-sm">71,5</span></div>
+                  <div class="text-center font-bold text-blue-900">2021<br><span class="text-sm">78,5</span></div>
+                  <div class="text-center font-bold text-blue-900">2022<br><span class="text-sm">61,9</span></div>
+                  <div class="text-center font-bold text-blue-900">2023<br><span class="text-sm">75,9</span></div>
+                  <div class="text-center font-bold text-blue-900">2024<br><span class="text-sm">61,4</span></div>
+                </div>
+              </div>
+
+              <!-- Fila 2: Balance Fiscal Primario -->
+              <div class="grid grid-cols-12 items-center border-b border-gray-200 py-2">
+                <div class="col-span-3 font-semibold text-gray-700 pr-2">Balance Fiscal Primario</div>
+                <div class="col-span-9 h-16 bg-blue-200/60 rounded relative flex items-center justify-between px-6 border-t border-b border-blue-400">
+                  <div class="text-center font-bold text-blue-950">24,1</div>
+                  <div class="text-center font-bold text-blue-950">11,3</div>
+                  <div class="text-center font-bold text-blue-950">36,6</div>
+                  <div class="text-center font-bold text-blue-950">14,4</div>
+                  <div class="text-center font-bold text-blue-950">40,1</div>
+                </div>
+              </div>
+
+              <!-- Fila 3: Capacidad de Ejecución de Ingresos -->
+              <div class="grid grid-cols-12 items-center border-b border-gray-200 py-2">
+                <div class="col-span-3 font-semibold text-gray-700 pr-2">Capacidad de Ejecución de Ingresos</div>
+                <div class="col-span-9 h-16 bg-red-200/80 rounded relative flex items-center justify-between px-6 border-t border-b border-red-400">
+                  <div class="text-center font-bold text-red-950">88,4</div>
+                  <div class="text-center font-bold text-red-950">120,0</div>
+                  <div class="text-center font-bold text-red-950">121,2</div>
+                  <div class="text-center font-bold text-red-950">124,8</div>
+                  <div class="text-center font-bold text-red-950">97,5</div>
+                </div>
+              </div>
+
+              <!-- Fila 4: Capacidad de Ejecución de Inversión -->
+              <div class="grid grid-cols-12 items-center border-b border-gray-200 py-2">
+                <div class="col-span-3 font-semibold text-gray-700 pr-2">Capacidad de Ejecución de Inversión</div>
+                <div class="col-span-9 h-16 bg-amber-200 rounded relative flex items-center justify-between px-6 border-t border-b border-amber-400">
+                  <div class="text-center font-bold text-amber-950">91,9</div>
+                  <div class="text-center font-bold text-amber-950">66,3</div>
+                  <div class="text-center font-bold text-amber-950">83,3</div>
+                  <div class="text-center font-bold text-amber-950">87,0</div>
+                  <div class="text-center font-bold text-amber-950">90,5</div>
+                </div>
+              </div>
+
+              <!-- Fila 5: Componente de gestión financiera -->
+              <div class="grid grid-cols-12 items-center border-b border-gray-200 py-2">
+                <div class="col-span-3 font-semibold text-gray-700 pr-2">Componente de gestión financiera</div>
+                <div class="col-span-9 h-16 bg-yellow-200/80 rounded relative flex items-center justify-between px-6 border-t border-b border-yellow-400">
+                  <div class="text-center font-bold text-yellow-950">93,3</div>
+                  <div class="text-center font-bold text-yellow-950">76,7</div>
+                  <div class="text-center font-bold text-yellow-950">83,5</div>
+                  <div class="text-center font-bold text-yellow-950">86,7</div>
+                  <div class="text-center font-bold text-yellow-950">100,0</div>
+                </div>
+              </div>
+
+              <!-- Fila 6: Nivel de Holgura -->
+              <div class="grid grid-cols-12 items-center border-b border-gray-200 py-2">
+                <div class="col-span-3 font-semibold text-gray-700 pr-2">Nivel de Holgura</div>
+                <div class="col-span-9 h-16 bg-teal-200/80 rounded relative flex items-center justify-between px-6 border-t border-b border-teal-400">
+                  <div class="text-center font-bold text-teal-950">38,8</div>
+                  <div class="text-center font-bold text-teal-950">41,0</div>
+                  <div class="text-center font-bold text-teal-950">36,5</div>
+                  <div class="text-center font-bold text-teal-950">38,9</div>
+                  <div class="text-center font-bold text-teal-950">36,1</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BARRA INFERIOR DE PESTAÑAS NATIVAS DE TABLEAU -->
+        <div class="bg-gray-200 border-t border-gray-300 p-1 flex items-center overflow-x-auto text-[11px] font-medium text-gray-700 space-x-1">
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Ambiente</button>
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Convivencia y Seguridad Ciudad...</button>
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Convivencia Medidas Correctivas</button>
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Demografía</button>
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Demografía Densidad</button>
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Economía Valor Agregado</button>
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Educación</button>
+          <button class="px-3 py-1 hover:bg-gray-300 rounded whitespace-nowrap">Finanzas</button>
+          <button class="px-3 py-1 bg-white font-bold text-blue-900 shadow-sm border border-gray-300 rounded whitespace-nowrap">Finanzas IDF</button>
+          
+          <div class="ml-auto flex items-center space-x-2 pl-4 text-gray-500">
+            <i class="fa-solid fa-share-nodes cursor-pointer hover:text-gray-800" title="Compartir"></i>
+            <i class="fa-solid fa-download cursor-pointer hover:text-gray-800" title="Descargar"></i>
+            <i class="fa-solid fa-up-right-and-down-left-from-center cursor-pointer hover:text-gray-800" onclick="fullscreenTableau()" title="Pantalla Completa"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: ACCESO A PROGRAMAS SOCIALES CON PESTAÑAS -->
+    <section class="space-y-4">
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+        <h2 class="text-xl font-extrabold text-gov-blue flex items-center space-x-2">
+          <i class="fa-solid fa-layer-group text-yellow-500"></i>
+          <span>Acceso a Programas Sociales y Oferta Institucional</span>
+        </h2>
+        <p class="text-xs text-gray-500">Selecciona la dimensión de interés para explorar el impacto, número de inscritos y cobertura por secretaría.</p>
+      </div>
+
+      <!-- Navegación por Pestañas del Sistema Estadístico -->
+      <div class="border-b border-gray-200 bg-white rounded-xl p-2 shadow-sm overflow-x-auto">
+        <nav class="flex space-x-1 min-w-max" aria-label="Tabs">
+          
+          <button onclick="switchTab('deportes')" id="tab-deportes" 
+                  class="tab-btn bg-gov-blue text-white px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-volleyball"></i>
+            <span>Deportes</span>
+          </button>
+
+          <button onclick="switchTab('cultura')" id="tab-cultura" 
+                  class="tab-btn text-gray-600 hover:bg-gray-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-palette"></i>
+            <span>Cultura</span>
+          </button>
+
+          <button onclick="switchTab('educacion')" id="tab-educacion" 
+                  class="tab-btn text-gray-600 hover:bg-gray-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Educación</span>
+          </button>
+
+          <button onclick="switchTab('cti')" id="tab-cti" 
+                  class="tab-btn text-gray-600 hover:bg-gray-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-microchip"></i>
+            <span>Ciencia, Tech e Innovación</span>
+          </button>
+
+          <button onclick="switchTab('salud')" id="tab-salud" 
+                  class="tab-btn text-gray-600 hover:bg-gray-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-notes-medical"></i>
+            <span>Salud</span>
+          </button>
+
+          <button onclick="switchTab('social')" id="tab-social" 
+                  class="tab-btn text-gray-600 hover:bg-gray-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <span>Desarrollo Social</span>
+          </button>
+
+          <button onclick="switchTab('economico')" id="tab-economico" 
+                  class="tab-btn text-gray-600 hover:bg-gray-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-store"></i>
+            <span>Desarrollo Económico</span>
+          </button>
+
+          <button onclick="switchTab('familia')" id="tab-familia" 
+                  class="tab-btn text-gray-600 hover:bg-gray-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold flex items-center space-x-2 whitespace-nowrap transition">
+            <i class="fa-solid fa-people-roof text-rose-600"></i>
+            <span>Observatorio de Familia</span>
+          </button>
+
+          <button onclick="switchTab('curiosos')" id="tab-curiosos" 
+                  class="tab-btn text-amber-800 bg-amber-50 hover:bg-amber-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-bold flex items-center space-x-2 whitespace-nowrap transition border border-amber-200">
+            <i class="fa-solid fa-lightbulb text-amber-600"></i>
+            <span>Datos Curiosos</span>
+          </button>
+
+          <button onclick="switchTab('ai-assistant')" id="tab-ai-assistant" 
+                  class="tab-btn text-purple-700 bg-purple-50 hover:bg-purple-100 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-bold flex items-center space-x-2 whitespace-nowrap transition border border-purple-200">
+            <i class="fa-solid fa-wand-magic-sparkles text-purple-600"></i>
+            <span>Asistente IA Sopó</span>
+          </button>
+
+        </nav>
+      </div>
+
+      <!-- PESTAÑA 1: DEPORTES -->
+      <div id="content-deportes" class="tab-content space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-blue-100 text-gov-blue text-xs font-bold px-2.5 py-1 rounded-full">Instituto Municipal de Recreación y Deporte (IMRD)</span>
+            <h3 class="text-xl font-bold text-gray-900 mt-2">Escuelas de Formación Deportiva de Sopó</h3>
+            <p class="text-xs text-gray-500">Inscripciones anuales, caracterización por disciplina, rangos de edad y paridad de género.</p>
+          </div>
+          <div class="flex gap-2">
+            <select id="deporte-filter" class="bg-gray-50 text-xs border border-gray-300 rounded-lg p-2 font-semibold">
+              <option value="all">Todas las Disciplinas</option>
+              <option value="futbol">Fútbol / Futsal</option>
+              <option value="natacion">Natación</option>
+              <option value="baloncesto">Baloncesto</option>
+              <option value="patinaje">Patinaje</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 lg:col-span-2">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Evolución de Inscritos en Deportes (2021 - 2026)</h4>
+            <p class="text-xs text-gray-500 mb-4">Crecimiento sostenido en la cobertura del IMRD</p>
+            <div class="h-64"><canvas id="deportesEvolucionChart"></canvas></div>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Participación por Género</h4>
+            <p class="text-xs text-gray-500 mb-4">Escuelas de Formación Deportiva</p>
+            <div class="h-64 flex items-center justify-center"><canvas id="deportesGeneroChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 2: CULTURA -->
+      <div id="content-cultura" class="tab-content hidden space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2.5 py-1 rounded-full">Secretaría de Cultura y Patrimonio</span>
+            <h3 class="text-xl font-bold text-gray-900 mt-2">Escuela de Formación Cultural "Recrearte"</h3>
+            <p class="text-xs text-gray-500">Formación artística en música, danza, teatro, artes plásticas y literatura.</p>
+          </div>
+          <div class="text-right">
+            <span class="text-2xl font-black text-gov-blue">3.420</span>
+            <span class="text-xs text-gray-500 block">Estudiantes Formados (2026)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Inscritos por Área Artística - Recrearte</h4>
+            <p class="text-xs text-gray-500 mb-4">Desglose de talleres y escuelas especializadas</p>
+            <div class="h-64"><canvas id="culturaAreasChart"></canvas></div>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Descentralización Cultural por Veredas</h4>
+            <p class="text-xs text-gray-500 mb-4">Cobertura en Centro, Briceño, Chocontá, Meusa, Mercenario, etc.</p>
+            <div class="h-64"><canvas id="culturaVeredasChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 3: EDUCACIÓN -->
+      <div id="content-educacion" class="tab-content hidden space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-green-100 text-gov-successGreen text-xs font-bold px-2.5 py-1 rounded-full">Secretaría de Educación de Sopó</span>
+            <h3 class="text-xl font-bold text-gray-900 mt-2">Acceso y Cobertura Educativa Municipal</h3>
+            <p class="text-xs text-gray-500">Estímulos semestrales FOES, rutas de Transporte Escolar y Cursos EducaTIC.</p>
+          </div>
+          <div class="bg-green-50 p-3 rounded-lg border border-green-200 text-center">
+            <span class="text-xs font-bold text-gov-successGreen uppercase block">Inversión Educativa 2026</span>
+            <span class="text-lg font-black text-gray-900">$3.820 Millones COP</span>
+          </div>
+        </div>
+
+        <!-- Tarjetas resumen Educación -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4">
+            <div class="bg-blue-100 text-gov-blue p-3 rounded-lg"><i class="fa-solid fa-graduation-cap text-2xl"></i></div>
+            <div>
+              <div class="text-xs font-semibold text-gray-500 uppercase">Estímulos FOES</div>
+              <div class="text-2xl font-bold text-gray-900">1.280</div>
+              <span class="text-[11px] text-gov-blue font-medium">Becas universitarias semestrales</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4">
+            <div class="bg-amber-100 text-amber-800 p-3 rounded-lg"><i class="fa-solid fa-bus text-2xl"></i></div>
+            <div>
+              <div class="text-xs font-semibold text-gray-500 uppercase">Transporte Escolar</div>
+              <div class="text-2xl font-bold text-gray-900">1.940</div>
+              <span class="text-[11px] text-amber-700 font-medium">Estudiantes en 14 rutas rurales</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4">
+            <div class="bg-purple-100 text-purple-800 p-3 rounded-lg"><i class="fa-solid fa-laptop-code text-2xl"></i></div>
+            <div>
+              <div class="text-xs font-semibold text-gray-500 uppercase">Apropiación EducaTIC</div>
+              <div class="text-2xl font-bold text-gray-900">860</div>
+              <span class="text-[11px] text-purple-700 font-medium">Certificados en Habilidades Digitales</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 lg:col-span-2">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Distribución de Estímulos Semestrales FOES</h4>
+            <p class="text-xs text-gray-500 mb-4">Aporte a transporte, matrícula e incentivo a la excelencia</p>
+            <div class="h-64"><canvas id="foesModalidadChart"></canvas></div>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Participantes en EducaTIC</h4>
+            <p class="text-xs text-gray-500 mb-4">Cursos de Apropiación Tecnológica por Nivel</p>
+            <div class="h-64"><canvas id="educaticChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 4: CIENCIA, TECNOLOGÍA E INNOVACIÓN -->
+      <div id="content-cti" class="tab-content hidden space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full">Secretaría de Ciencia, Tecnología e Innovación</span>
+            <h3 class="text-xl font-bold text-gray-900 mt-2">Programas de CTi Sopó</h3>
+            <p class="text-xs text-gray-500">Semilleros de Robótica, Cursos de Energía Solar Fotovoltaica y Acompañamiento en Proyectos Tecnológicos.</p>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-gray-500 block">Proyectos CTi Financiados</span>
+            <span class="text-xl font-black text-purple-700">38 Iniciativas</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-purple-50 p-4 rounded-xl border border-purple-200">
+            <div class="flex items-center space-x-2 text-purple-900 font-bold text-sm">
+              <i class="fa-solid fa-robot text-purple-600 text-lg"></i>
+              <span>Semilleros de Robótica</span>
+            </div>
+            <div class="text-2xl font-black text-purple-950 mt-2">420</div>
+            <p class="text-xs text-purple-700 mt-1">Niños y jóvenes en programación LEGO & Arduino</p>
+          </div>
+
+          <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+            <div class="flex items-center space-x-2 text-amber-900 font-bold text-sm">
+              <i class="fa-solid fa-solar-panel text-amber-600 text-lg"></i>
+              <span>Energía Solar Fotovoltaica</span>
+            </div>
+            <div class="text-2xl font-black text-amber-950 mt-2">185</div>
+            <p class="text-xs text-amber-700 mt-1">Técnicos capacitados en paneles solares rurales</p>
+          </div>
+
+          <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+            <div class="flex items-center space-x-2 text-blue-900 font-bold text-sm">
+              <i class="fa-solid fa-diagram-project text-blue-600 text-lg"></i>
+              <span>Acompañamiento Proyectos</span>
+            </div>
+            <div class="text-2xl font-black text-blue-950 mt-2">64</div>
+            <p class="text-xs text-blue-700 mt-1">Emprendimientos con mentoría en innovación</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Inscripciones por Programa CTi</h4>
+            <p class="text-xs text-gray-500 mb-4">Semilleros, Energía Solar y Asesoría Técnica</p>
+            <div class="h-64"><canvas id="ctiCursosChart"></canvas></div>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Acompañamiento Proyectos por Sector</h4>
+            <p class="text-xs text-gray-500 mb-4">Agrotech, Cleantech, EdTech y Comercio Electrónico</p>
+            <div class="h-64"><canvas id="ctiProyectosChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 5: SALUD -->
+      <div id="content-salud" class="tab-content hidden space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-red-100 text-gov-alertRed text-xs font-bold px-2.5 py-1 rounded-full">Secretaría de Salud y Protección Social</span>
+            <h3 class="text-xl font-bold text-gray-900 mt-2">Capacitaciones Sanitarias y Salud Pública</h3>
+            <p class="text-xs text-gray-500">Cursos de Manipulación de Alimentos, Bioseguridad y prevención integral.</p>
+          </div>
+          <div class="bg-red-50 p-3 rounded-lg border border-red-200 text-center">
+            <span class="text-xs font-bold text-gov-alertRed uppercase block">Manipuladores Certificados</span>
+            <span class="text-lg font-black text-gray-900">1.620 Personas</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4">
+            <div class="bg-amber-100 text-amber-800 p-3.5 rounded-lg"><i class="fa-solid fa-utensils text-2xl"></i></div>
+            <div>
+              <div class="text-xs font-semibold text-gray-500 uppercase">Manipulación de Alimentos</div>
+              <div class="text-2xl font-bold text-gray-900">1.620 <span class="text-xs font-normal text-gray-500">certificados</span></div>
+              <span class="text-[11px] text-gray-600">Comerciantes, restaurantes y manipuladores escolares</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4">
+            <div class="bg-emerald-100 text-emerald-800 p-3.5 rounded-lg"><i class="fa-solid fa-pump-soap text-2xl"></i></div>
+            <div>
+              <div class="text-xs font-semibold text-gray-500 uppercase">Cursos de Bioseguridad</div>
+              <div class="text-2xl font-bold text-gray-900">840 <span class="text-xs font-normal text-gray-500">asistentes</span></div>
+              <span class="text-[11px] text-gray-600">Centros estéticos, salones y locales comerciales</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Capacitaciones Sanitarias Impartidas</h4>
+            <p class="text-xs text-gray-500 mb-4">Manipulación de Alimentos vs. Bioseguridad por Trimestre</p>
+            <div class="h-64"><canvas id="saludCapacitacionesChart"></canvas></div>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Estrategia Sopó Escucha (Salud Mental)</h4>
+            <p class="text-xs text-gray-500 mb-4">Talleres y atención psicosocial preventiva</p>
+            <div class="h-64"><canvas id="saludMentalChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 6: DESARROLLO SOCIAL -->
+      <div id="content-social" class="tab-content hidden space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+          <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1 rounded-full">Secretaría de Desarrollo Social</span>
+          <h3 class="text-xl font-bold text-gray-900 mt-2">Programas Sociales e Inclusión Sopó</h3>
+          <p class="text-xs text-gray-500">Atención a Adulto Mayor, Discapacidad, Mujer, Equidad y Género, y Dirección de Juventud.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Adulto Mayor -->
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-orange-600">
+              <span class="text-xs font-bold uppercase">Adulto Mayor</span>
+              <i class="fa-solid fa-person-cane text-xl"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900">1.840</div>
+            <p class="text-xs text-gray-500">Atención en Centro Día y paquetes nutricionales.</p>
+          </div>
+
+          <!-- Discapacidad -->
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-indigo-600">
+              <span class="text-xs font-bold uppercase">Discapacidad</span>
+              <i class="fa-solid fa-wheelchair text-xl"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900">430</div>
+            <p class="text-xs text-gray-500">Beneficiarios del Centro Creciendo Juntos y terapias.</p>
+          </div>
+
+          <!-- Mujer, Equidad y Género -->
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-pink-600">
+              <span class="text-xs font-bold uppercase">Mujer y Género</span>
+              <i class="fa-solid fa-person-dress text-xl"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900">2.150</div>
+            <p class="text-xs text-gray-500">Empoderamiento, autonomía económica y rutas.</p>
+          </div>
+
+          <!-- Dirección de Juventud -->
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-blue-600">
+              <span class="text-xs font-bold uppercase">Juventud</span>
+              <i class="fa-solid fa-people-group text-xl"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900">3.600</div>
+            <p class="text-xs text-gray-500">Parche Joven, CMJ y estímulos culturales.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Cobertura por Programas Sociales</h4>
+            <p class="text-xs text-gray-500 mb-4">Distribución de beneficiarios atendidos</p>
+            <div class="h-64"><canvas id="socialProgramasChart"></canvas></div>
+          </div>
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Atención a Personas con Discapacidad</h4>
+            <p class="text-xs text-gray-500 mb-4">Modalidad de acompañamiento e inclusión</p>
+            <div class="h-64"><canvas id="discapacidadChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 7: DESARROLLO ECONÓMICO -->
+      <div id="content-economico" class="tab-content hidden space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full">Secretaría de Desarrollo Económico y Agropecuario</span>
+            <h3 class="text-xl font-bold text-gray-900 mt-2">Programa "Sopó Emprende" e Impulso Productivo</h3>
+            <p class="text-xs text-gray-500">Capital semilla, ferias comerciales, asistencia técnica agropecuaria y fortalecimiento a emprendedores.</p>
+          </div>
+          <div class="text-right">
+            <span class="text-2xl font-black text-amber-700">340+</span>
+            <span class="text-xs text-gray-500 block">Emprendimientos Apoyados</span>
+          </div>
+        </div>
+
+      <!-- PESTAÑA 8: OBSERVATORIO DE FAMILIA -->
+      <div id="content-familia" class="tab-content hidden space-y-6">
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <span class="bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center w-max gap-1.5">
+              <i class="fa-solid fa-heart-pulse"></i> Observatorio de Familia de Sopó
+            </span>
+            <h3 class="text-xl font-bold text-gray-900 mt-2">Estadísticas, Demografía y Oferta Institucional para las Familias</h3>
+            <p class="text-xs text-gray-500">Monitoreo de dinámicas familiares, jefatura de hogar, acompañamiento psicosocial y tipologías de hogar en Sopó.</p>
+          </div>
+          <div class="bg-rose-50 p-3 rounded-lg border border-rose-200 text-center">
+            <span class="text-xs font-bold text-rose-800 uppercase block">Hogares Caracterizados</span>
+            <span class="text-lg font-black text-gray-900">9.850 Hogares</span>
+          </div>
+        </div>
+
+        <!-- Indicadores KPI del Observatorio de Familia -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <div class="text-xs font-bold text-rose-700 uppercase flex justify-between items-center">
+              <span>Atención Integral</span>
+              <i class="fa-solid fa-hands-holding-child text-lg"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900 mt-1">4.120</div>
+            <p class="text-xs text-gray-500 mt-0.5">Familias en programas institucionales</p>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <div class="text-xs font-bold text-purple-700 uppercase flex justify-between items-center">
+              <span>Jefatura Femenina</span>
+              <i class="fa-solid fa-person-dress text-lg"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900 mt-1">44,2%</div>
+            <p class="text-xs text-gray-500 mt-0.5">Hogares con mujer al frente</p>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <div class="text-xs font-bold text-blue-700 uppercase flex justify-between items-center">
+              <span>Crianza Amorosa</span>
+              <i class="fa-solid fa-child-reaching text-lg"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900 mt-1">1.650</div>
+            <p class="text-xs text-gray-500 mt-0.5">Padres y cuidadores formados</p>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+            <div class="text-xs font-bold text-emerald-700 uppercase flex justify-between items-center">
+              <span>Seguridad Alimentaria</span>
+              <i class="fa-solid fa-bowl-rice text-lg"></i>
+            </div>
+            <div class="text-2xl font-black text-gray-900 mt-1">1.280</div>
+            <p class="text-xs text-gray-500 mt-0.5">Paquetes / huertas familiares</p>
+          </div>
+        </div>
+
+        <!-- Gráficas del Observatorio de Familia -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Participación de Familias en la Oferta Institucional</h4>
+            <p class="text-xs text-gray-500 mb-4">Número de familias vinculadas por programa de acompañamiento</p>
+            <div class="h-64"><canvas id="familiaProgramasChart"></canvas></div>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+            <h4 class="font-bold text-gray-900 text-base mb-1">Tipologías de Hogar en Sopó</h4>
+            <p class="text-xs text-gray-500 mb-4">Composición y estructura demográfica de las familias</p>
+            <div class="h-64"><canvas id="familiaTipologiaChart"></canvas></div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+          <h4 class="font-bold text-gray-900 text-base mb-1">Distribución de Familias Caracterizadas por Veredas</h4>
+          <p class="text-xs text-gray-500 mb-4">Cobertura territorial del Observatorio de Familia en el sector urbano y rural</p>
+          <div class="h-64"><canvas id="familiaVeredasChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 9: DATOS CURIOSOS -->
+      <div id="content-curiosos" class="tab-content hidden space-y-6">
+        <div class="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white p-6 rounded-2xl shadow-md">
+          <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-lightbulb text-3xl text-yellow-100"></i>
+            <div>
+              <h3 class="text-2xl font-black">Datos Curiosos & Estadísticas Destacadas de Sopó</h3>
+              <p class="text-xs text-yellow-100 mt-1">Hechos fascinantes, récords del municipio e hitos territoriales.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition space-y-3">
+            <div class="flex items-center space-x-3 text-amber-600">
+              <span class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-cow"></i></span>
+              <h4 class="font-bold text-gray-900 text-base">Capital Láctea de Sabana Centro</h4>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              En Sopó se procesan más de <strong>150.000 litros de leche al día</strong>, siendo sede de grandes industrias lácteas y convirtiendo al municipio en referente gastronómico de postres y quesos finos.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition space-y-3">
+            <div class="flex items-center space-x-3 text-emerald-600">
+              <span class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-mountain"></i></span>
+              <h4 class="font-bold text-gray-900 text-base">Parque Ecológico Pionono</h4>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              El Parque Pionono se eleva hasta los <strong>3.250 m.s.n.m.</strong> (el mirador Cerro de las Águilas) y protege más de 680 hectáreas de reserva forestal y flora de páramo.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition space-y-3">
+            <div class="flex items-center space-x-3 text-blue-600">
+              <span class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-feather text-lg"></i></span>
+              <h4 class="font-bold text-gray-900 text-base">Origen Muisca de Sopó</h4>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              La palabra "Sopó" proviene del idioma Muiscubun y significa <strong>"Piedra o Cerro Fuerte"</strong>. Fundado formalmente el 25 de mayo de 1653 por Fray Francisco Chacón.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition space-y-3">
+            <div class="flex items-center space-x-3 text-purple-600">
+              <span class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-recycle"></i></span>
+              <h4 class="font-bold text-gray-900 text-base">Líder en Reciclaje Rural</h4>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Sopó alcanza una tasa de aprovechamiento de residuos superiores al <strong>28%</strong>, superando el promedio nacional gracias a las rutas separadas de recolección en veredas.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition space-y-3">
+            <div class="flex items-center space-x-3 text-red-600">
+              <span class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-person-hiking"></i></span>
+              <h4 class="font-bold text-gray-900 text-base">Parapente y Turismo de Aventura</h4>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Gracias a los vientos térmicos de la vereda Briceño, Sopó es considerado una de las <strong>mejores zonas del centro del país para la práctica de parapente</strong> y deportes aéreos.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition space-y-3">
+            <div class="flex items-center space-x-3 text-teal-600">
+              <span class="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-church"></i></span>
+              <h4 class="font-bold text-gray-900 text-base">Colección Arcángeles de Sopó</h4>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              La Iglesia Divino Salvador alberga la célebre colección colonial de los <strong>12 Arcángeles de Sopó</strong>, una joya del arte barroco neogranadino pintada en el siglo XVII.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PESTAÑA 10: ASISTENTE DE IA SOPÓ -->
+      <div id="content-ai-assistant" class="tab-content hidden space-y-6">
+        <div class="bg-gradient-to-r from-purple-900 via-gov-darkblue to-gov-blue text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
+          <div class="relative z-10 max-w-3xl">
+            <span class="bg-purple-400 text-purple-950 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+              <i class="fa-solid fa-brain"></i> Inteligencia Artificial Territorial
+            </span>
+            <h3 class="text-2xl font-black mt-3 mb-2">Asistente Virtual de Datos Estadísticos de Sopó</h3>
+            <p class="text-sm text-purple-100">
+              Pregunta cualquier dato o tendencia sobre la Ficha TerriData, programas de Deportes, Escuela Recrearte, Becas FOES, Transporte Escolar, Cursos EducaTIC, Robótica, Energía Solar, Salud, Sopó Emprende o Datos Curiosos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Preguntas sugeridas -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="askAI('¿Cuáles son los principales indicadores del Observatorio de Familia de Sopó y la participación por programas?')" 
+                  class="bg-white hover:bg-purple-50 text-purple-900 text-xs font-semibold px-3 py-2 rounded-lg border border-purple-200 shadow-sm transition">
+            <i class="fa-solid fa-people-roof text-purple-500 mr-1"></i> Observatorio de Familia
+          </button>
+          <button onclick="askAI('Resume la oferta de Educación: FOES, transporte escolar y cursos EducaTIC en Sopó.')" 
+                  class="bg-white hover:bg-purple-50 text-purple-900 text-xs font-semibold px-3 py-2 rounded-lg border border-purple-200 shadow-sm transition">
+            <i class="fa-solid fa-graduation-cap text-purple-500 mr-1"></i> Oferta de Educación & EducaTIC
+          </button>
+          <button onclick="askAI('¿Qué proyectos de Ciencia, Tecnología e Innovación (Robótica y Energía Solar) se dictan en Sopó?')" 
+                  class="bg-white hover:bg-purple-50 text-purple-900 text-xs font-semibold px-3 py-2 rounded-lg border border-purple-200 shadow-sm transition">
+            <i class="fa-solid fa-robot text-purple-500 mr-1"></i> Cursos CTi (Robótica & Solar)
+          </button>
+          <button onclick="askAI('¿En qué consiste el programa Sopó Emprende y cuál es el presupuesto entregado?')" 
+                  class="bg-white hover:bg-purple-50 text-purple-900 text-xs font-semibold px-3 py-2 rounded-lg border border-purple-200 shadow-sm transition">
+            <i class="fa-solid fa-store text-purple-500 mr-1"></i> Programa Sopó Emprende
+          </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 space-y-4">
+          <div class="flex items-center space-x-2 border-b border-gray-100 pb-3">
+            <i class="fa-solid fa-comments text-purple-600"></i>
+            <h4 class="font-bold text-gray-800 text-sm">Consulta Ciudadana Interactiva</h4>
+          </div>
+
+          <div id="ai-response-box" class="min-h-[160px] bg-gray-50 rounded-lg p-4 text-sm text-gray-700 leading-relaxed border border-gray-200 space-y-3">
+            <p class="text-gray-500 italic">
+              Escribe tu consulta en la barra inferior para consultar la base de datos de Sopó en tiempo real.
+            </p>
+          </div>
+
+          <div class="flex gap-2">
+            <input type="text" id="ai-user-query" placeholder="Ej: ¿Cuántas personas han tomado el curso de manipulación de alimentos en Salud?" 
+                   onkeypress="if(event.key === 'Enter') askAIFromInput()"
+                   class="flex-grow bg-white border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            
+            <button onclick="askAIFromInput()" id="ai-submit-btn" class="bg-purple-700 hover:bg-purple-800 text-white font-bold px-5 py-2 rounded-lg text-sm transition flex items-center space-x-2">
+              <span>Consultar</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER OFICIAL DE LA SEDE ELECTRÓNICA DE SOPÓ -->
+  <footer class="mt-12">
+    <!-- 1. Sección Verde Principal con Tarjeta Blanca Centrada -->
+    <div class="bg-[#8cc63f] py-10 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
+        
+        <!-- Logo Sopó en esquina superior derecha de la tarjeta -->
+        <div class="absolute top-6 right-6 hidden sm:flex items-center">
+          <img src="logo_sopo_2024_2027_1x.png" alt="Sopó" class="h-12 w-auto object-contain"
+               onerror="this.onerror=null; this.src='https://placehold.co/180x50/004884/ffffff?text=Alcaldia+Sopo';">
+        </div>
+
+        <div class="space-y-4">
+          <!-- Títulos principales del Footer -->
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-[#689f2c] leading-tight">
+              Sede electrónica de la Alcaldía de Sopó - Cundinamarca
+            </h3>
+            <h4 class="text-sm font-bold text-[#689f2c] mt-3">
+              Sede Principal
+            </h4>
+          </div>
+
+          <!-- Información institucional detallada -->
+          <div class="text-xs text-gray-700 leading-relaxed space-y-1 max-w-3xl">
+            <p><strong>Dirección:</strong> Carrera 3 # 2-45, Sopó - Cundinamarca, Colombia.</p>
+            <p><strong>Código postal:</strong> 251001</p>
+            <p><strong>Horario de atención:</strong> Jornada Continua, Lunes a Jueves 7:00 a.m a 5:00 p.m - Viernes 7:00 a.m a 4:00 p.m</p>
+            <p><strong>NIT:</strong> 899.999.468-2 - <strong>Código DANE:</strong> 25758</p>
+            <p><strong>Teléfono conmutador:</strong> Fijo + 57 (1) 5876644</p>
+            <p><strong>Línea de servicio a la ciudadanía/usuario:</strong> + 57 317 421 9386</p>
+            <p><strong>Línea anticorrupción:</strong> Fijo + 57 (1) 5876644</p>
+            <p><strong>Correo institucional:</strong> <a href="mailto:contactenos@sopo-cundinamarca.gov.co" class="text-blue-800 underline">contactenos@sopo-cundinamarca.gov.co</a></p>
+            <p><strong>Notificaciones judiciales:</strong> <a href="mailto:notificacionesjudiciales@sopo-cundinamarca.gov.co" class="text-blue-800 underline">notificacionesjudiciales@sopo-cundinamarca.gov.co</a></p>
+          </div>
+
+          <!-- Certificaciones ICONTEC -->
+          <div class="pt-4 flex items-center space-x-4">
+            <!-- Badge 1: ICONTEC ISO 9001 -->
+            <div class="border border-blue-400 rounded-lg p-2 text-center bg-blue-50 w-24 shadow-sm">
+              <div class="w-6 h-6 mx-auto rounded-full bg-blue-700 text-white flex items-center justify-center font-bold text-[10px]">icontec</div>
+              <div class="text-[9px] font-bold text-blue-900 mt-1">ISO 9001</div>
+              <div class="text-[7px] text-gray-500">N° SC-CER313325</div>
+            </div>
+            <!-- Badge 2: ICONTEC ISO 14001 -->
+            <div class="border border-blue-400 rounded-lg p-2 text-center bg-blue-50 w-24 shadow-sm">
+              <div class="w-6 h-6 mx-auto rounded-full bg-blue-700 text-white flex items-center justify-center font-bold text-[10px]">icontec</div>
+              <div class="text-[9px] font-bold text-blue-900 mt-1">ISO 14001</div>
+              <div class="text-[7px] text-gray-500">TR-SG-2019001997</div>
+            </div>
+          </div>
+
+          <!-- Redes Sociales Oficiales (@AlcaldiadeSopo) -->
+          <div class="pt-6 flex flex-wrap items-center gap-4 text-xs font-semibold text-blue-800">
+            <a href="https://facebook.com" target="_blank" class="flex items-center space-x-1.5 hover:underline">
+              <span class="w-6 h-6 bg-blue-600 text-white rounded flex items-center justify-center text-xs"><i class="fa-brands fa-facebook-f"></i></span>
+              <span>@AlcaldiadeSopo</span>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="flex items-center space-x-1.5 hover:underline">
+              <span class="w-6 h-6 bg-pink-600 text-white rounded flex items-center justify-center text-xs"><i class="fa-brands fa-instagram"></i></span>
+              <span>@AlcaldiadeSopo</span>
+            </a>
+            <a href="https://x.com" target="_blank" class="flex items-center space-x-1.5 hover:underline">
+              <span class="w-6 h-6 bg-black text-white rounded flex items-center justify-center text-xs"><i class="fa-brands fa-x-twitter"></i></span>
+              <span>@AlcaldiadeSopo</span>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="flex items-center space-x-1.5 hover:underline">
+              <span class="w-6 h-6 bg-red-600 text-white rounded flex items-center justify-center text-xs"><i class="fa-brands fa-youtube"></i></span>
+              <span>@AlcaldiadeSopo</span>
+            </a>
+          </div>
+
+          <!-- Enlaces de navegación en el pie -->
+          <div class="pt-4 border-t border-gray-100 flex flex-wrap gap-4 text-xs font-bold text-blue-900">
+            <a href="#" class="underline hover:text-blue-600">Mapa del sitio</a>
+            <a href="#" class="underline hover:text-blue-600">Ayúdanos a mejorar</a>
+            <a href="#" class="underline hover:text-blue-600">Políticas</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Barra Azul Inferior GOV.CO + Marca Colombia -->
+    <div class="gov-official-bar py-3 px-6 flex justify-between items-center text-white text-xs">
+      <div class="flex items-center space-x-3">
+        <span class="font-extrabold text-lg tracking-tight">gov<span class="text-yellow-400">.</span>co</span>
+        <span class="text-blue-300">|</span>
+        <span class="bg-yellow-400 text-blue-950 font-black text-[10px] px-1.5 py-0.5 rounded">CO COLOMBIA</span>
+      </div>
+      <div class="text-[11px] text-blue-100 hidden sm:block">
+        Sede Electrónica Oficial - República de Colombia
+      </div>
+    </div>
+  </footer>
+
+  <!-- BARRA DE ACCESIBILIDAD FLOTANTE (DERECHA) & BOTONES FLOTANTES -->
+  <aside class="fixed right-0 top-1/3 z-50 flex flex-col items-end space-y-1">
+    <div class="bg-gov-blue text-white rounded-l-lg shadow-xl p-1.5 flex flex-col space-y-2 text-xs">
+      <button onclick="toggleHighContrast()" title="Contraste" class="p-1.5 hover:bg-blue-700 rounded transition">
+        <i class="fa-solid fa-circle-half-stroke text-sm"></i>
+      </button>
+      <button title="Brillo" class="p-1.5 hover:bg-blue-700 rounded transition">
+        <i class="fa-solid fa-sun text-sm"></i>
+      </button>
+      <button onclick="changeFontSize('decrease')" title="Reducir texto" class="p-1.5 font-bold hover:bg-blue-700 rounded text-center text-xs">
+        A-
+      </button>
+      <button onclick="changeFontSize('increase')" title="Aumentar texto" class="p-1.5 font-bold hover:bg-blue-700 rounded text-center text-xs">
+        A+
+      </button>
+      <button title="Accesibilidad" class="p-1.5 hover:bg-blue-700 rounded transition">
+        <i class="fa-solid fa-universal-access text-sm"></i>
+      </button>
+      <button title="Formularios" class="p-1.5 hover:bg-blue-700 rounded transition">
+        <i class="fa-solid fa-file-lines text-sm"></i>
+      </button>
+      <button title="Usuario" class="p-1.5 hover:bg-blue-700 rounded transition">
+        <i class="fa-solid fa-user text-sm"></i>
+      </button>
+      <button title="Cerrar" class="p-1.5 hover:bg-blue-700 rounded transition">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+    </div>
+
+    <!-- Botón WhatsApp Flotante -->
+    <a href="https://wa.me/573174219386" target="_blank" rel="noopener noreferrer" 
+       class="bg-green-500 text-white p-2.5 rounded-full shadow-lg hover:bg-green-600 transition flex items-center justify-center mr-2 mt-4" title="Contacto WhatsApp">
+      <i class="fa-brands fa-whatsapp text-xl"></i>
+    </a>
+  </aside>
+
+  <!-- Botones Flotantes Inferiores ("Ayúdanos a mejorar" & Volver arriba) -->
+  <div class="fixed bottom-4 right-4 z-40 flex items-center space-x-3">
+    <button onclick="alert('Formulario de retroalimentación en desarrollo')" 
+            class="bg-gov-blue hover:bg-blue-900 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-lg flex items-center space-x-2 transition">
+      <i class="fa-solid fa-comment-dots"></i>
+      <span>Ayúdanos a mejorar</span>
+    </button>
+    
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+            class="bg-gov-blue hover:bg-blue-900 text-white w-9 h-9 rounded-full shadow-lg flex items-center justify-center transition" title="Ir arriba">
+      <i class="fa-solid fa-chevron-up text-xs"></i>
+    </button>
+  </div>
+
+  <!-- LÓGICA INTERACTIVA JAVASCRIPT & CHART.JS -->
+  <script>
+    // Variables globales para Chart.js
+    let deportesEvolucionChartInstance = null;
+    let deportesGeneroChartInstance = null;
+    let culturaAreasChartInstance = null;
+    let culturaVeredasChartInstance = null;
+    let foesModalidadChartInstance = null;
+    let educaticChartInstance = null;
+    let ctiCursosChartInstance = null;
+    let ctiProyectosChartInstance = null;
+    let saludCapacitacionesChartInstance = null;
+    let saludMentalChartInstance = null;
+    let socialProgramasChartInstance = null;
+    let discapacidadChartInstance = null;
+    let economicoSectoresChartInstance = null;
+    let economicoFondoChartInstance = null;
+    let familiaProgramasChartInstance = null;
+    let familiaTipologiaChartInstance = null;
+    let familiaVeredasChartInstance = null;
+
+    window.onload = function () {
+      initAllCharts();
+    };
+
+    // Funciones para administrar Iframe de Tableau
+    function toggleTableauSource() {
+      const bar = document.getElementById('tableau-url-bar');
+      bar.classList.toggle('hidden');
+    }
+
+    function applyTableauUrl() {
+      const url = document.getElementById('tableau-url-input').value;
+      const iframe = document.getElementById('tableau-iframe');
+      const mockup = document.getElementById('tableau-mockup-view');
+      
+      if (url && url !== 'about:blank') {
+        iframe.src = url;
+        iframe.classList.remove('hidden');
+        mockup.classList.add('hidden');
+      } else {
+        iframe.classList.add('hidden');
+        mockup.classList.remove('hidden');
+      }
+    }
+
+    function reloadTableauIframe() {
+      const iframe = document.getElementById('tableau-iframe');
+      if (!iframe.classList.contains('hidden')) {
+        iframe.src = iframe.src;
+      } else {
+        alert("El iframe se ha actualizado correctamente.");
+      }
+    }
+
+    function fullscreenTableau() {
+      const elem = document.getElementById('tableau-container');
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    }
+
+    // Cambio de pestañas
+    function switchTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(el => el.classList.add('hidden'));
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        if (btn.id !== 'tab-curiosos' && btn.id !== 'tab-ai-assistant') {
+          btn.classList.remove('bg-gov-blue', 'text-white');
+          btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+        }
+      });
+
+      const selectedContent = document.getElementById('content-' + tabId);
+      if (selectedContent) selectedContent.classList.remove('hidden');
+
+      const selectedBtn = document.getElementById('tab-' + tabId);
+      if (selectedBtn && tabId !== 'ai-assistant' && tabId !== 'curiosos') {
+        selectedBtn.classList.remove('text-gray-600', 'hover:bg-gray-100');
+        selectedBtn.classList.add('bg-gov-blue', 'text-white');
+      }
+    }
+
+    function initAllCharts() {
+      // 1. Deportes
+      const ctxEvo = document.getElementById('deportesEvolucionChart')?.getContext('2d');
+      if (ctxEvo) {
+        deportesEvolucionChartInstance = new Chart(ctxEvo, {
+          type: 'line',
+          data: {
+            labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+            datasets: [{ label: 'Inscritos IMRD', data: [3100, 3550, 3980, 4300, 4620, 4850], borderColor: '#008A3B', backgroundColor: 'rgba(0, 138, 59, 0.1)', fill: true, tension: 0.2 }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      const ctxGen = document.getElementById('deportesGeneroChart')?.getContext('2d');
+      if (ctxGen) {
+        deportesGeneroChartInstance = new Chart(ctxGen, {
+          type: 'doughnut',
+          data: { labels: ['Femenino', 'Masculino'], datasets: [{ data: [52, 48], backgroundColor: ['#E83E8C', '#004884'] }] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 2. Cultura
+      const ctxArea = document.getElementById('culturaAreasChart')?.getContext('2d');
+      if (ctxArea) {
+        culturaAreasChartInstance = new Chart(ctxArea, {
+          type: 'bar',
+          data: { labels: ['Música', 'Danza', 'Teatro', 'Artes Plásticas', 'Literatura'], datasets: [{ data: [1150, 890, 540, 520, 320], backgroundColor: '#D67D00' }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+      }
+
+      const ctxVer = document.getElementById('culturaVeredasChart')?.getContext('2d');
+      if (ctxVer) {
+        culturaVeredasChartInstance = new Chart(ctxVer, {
+          type: 'polarArea',
+          data: { labels: ['Centro Urbano', 'Briceño', 'Chocontá/Meusa', 'Mercenario', 'Hato Grande'], datasets: [{ data: [1350, 820, 510, 420, 320], backgroundColor: ['#004884', '#3366CC', '#008A3B', '#D67D00', '#A80521'] }] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 3. Educación FOES & EducaTIC
+      const ctxMod = document.getElementById('foesModalidadChart')?.getContext('2d');
+      if (ctxMod) {
+        foesModalidadChartInstance = new Chart(ctxMod, {
+          type: 'bar',
+          data: { labels: ['Subsidio Transporte', 'Matrícula Parcial', 'Matrícula 100%', 'Mención Excelencia'], datasets: [{ data: [620, 380, 180, 100], backgroundColor: '#008A3B' }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+      }
+
+      const ctxEducaTIC = document.getElementById('educaticChart')?.getContext('2d');
+      if (ctxEducaTIC) {
+        educaticChartInstance = new Chart(ctxEducaTIC, {
+          type: 'pie',
+          data: { labels: ['AlfaDigital Básico', 'Ofimática Avanzada', 'Redes Sociales PYME', 'Programación Web'], datasets: [{ data: [340, 260, 180, 80], backgroundColor: ['#6f42c1', '#20c997', '#fd7e14', '#004884'] }] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 4. CTi
+      const ctxCur = document.getElementById('ctiCursosChart')?.getContext('2d');
+      if (ctxCur) {
+        ctiCursosChartInstance = new Chart(ctxCur, {
+          type: 'bar',
+          data: { labels: ['Semilleros Robótica', 'Energía Solar', 'Acompañamiento Proyectos'], datasets: [{ data: [420, 185, 64], backgroundColor: '#6f42c1' }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+      }
+
+      const ctxProyCTi = document.getElementById('ctiProyectosChart')?.getContext('2d');
+      if (ctxProyCTi) {
+        ctiProyectosChartInstance = new Chart(ctxProyCTi, {
+          type: 'doughnut',
+          data: { labels: ['Agrotech', 'Energías Limpias', 'EdTech', 'E-Commerce Rural'], datasets: [{ data: [28, 18, 12, 6], backgroundColor: ['#20c997', '#ffc107', '#007bff', '#e83e8c'] }] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 5. Salud
+      const ctxSaludCap = document.getElementById('saludCapacitacionesChart')?.getContext('2d');
+      if (ctxSaludCap) {
+        saludCapacitacionesChartInstance = new Chart(ctxSaludCap, {
+          type: 'bar',
+          data: { labels: ['Trimestre 1', 'Trimestre 2', 'Trimestre 3', 'Trimestre 4'], datasets: [
+            { label: 'Manipulación Alimentos', data: [410, 480, 390, 340], backgroundColor: '#d97706' },
+            { label: 'Cursos Bioseguridad', data: [210, 240, 200, 190], backgroundColor: '#059669' }
+          ] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      const ctxSaludM = document.getElementById('saludMentalChart')?.getContext('2d');
+      if (ctxSaludM) {
+        saludMentalChartInstance = new Chart(ctxSaludM, {
+          type: 'pie',
+          data: { labels: ['Talleres Colegios', 'Consultas Individuales', 'Atención Familias', 'Grupos Apoyo'], datasets: [{ data: [45, 30, 15, 10], backgroundColor: ['#004884', '#3366CC', '#D67D00', '#008A3B'] }] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 6. Desarrollo Social
+      const ctxSocProg = document.getElementById('socialProgramasChart')?.getContext('2d');
+      if (ctxSocProg) {
+        socialProgramasChartInstance = new Chart(ctxSocProg, {
+          type: 'bar',
+          data: { labels: ['Adulto Mayor', 'Juventud', 'Mujer y Género', 'Discapacidad'], datasets: [{ data: [1840, 3600, 2150, 430], backgroundColor: '#4f46e5' }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+      }
+
+      const ctxDiscap = document.getElementById('discapacidadChart')?.getContext('2d');
+      if (ctxDiscap) {
+        discapacidadChartInstance = new Chart(ctxDiscap, {
+          type: 'doughnut',
+          data: { labels: ['Centro Creciendo Juntos', 'Ruta de Fisioterapia', 'Inclusión Laboral', 'Apoyo Cuidador'], datasets: [{ data: [180, 130, 70, 50], backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ec4899'] }] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 7. Desarrollo Económico
+      const ctxEcoFon = document.getElementById('economicoFondoChart')?.getContext('2d');
+      if (ctxEcoFon) {
+        economicoFondoChartInstance = new Chart(ctxEcoFon, {
+          type: 'line',
+          data: { labels: ['2022', '2023', '2024', '2025', '2026'], datasets: [{ label: 'Inversión Sopó Emprende ($MM COP)', data: [180, 240, 310, 420, 580], borderColor: '#d97706', backgroundColor: 'rgba(217, 119, 6, 0.1)', fill: true }] },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      // 8. Observatorio de Familia
+      const ctxFamProg = document.getElementById('familiaProgramasChart')?.getContext('2d');
+      if (ctxFamProg) {
+        familiaProgramasChartInstance = new Chart(ctxFamProg, {
+          type: 'bar',
+          data: {
+            labels: ['Escuela Crianza Amorosa', 'Seguridad Alimentaria', 'Apoyo Psicosocial', 'Fortalecimiento Vínculos', 'Subsidio Vivienda Rural'],
+            datasets: [{
+              label: 'Familias Beneficiadas',
+              data: [1650, 1280, 890, 740, 310],
+              backgroundColor: '#e11d48'
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+      }
+
+      const ctxFamTipo = document.getElementById('familiaTipologiaChart')?.getContext('2d');
+      if (ctxFamTipo) {
+        familiaTipologiaChartInstance = new Chart(ctxFamTipo, {
+          type: 'doughnut',
+          data: {
+            labels: ['Nuclear con Hijos (45%)', 'Monoparental Femenina (32%)', 'Extensa / Compuesta (14%)', 'Monoparental Masculina (5%)', 'Unipersonal (4%)'],
+            datasets: [{
+              data: [45, 32, 14, 5, 4],
+              backgroundColor: ['#004884', '#e11d48', '#d97706', '#059669', '#7c3aed']
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+
+      const ctxFamVer = document.getElementById('familiaVeredasChart')?.getContext('2d');
+      if (ctxFamVer) {
+        familiaVeredasChartInstance = new Chart(ctxFamVer, {
+          type: 'bar',
+          data: {
+            labels: ['Centro Urbano', 'Briceño', 'Meusa', 'Chocontá', 'Mercenario', 'Hato Grande', 'Carolina'],
+            datasets: [{
+              label: 'Hogares Caracterizados',
+              data: [3850, 2100, 1150, 920, 780, 610, 440],
+              backgroundColor: '#3366CC'
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+      }
+    }
+
+    function toggleHighContrast() { document.body.classList.toggle('high-contrast'); }
+
+    // Integración con Gemini API para el Asistente Virtual
+    async function askAI(query) {
+      document.getElementById('ai-user-query').value = query;
+      await processAIQuery(query);
+    }
+
+    async function askAIFromInput() {
+      const query = document.getElementById('ai-user-query').value;
+      if (!query.trim()) return;
+      await processAIQuery(query);
+    }
+
+    async function processAIQuery(userQuery) {
+      switchTab('ai-assistant');
+      const box = document.getElementById('ai-response-box');
+      const btn = document.getElementById('ai-submit-btn');
+
+      box.innerHTML = `
+        <div class="flex items-center space-x-3 text-purple-700 animate-pulse">
+          <i class="fa-solid fa-spinner fa-spin text-xl"></i>
+          <span>Consultando base de datos oficial de Sopó e indicadores TerriData...</span>
+        </div>
+      `;
+      btn.disabled = true;
+
+      const systemPrompt = `
+        Eres el Asistente Virtual Oficial del Portal Estadístico de la Alcaldía de Sopó (Cundinamarca, Colombia).
+        Responde preguntas sobre el municipio, TerriData (IDF 2024: 61.4 pts), Deportes (4.850 inscritos), Cultura (3.420 estudiantes Recrearte),
+        Educación (FOES: 1.280 becas, Transporte Escolar: 1.940, EducaTIC: 860), CTi (Robótica: 420, Energía Solar: 185, Acompañamiento en Proyectos: 64),
+        Salud (Manipulación Alimentos: 1.620, Bioseguridad: 840), Desarrollo Social (Adulto Mayor, Discapacidad, Mujer y Juventud),
+        Desarrollo Económico (Programa Sopó Emprende con $580M COP), Observatorio de Familia (9.850 hogares caracterizados, 4.120 familias en oferta, Escuela de Crianza Amorosa, jefatura femenina del 44.2% y tipologías familiares) y Datos Curiosos.
+        Responde en español, tono institucional amigable y estructurado en viñetas.
+      `;
+
+      const apiKey = "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: userQuery }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] }
+          })
+        });
+
+        const result = await response.json();
+        const candidate = result.candidates?.[0];
+
+        if (candidate && candidate.content?.parts?.[0]?.text) {
+          let text = candidate.content.parts[0].text;
+          text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+          text = text.replace(/\n\* /g, '<br>• ');
+          text = text.replace(/\n/g, '<br>');
+
+          box.innerHTML = `<div class="prose max-w-none text-gray-800"><p>${text}</p></div>`;
+        } else {
+          box.innerHTML = `<p class="text-red-600 font-semibold">No se obtuvo una respuesta estructurada. Intenta nuevamente.</p>`;
+        }
+      } catch (err) {
+        console.error(err);
+        box.innerHTML = `<p class="text-red-600 font-semibold">Error al conectar con la Inteligencia Artificial.</p>`;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+
+</body>
+</html>

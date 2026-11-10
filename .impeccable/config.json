@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "prototipo/assets/portal.css"
+        ],
+        "createdAt": "2026-11-10T15:20:53.388Z",
+        "reason": "Claude: la pestaña activa se une al panel; esquinas superiores en 0 en escritorio, borde de 1px en móvil"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "sans",
+        "files": [
+          ".impeccable/mocks/decision/*.html"
+        ],
+        "createdAt": "2026-11-10T17:12:45.023Z",
+        "reason": "Claude: bocetos de la ronda de decisión, descartables y exentos de la revisión final"
+      }
+    ]
+  }
+}

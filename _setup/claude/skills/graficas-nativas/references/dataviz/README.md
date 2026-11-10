@@ -1,0 +1,1 @@
+Copiado del método dataviz (agnóstico de sistema). Solo se reemplazaron los enlaces a la paleta: los parámetros del portal están en ../paleta-nxgov.md. El validador está en ../../scripts/validate_palette.js.
