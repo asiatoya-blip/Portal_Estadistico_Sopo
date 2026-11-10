@@ -3,7 +3,6 @@ name: Portal Estadístico de Sopó
 description: Tablero claro y liviano con las cifras oficiales de Sopó y sus libros de Tableau, dentro del chrome GOV.CO v5.
 colors:
   accent: "#0943B5"
-  accent-hover: "#07368F"
   accent-soft: "#EEF3FD"
   text: "#101828"
   muted: "#5B6478"
@@ -181,7 +180,6 @@ Una paleta casi neutra, fría y luminosa, con un solo acento institucional y dos
 
 ### Primary
 - **Cobalt Institucional** (`accent`): enlaces, pestaña y entrada de menú activas, botón al pasar el cursor, contorno de foco (3px) y la línea de tendencia de cada tarjeta. Es el Cobalt del Kit GOV.CO 9.2.
-- **Cobalt Profundo** (`accent-hover`): variante oscura reservada para estado de presión/hover en acciones rellenas.
 - **Bruma Cobalt** (`accent-soft`): fondo de la sub-entrada activa del menú, del contador de un grupo abierto, del ícono de colección y de la selección de texto.
 
 ### Secondary

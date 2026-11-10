@@ -101,7 +101,7 @@
 .nxgov-pulse__item--empeora strong { color: var(--nxgov-color-bad); }
 
 .nxgov-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.nxgov-kpi { display: flex; flex-direction: column; padding: 0.875rem 1.125rem 0.75rem; background: var(--nxgov-color-surface); border: 1px solid var(--nxgov-color-line); border-radius: var(--nxgov-radius); color: var(--nxgov-color-text); text-decoration: none; box-shadow: var(--nxgov-shadow); transition: box-shadow var(--nxgov-motion-fast) var(--nxgov-ease), border-color var(--nxgov-motion-fast) var(--nxgov-ease); }
+.nxgov-kpi { display: flex; flex-direction: column; padding: 0.875rem 1.125rem 0.75rem; background: var(--nxgov-color-surface); border: 1px solid var(--nxgov-color-line); border-radius: var(--nxgov-radius); color: var(--nxgov-color-text); text-decoration: none; box-shadow: var(--nxgov-shadow); transition: box-shadow var(--nxgov-motion-fast) var(--nxgov-ease), border-color var(--nxgov-motion-fast) var(--nxgov-ease), transform var(--nxgov-motion-fast) var(--nxgov-ease); }
 a.nxgov-kpi:hover { transform: translateY(-2px); }
 .nxgov-kpi:hover { color: var(--nxgov-color-text); border-color: var(--nxgov-color-line-strong); box-shadow: var(--nxgov-shadow-hover); }
 .nxgov-kpi__top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }

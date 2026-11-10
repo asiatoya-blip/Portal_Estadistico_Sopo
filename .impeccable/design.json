@@ -1,88 +1,94 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T17:12:07+00:00",
+  "generatedAt": "2026-11-10T21:00:09+00:00",
   "title": "Design System: Portal Estadístico de Sopó",
   "extensions": {
     "colorMeta": {
-      "cobalt": {
+      "accent": {
         "role": "primary",
-        "displayName": "Cobalt GOV.CO",
+        "displayName": "Cobalt Institucional",
         "canonical": "#0943B5",
+        "cssVar": "--nxgov-color-accent",
         "tonalRamp": [
-          "#0F1F3E",
-          "#133473",
-          "#1347AE",
-          "#0D59EF",
-          "#4980ED",
-          "#84A7EB",
-          "#BBCCF0",
-          "#EBF0F9"
+          "#12203A",
+          "#18356F",
+          "#1648AB",
+          "#0D59EE",
+          "#4C81EA",
+          "#89A9E7",
+          "#BECEEC",
+          "#EDF1F8"
         ]
       },
-      "cobalt-hover": {
+      "accent-soft": {
         "role": "primary",
-        "displayName": "Cobalt profundo",
-        "canonical": "#07368F",
+        "displayName": "Bruma Cobalt",
+        "canonical": "#EEF3FD",
+        "cssVar": "--nxgov-color-accent-soft",
         "tonalRamp": [
-          "#0E1F3E",
-          "#133574",
-          "#1348AE",
-          "#0C5BEF",
-          "#4981ED",
-          "#84A8EC",
-          "#BBCDF0",
-          "#EBF0F9"
+          "#152038",
+          "#1D376A",
+          "#1F4BA2",
+          "#1B5DE0",
+          "#5684E0",
+          "#8FAAE1",
+          "#C1CFE9",
+          "#EEF1F7"
         ]
       },
-      "ink": {
-        "role": "secondary",
-        "displayName": "Marino tinta",
-        "canonical": "#0A1A3F",
-        "tonalRamp": [
-          "#131F39",
-          "#1D346A",
-          "#22489F",
-          "#235AD8",
-          "#5981DD",
-          "#8FA8E1",
-          "#C0CDEA",
-          "#EDF0F8"
-        ]
-      },
-      "ink-soft": {
+      "text": {
         "role": "neutral",
-        "displayName": "Gris pizarra",
-        "canonical": "#33415C",
+        "displayName": "Tinta Pizarra",
+        "canonical": "#101828",
+        "cssVar": "--nxgov-color-text",
         "tonalRamp": [
-          "#1F242E",
-          "#343F53",
-          "#485979",
-          "#5A72A1",
-          "#8193B5",
-          "#A8B3C8",
-          "#CDD2DD",
-          "#F0F2F4"
+          "#1D2330",
+          "#2F3C58",
+          "#3D5584",
+          "#486CB3",
+          "#758EC0",
+          "#A2B1CE",
+          "#CAD2E0",
+          "#F0F1F5"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Gris Pizarra",
+        "canonical": "#5B6478",
+        "cssVar": "--nxgov-color-muted",
+        "tonalRamp": [
+          "#232529",
+          "#3D414A",
+          "#555C6C",
+          "#6D778F",
+          "#8F96A7",
+          "#B1B5BF",
+          "#D2D4D9",
+          "#F1F2F3"
         ]
       },
       "ground": {
         "role": "neutral",
-        "displayName": "Fondo GOV",
-        "canonical": "#F4F6FB",
+        "displayName": "Suelo Niebla",
+        "canonical": "#F6F7F9",
+        "cssVar": "--nxgov-color-ground",
         "tonalRamp": [
-          "#1A2132",
-          "#2B395C",
-          "#384F89",
-          "#4365B8",
-          "#7189C5",
-          "#9DADD3",
-          "#C7CFE3",
-          "#EFF1F6"
+          "#22252B",
+          "#3A404D",
+          "#505B71",
+          "#657597",
+          "#8995AC",
+          "#AEB4C2",
+          "#D0D3DA",
+          "#F1F2F3"
         ]
       },
       "surface": {
         "role": "neutral",
-        "displayName": "Superficie",
+        "displayName": "Blanco Superficie",
         "canonical": "#FFFFFF",
+        "cssVar": "--nxgov-color-surface",
         "tonalRamp": [
           "#262626",
           "#434343",
@@ -94,325 +100,391 @@
           "#F2F2F2"
         ]
       },
-      "tint": {
-        "role": "neutral",
-        "displayName": "Velo Cobalt",
-        "canonical": "#EAF0FB",
-        "tonalRamp": [
-          "#142138",
-          "#1F3967",
-          "#264F9B",
-          "#2965D3",
-          "#5D89D8",
-          "#91ADDF",
-          "#C1CFE9",
-          "#EDF1F7"
-        ]
-      },
       "line": {
         "role": "neutral",
-        "displayName": "Línea",
-        "canonical": "#C3CFE5",
+        "displayName": "Línea Fina",
+        "canonical": "#E6E9EF",
+        "cssVar": "--nxgov-color-line",
         "tonalRamp": [
-          "#1C2331",
-          "#2E3D58",
-          "#3F5783",
-          "#4C6FAF",
-          "#7790BF",
-          "#A1B1CE",
-          "#CAD2E1",
-          "#EFF1F5"
+          "#21252B",
+          "#39404E",
+          "#4E5B73",
+          "#627599",
+          "#8894AE",
+          "#ADB4C3",
+          "#D0D3DB",
+          "#F1F2F4"
         ]
       },
-      "control": {
+      "line-strong": {
         "role": "neutral",
-        "displayName": "Control",
-        "canonical": "#6F7D99",
+        "displayName": "Línea Firme",
+        "canonical": "#CDD3DE",
+        "cssVar": "--nxgov-color-line-strong",
         "tonalRamp": [
           "#22252B",
-          "#3A404C",
-          "#525C6F",
-          "#687793",
-          "#8B96AA",
-          "#AEB5C2",
-          "#D0D3DA",
+          "#39404D",
+          "#505C71",
+          "#647697",
+          "#8996AD",
+          "#ADB5C3",
+          "#D0D4DA",
+          "#F1F2F3"
+        ]
+      },
+      "neutral-soft": {
+        "role": "neutral",
+        "displayName": "Gris Lavado",
+        "canonical": "#F1F3F6",
+        "cssVar": "--nxgov-color-neutral-soft",
+        "tonalRamp": [
+          "#21252B",
+          "#39414E",
+          "#4F5D72",
+          "#637899",
+          "#8897AE",
+          "#ADB6C3",
+          "#D0D4DB",
           "#F1F2F4"
         ]
       },
       "cut": {
-        "role": "tertiary",
-        "displayName": "Amarillo corte",
+        "role": "secondary",
+        "displayName": "Ámbar de Corte",
         "canonical": "#FDBF2D",
+        "cssVar": "--nxgov-color-cut",
         "tonalRamp": [
-          "#40310D",
-          "#77580F",
-          "#B5830C",
+          "#3C2F10",
+          "#735714",
+          "#B18110",
           "#F8AF03",
-          "#F4BF42",
-          "#F0CF80",
-          "#F2E1B8",
-          "#FAF5EB"
-        ]
-      },
-      "bad": {
-        "role": "tertiary",
-        "displayName": "Rojo desfavorable",
-        "canonical": "#A5361A",
-        "tonalRamp": [
-          "#391B13",
-          "#6A2C1D",
-          "#9F3B22",
-          "#D94723",
-          "#DD7359",
-          "#E19F8F",
-          "#EAC8C0",
-          "#F8EFED"
-        ]
-      },
-      "bad-tint": {
-        "role": "tertiary",
-        "displayName": "Rojo velo",
-        "canonical": "#FBEAE5",
-        "tonalRamp": [
-          "#391C13",
-          "#6A2E1C",
-          "#A03E21",
-          "#D94C22",
-          "#DD7758",
-          "#E2A18E",
-          "#EBC9C0",
-          "#F8EFED"
+          "#F0BD45",
+          "#EBCD85",
+          "#EEDFBD",
+          "#F8F5EC"
         ]
       },
       "good": {
         "role": "tertiary",
-        "displayName": "Verde favorable",
-        "canonical": "#1B6B3A",
+        "displayName": "Verde Mejora",
+        "canonical": "#0F7A55",
+        "cssVar": "--nxgov-color-good",
         "tonalRamp": [
-          "#173623",
-          "#24633C",
-          "#2D9455",
-          "#33C86D",
-          "#65D18F",
-          "#96DAB0",
-          "#C4E7D1",
-          "#EEF7F1"
+          "#15382C",
+          "#1E694F",
+          "#20A174",
+          "#1CDF9C",
+          "#57DFB0",
+          "#8FE1C5",
+          "#C2E9DB",
+          "#EEF7F4"
         ]
       },
-      "good-tint": {
+      "good-soft": {
         "role": "tertiary",
-        "displayName": "Verde velo",
-        "canonical": "#E4F2E9",
+        "displayName": "Verde Bruma",
+        "canonical": "#E8F6EF",
+        "cssVar": "--nxgov-color-good-soft",
         "tonalRamp": [
-          "#1D2F24",
-          "#31563E",
-          "#427F58",
-          "#52A971",
-          "#7BBB92",
-          "#A4CCB2",
-          "#CBDFD2",
-          "#F0F5F1"
+          "#1D3026",
+          "#2E5943",
+          "#3C8561",
+          "#47B47E",
+          "#75C19B",
+          "#A1CFB8",
+          "#CAE0D5",
+          "#F0F5F2"
         ]
+      },
+      "bad": {
+        "role": "tertiary",
+        "displayName": "Rojo Alerta",
+        "canonical": "#B42318",
+        "cssVar": "--nxgov-color-bad",
+        "tonalRamp": [
+          "#371815",
+          "#68241E",
+          "#A02A21",
+          "#DD2C1E",
+          "#DE6158",
+          "#E09690",
+          "#E8C5C2",
+          "#F7EEEE"
+        ]
+      },
+      "bad-soft": {
+        "role": "tertiary",
+        "displayName": "Rojo Bruma",
+        "canonical": "#FDECEA",
+        "cssVar": "--nxgov-color-bad-soft",
+        "tonalRamp": [
+          "#391814",
+          "#6B241B",
+          "#A52B1C",
+          "#E52C17",
+          "#E36253",
+          "#E3968D",
+          "#EAC5C0",
+          "#F7EEED"
+        ]
+      }
+    },
+    "contrastMode": {
+      "selector": ".nxgov-page.contrast-govco",
+      "overrides": {
+        "ground": "#000",
+        "surface": "#000",
+        "text": "#FFF",
+        "muted": "#FFF",
+        "line": "#FFF",
+        "line-strong": "#FFF",
+        "accent": "#FFE14D",
+        "accent-soft": "#1A1A1A",
+        "neutral-soft": "#1A1A1A",
+        "good": "#7CF2C2",
+        "good-soft": "#000",
+        "bad": "#FF9B90",
+        "bad-soft": "#000"
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Título de la página, una sola vez."
-      },
-      "figure": {
-        "displayName": "Cifra",
-        "purpose": "Cifra principal del tema, en Cobalt con cifras tabulares."
+        "purpose": "Título del resumen; uno por página."
       },
       "headline": {
-        "displayName": "Titular",
-        "purpose": "Nombre del tema en su panel."
+        "displayName": "Headline",
+        "purpose": "Título de cada vista de tablero."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Valor de cada tarjeta de cifra; tabular, sin partir."
       },
       "title": {
-        "displayName": "Título",
-        "purpose": "Título de cada hoja de tablero."
+        "displayName": "Title",
+        "purpose": "Encabezados de sección del resumen."
       },
-      "tab-figure": {
-        "displayName": "Cifra de pestaña",
-        "purpose": "El número de cada tema en la barra; 1.0625rem bajo 40rem."
-      },
-      "button": {
-        "displayName": "Botón",
-        "purpose": "Píldoras de hoja (0.9375rem) y botón de carga (1.0625rem)."
-      },
-      "body": {
-        "displayName": "Cuerpo",
-        "purpose": "Texto general."
-      },
-      "lead": {
-        "displayName": "Entrada",
-        "purpose": "Entrada bajo el título, Gris pizarra, 60ch."
+      "title-sm": {
+        "displayName": "Title-sm",
+        "purpose": "Título de cada colección/libro."
       },
       "label": {
-        "displayName": "Etiqueta",
-        "purpose": "Nombre del tema en la pestaña, etiqueta de la cifra."
+        "displayName": "Label",
+        "purpose": "Menú, pestañas, botones y paginador."
       },
-      "meta": {
-        "displayName": "Meta",
-        "purpose": "Fuente, fecha de corte y aviso de tercero."
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido; resúmenes de tablero a 75ch."
+      },
+      "body-sm": {
+        "displayName": "Body-sm",
+        "purpose": "Unidades, variación, migas, fecha de corte."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Fuentes, metadatos, nota del menú, aviso de desplazamiento."
       }
     },
-    "shadows": [],
-    "motion": [
+    "fonts": [
       {
-        "name": "motion-fast",
-        "value": "180ms",
-        "purpose": "Hover de pestañas y botón de carga (fondo y borde)."
+        "family": "Work Sans",
+        "file": "prototipo/assets/fonts/WorkSans-wght.ttf",
+        "weight": "100 900",
+        "cssVar": "--nxgov-font-display"
       },
       {
-        "name": "motion-base",
+        "family": "Nunito Sans",
+        "files": [
+          "prototipo/assets/fonts/NunitoSans_10pt-Regular.ttf",
+          "prototipo/assets/fonts/NunitoSans_10pt-Bold.ttf"
+        ],
+        "weight": "400, 700",
+        "cssVar": "--nxgov-font"
+      }
+    ],
+    "shadows": [
+      {
+        "name": "reposo",
+        "cssVar": "--nxgov-shadow",
+        "value": "0 1px 2px rgba(16, 24, 40, 0.04)",
+        "purpose": "Tarjetas, colecciones, tablero y entrada activa del menú en reposo."
+      },
+      {
+        "name": "elevacion-cursor",
+        "cssVar": "--nxgov-shadow-hover",
+        "value": "0 4px 16px rgba(16, 24, 40, 0.08)",
+        "purpose": "Solo tarjetas de cifra al pasar el cursor."
+      }
+    ],
+    "motion": [
+      {
+        "name": "fast",
+        "cssVar": "--nxgov-motion-fast",
+        "value": "150ms",
+        "purpose": "Transiciones de estado (borde, fondo, sombra, chevron)."
+      },
+      {
+        "name": "base",
+        "cssVar": "--nxgov-motion-base",
         "value": "320ms",
-        "purpose": "Entrada de la cifra y el título al cambiar de tema (nxgov-rise)."
+        "purpose": "Asentamiento de las tarjetas al llegar al resumen."
       },
       {
         "name": "ease",
+        "cssVar": "--nxgov-ease",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Curva única de salida suave; se anula con prefers-reduced-motion."
+        "purpose": "Curva única de salida suave."
       }
     ],
     "breakpoints": [
       {
-        "name": "barra-4",
+        "name": "rejilla-2-columnas",
+        "value": "75rem"
+      },
+      {
+        "name": "shell-1-columna",
         "value": "64rem"
       },
       {
-        "name": "panel-1col",
-        "value": "48rem"
-      },
-      {
-        "name": "movil",
+        "name": "telefono",
         "value": "40rem"
       }
-    ]
+    ],
+    "layout": {
+      "container": "--nxgov-max: 90rem",
+      "gutter": "--nxgov-gutter: clamp(1rem, 3vw, 2.5rem)",
+      "navWidth": "--nxgov-nav-width: 15rem"
+    }
   },
   "components": [
     {
-      "name": "Pestaña-cifra",
-      "kind": "nav",
-      "refersTo": "theme-tab",
-      "description": "Cada tema de la barra con su nombre y su cifra; la activa en marino con cifra amarilla.",
-      "html": "<ul class=\"ds-tabs\"><li><a class=\"ds-tab\" href=\"#\" aria-current=\"true\"><span class=\"ds-tab__name\">Población</span><span class=\"ds-tab__value\">34.015</span></a></li><li><a class=\"ds-tab\" href=\"#\"><span class=\"ds-tab__name\">Economía</span><span class=\"ds-tab__value\">$1,28 bill.</span></a></li><li><a class=\"ds-tab\" href=\"#\"><span class=\"ds-tab__name\">Educación</span><span class=\"ds-tab__value\">86,9 %</span></a></li></ul>",
-      "css": ".ds-tabs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.5rem;font-family:var(--nxgov-font,'Nunito Sans',sans-serif)} .ds-tab{display:flex;flex-direction:column;gap:0.125rem;padding:0.75rem 0.875rem;border:1px solid var(--nxgov-color-control,#6F7D99);border-radius:0.75rem 0.75rem 0 0;background:var(--nxgov-color-surface,#FFFFFF);color:var(--nxgov-color-ink,#0A1A3F);text-decoration:none;transition:background-color 180ms cubic-bezier(0.16,1,0.3,1),border-color 180ms cubic-bezier(0.16,1,0.3,1)} .ds-tab:hover{background:var(--nxgov-color-tint,#EAF0FB);border-color:var(--nxgov-color-cobalt,#0943B5)} .ds-tab:focus-visible{outline:3px solid var(--nxgov-color-cobalt,#0943B5);outline-offset:3px} .ds-tab__name{font-weight:700;font-size:0.9375rem} .ds-tab__value{font-family:var(--nxgov-font-display,'Work Sans',sans-serif);font-weight:700;font-size:1.375rem;line-height:1.15;color:var(--nxgov-color-cobalt,#0943B5);font-variant-numeric:tabular-nums} .ds-tab[aria-current=\"true\"]{background:var(--nxgov-color-ink,#0A1A3F);border-color:var(--nxgov-color-ink,#0A1A3F);color:var(--nxgov-color-surface,#FFFFFF)} .ds-tab[aria-current=\"true\"] .ds-tab__value{color:var(--nxgov-color-cut,#FDBF2D)}"
-    },
-    {
-      "name": "Cargar el tablero",
-      "kind": "button",
-      "refersTo": "button-load",
-      "description": "Acción principal de la puerta de Tableau.",
-      "html": "<button type=\"button\" class=\"ds-btn-load\">Cargar el tablero</button>",
-      "css": ".ds-btn-load{min-height:3rem;padding:0.75rem 1.75rem;border:0;border-radius:999px;cursor:pointer;background:var(--nxgov-color-cobalt,#0943B5);color:var(--nxgov-color-surface,#FFFFFF);font:600 1.0625rem/1.3 var(--nxgov-font-display,'Work Sans',sans-serif);transition:background-color 180ms cubic-bezier(0.16,1,0.3,1)} .ds-btn-load:hover{background:var(--nxgov-color-cobalt-hover,#07368F)} .ds-btn-load:focus-visible{outline:3px solid var(--nxgov-color-cobalt,#0943B5);outline-offset:3px}"
-    },
-    {
-      "name": "Píldora de hoja",
-      "kind": "chip",
-      "refersTo": "sheet-chip",
-      "description": "Selector de hoja dentro de un libro de Tableau (aria-pressed).",
-      "html": "<div class=\"ds-sheets\"><button type=\"button\" class=\"ds-sheet\" aria-pressed=\"true\">Demografía</button><button type=\"button\" class=\"ds-sheet\" aria-pressed=\"false\">Densidad de población</button></div>",
-      "css": ".ds-sheets{display:flex;flex-wrap:wrap;gap:0.5rem} .ds-sheet{min-height:2.75rem;padding:0.5rem 1rem;border:1px solid var(--nxgov-color-cobalt,#0943B5);border-radius:999px;background:var(--nxgov-color-surface,#FFFFFF);color:var(--nxgov-color-cobalt,#0943B5);font:600 0.9375rem/1.3 var(--nxgov-font-display,'Work Sans',sans-serif);cursor:pointer} .ds-sheet:hover{background:var(--nxgov-color-tint,#EAF0FB)} .ds-sheet:focus-visible{outline:3px solid var(--nxgov-color-cobalt,#0943B5);outline-offset:3px} .ds-sheet[aria-pressed=\"true\"]{background:var(--nxgov-color-cobalt,#0943B5);color:var(--nxgov-color-surface,#FFFFFF)}"
-    },
-    {
-      "name": "Cifra con valoración",
+      "name": "Tarjeta de cifra",
       "kind": "card",
-      "refersTo": "theme-panel",
-      "description": "Bloque de cifra: etiqueta, número, unidad, variación con flecha y valoración, fuente.",
-      "html": "<figure class=\"ds-stat\"><figcaption class=\"ds-stat__label\">Valor agregado 2023</figcaption><p class=\"ds-stat__value\">$1,28 bill.<span class=\"ds-stat__unit\">pesos corrientes</span></p><p class=\"ds-stat__change ds-stat__change--fav\"><svg class=\"ds-stat__icon\" aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M12 19V5M5 12l7-7 7 7\"/></svg><span>+8,8 % frente a 2022</span><span class=\"ds-stat__verdict\">Favorable</span></p><p class=\"ds-stat__source\">Fuente: DANE (TerriData, DNP)</p></figure>",
-      "css": ".ds-stat{margin:0;padding:1.5rem 0;border-top:1px solid var(--nxgov-color-line,#C3CFE5);border-bottom:1px solid var(--nxgov-color-line,#C3CFE5);display:flex;flex-direction:column;gap:0.375rem;font-family:var(--nxgov-font,'Nunito Sans',sans-serif);color:var(--nxgov-color-ink,#0A1A3F)} .ds-stat__label{font-weight:700;color:var(--nxgov-color-ink-soft,#33415C)} .ds-stat__value{margin:0;font-family:var(--nxgov-font-display,'Work Sans',sans-serif);font-weight:700;font-size:clamp(2.5rem,2rem + 1.6vw,3.5rem);line-height:1;letter-spacing:-0.02em;color:var(--nxgov-color-cobalt,#0943B5);font-variant-numeric:tabular-nums} .ds-stat__unit{display:block;margin-top:0.375rem;font-family:var(--nxgov-font,'Nunito Sans',sans-serif);font-size:1rem;font-weight:400;letter-spacing:0;color:var(--nxgov-color-ink,#0A1A3F)} .ds-stat__change{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:0.375rem 0.5rem;font-weight:700} .ds-stat__change--fav{color:var(--nxgov-color-good,#1B6B3A)} .ds-stat__icon{width:1.25rem;height:1.25rem;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round} .ds-stat__verdict{padding:0.125rem 0.625rem;border-radius:999px;font-size:0.875rem;background:var(--nxgov-color-good-tint,#E4F2E9)} .ds-stat__source{margin:0;font-size:0.875rem;color:var(--nxgov-color-ink-soft,#33415C)}"
+      "refersTo": "kpi-card",
+      "description": "Cifra oficial con estado, tendencia, variación y fuente; enlace al tablero cuando existe.",
+      "html": "<a class=\"ds-kpi\" href=\"#\"><span class=\"ds-kpi__top\"><span class=\"ds-kpi__label\">Valor agregado</span><span class=\"ds-kpi__chip\">Mejora</span></span><span class=\"ds-kpi__value\">$1,28 bill.</span><span class=\"ds-kpi__unit\">pesos corrientes, 2023</span><svg class=\"ds-kpi__trend\" viewBox=\"0 0 160 44\" preserveAspectRatio=\"none\" role=\"img\" aria-label=\"Tendencia 2015 a 2023\"><polygon points=\"4,44 4,40 42,33 80,32 118,24.5 156,4 156,44\"/><polyline points=\"4,40 42,33 80,32 118,24.5 156,4\"/><circle cx=\"156\" cy=\"4\" r=\"3\"/></svg><span class=\"ds-kpi__change\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M12 19V5M5 12l7-7 7 7\"/></svg>+8,8 % frente a 2022</span><span class=\"ds-kpi__source\">DANE, valor agregado municipal <b class=\"ds-kpi__go\">· Ver tablero</b></span></a>",
+      "css": ".ds-kpi { display: flex; flex-direction: column; max-width: 20rem; padding: 0.875rem 1.125rem 0.75rem; background: var(--nxgov-color-surface); border: 1px solid var(--nxgov-color-line); border-radius: var(--nxgov-radius); color: var(--nxgov-color-text); font: 400 1rem/1.6 var(--nxgov-font); text-decoration: none; box-shadow: var(--nxgov-shadow); transition: box-shadow var(--nxgov-motion-fast) var(--nxgov-ease), border-color var(--nxgov-motion-fast) var(--nxgov-ease); } .ds-kpi:hover { border-color: var(--nxgov-color-line-strong); box-shadow: var(--nxgov-shadow-hover); transform: translateY(-2px); } .ds-kpi:focus-visible { outline: 3px solid var(--nxgov-color-accent); outline-offset: 2px; } .ds-kpi__top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; } .ds-kpi__label { font-size: 0.9375rem; color: var(--nxgov-color-muted); } .ds-kpi__chip { padding: 0.125rem 0.5rem; border-radius: var(--nxgov-radius-pill); font-size: 0.75rem; font-weight: 700; background: var(--nxgov-color-good-soft); color: var(--nxgov-color-good); } .ds-kpi__value { margin-top: 0.25rem; font: 600 2rem/1.1 var(--nxgov-font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-kpi__unit { font-size: 0.875rem; color: var(--nxgov-color-muted); } .ds-kpi__trend { width: 100%; height: 2.25rem; margin: 0.5rem 0 0.375rem; overflow: visible; color: var(--nxgov-color-accent); } .ds-kpi__trend polygon { fill: currentColor; opacity: 0.08; } .ds-kpi__trend polyline { fill: none; stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; } .ds-kpi__trend circle { fill: currentColor; stroke: var(--nxgov-color-surface); stroke-width: 2; vector-effect: non-scaling-stroke; } .ds-kpi__change { display: flex; align-items: center; gap: 0.25rem; font-size: 0.875rem; font-weight: 700; color: var(--nxgov-color-good); } .ds-icon { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-kpi__source { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--nxgov-color-line); font-size: 0.8125rem; color: var(--nxgov-color-muted); } .ds-kpi__go { color: var(--nxgov-color-accent); white-space: nowrap; }"
     },
     {
-      "name": "Fecha de corte",
+      "name": "Chips de estado",
       "kind": "chip",
-      "refersTo": "cut-badge",
-      "description": "Único uso del amarillo: la fecha de corte de los datos.",
-      "html": "<p class=\"ds-cut\">Datos a octubre de 2026</p>",
-      "css": ".ds-cut{display:inline-block;margin:0;padding:0.375rem 0.875rem;background:var(--nxgov-color-cut,#FDBF2D);color:var(--nxgov-color-ink,#0A1A3F);border-radius:999px;font:700 0.9375rem/1.6 var(--nxgov-font,'Nunito Sans',sans-serif)}"
+      "refersTo": "kpi-chip-mejora",
+      "description": "Estado de cifra con palabra y color suave: mejora, empeora, sin valoración.",
+      "html": "<span class=\"ds-chip ds-chip--good\">Mejora</span> <span class=\"ds-chip ds-chip--bad\">Empeora</span> <span class=\"ds-chip\">Sin valoración</span>",
+      "css": ".ds-chip { display: inline-block; padding: 0.125rem 0.5rem; border-radius: var(--nxgov-radius-pill); font: 700 0.75rem/1.6 var(--nxgov-font); background: var(--nxgov-color-neutral-soft); color: var(--nxgov-color-muted); } .ds-chip--good { background: var(--nxgov-color-good-soft); color: var(--nxgov-color-good); } .ds-chip--bad { background: var(--nxgov-color-bad-soft); color: var(--nxgov-color-bad); }"
     },
     {
-      "name": "Escenario del tablero",
-      "kind": "custom",
-      "refersTo": "viz-stage",
-      "description": "Puerta de Tableau: botón de carga y aviso de tercero antes del iframe.",
-      "html": "<div class=\"ds-stage\"><div class=\"ds-stage__gate\"><button type=\"button\" class=\"ds-stage__load\">Cargar el tablero</button><p class=\"ds-stage__notice\">Se carga desde Tableau Public, un servicio externo que puede usar cookies. El resto del portal no las usa.</p></div></div>",
-      "css": ".ds-stage{position:relative;min-height:15rem;background:var(--nxgov-color-tint,#EAF0FB);border:1px solid var(--nxgov-color-line,#C3CFE5);border-radius:0.75rem;overflow:hidden;font-family:var(--nxgov-font,'Nunito Sans',sans-serif)} .ds-stage__gate{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:1.5rem;text-align:center} .ds-stage__load{min-height:3rem;padding:0.75rem 1.75rem;border:0;border-radius:999px;cursor:pointer;background:var(--nxgov-color-cobalt,#0943B5);color:var(--nxgov-color-surface,#FFFFFF);font:600 1.0625rem/1.3 var(--nxgov-font-display,'Work Sans',sans-serif)} .ds-stage__load:hover{background:var(--nxgov-color-cobalt-hover,#07368F)} .ds-stage__load:focus-visible{outline:3px solid var(--nxgov-color-cobalt,#0943B5);outline-offset:3px} .ds-stage__notice{margin:0;max-width:36ch;font-size:0.875rem;color:var(--nxgov-color-ink-soft,#33415C)}"
+      "name": "Botón de contorno",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Acción secundaria, p. ej. \"Abrir en Tableau Public\".",
+      "html": "<a class=\"ds-btn\" href=\"#\">Abrir en Tableau Public</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0.5rem 1rem; border: 1px solid var(--nxgov-color-line-strong); border-radius: var(--nxgov-radius-sm); background: var(--nxgov-color-surface); color: var(--nxgov-color-text); font: 600 0.875rem/1.3 var(--nxgov-font-display); text-decoration: none; transition: border-color var(--nxgov-motion-fast) var(--nxgov-ease); } .ds-btn:hover { border-color: var(--nxgov-color-accent); color: var(--nxgov-color-accent); } .ds-btn:focus-visible { outline: 3px solid var(--nxgov-color-accent); outline-offset: 2px; }"
     },
     {
-      "name": "Enlace",
+      "name": "Menú lateral",
       "kind": "nav",
-      "refersTo": "",
-      "description": "Enlace Cobalt subrayado de cabecera y contenido.",
-      "html": "<a class=\"ds-link\" href=\"#\">Sede electrónica</a>",
-      "css": ".ds-link{color:var(--nxgov-color-cobalt,#0943B5);font:700 1rem/1.6 var(--nxgov-font,'Nunito Sans',sans-serif);text-underline-offset:0.18em;text-decoration-thickness:0.08em} .ds-link:hover{color:var(--nxgov-color-cobalt-hover,#07368F);text-decoration-thickness:0.14em} .ds-link:focus-visible{outline:3px solid var(--nxgov-color-cobalt,#0943B5);outline-offset:3px;border-radius:4px}"
+      "refersTo": "nav-item",
+      "description": "Entradas con ícono, libros plegables con contador y hojas sobre una guía vertical.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Tableros\"><a class=\"ds-nav__item\" href=\"#\" aria-current=\"page\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M4 13h6V4H4zM14 20h6v-9h-6zM14 4v4h6V4zM4 20h6v-4H4z\"/></svg><span class=\"ds-nav__label\">Resumen</span></a><a class=\"ds-nav__item\" href=\"#\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6\"/></svg><span class=\"ds-nav__label\">Indicadores TerriData</span><span class=\"ds-nav__count\">12</span></a><ul class=\"ds-nav__sub\"><li><a href=\"#\" aria-current=\"page\">Demografía</a></li><li><a href=\"#\">Educación</a></li></ul></nav>",
+      "css": ".ds-nav { width: 15rem; padding: 0.5rem; background: var(--nxgov-color-ground); } .ds-nav__item { display: flex; align-items: center; gap: 0.625rem; min-height: 2.5rem; padding: 0.5rem 0.75rem; border-radius: var(--nxgov-radius-sm); color: var(--nxgov-color-text); font: 600 0.9375rem/1.3 var(--nxgov-font-display); text-decoration: none; transition: background-color var(--nxgov-motion-fast) var(--nxgov-ease); } .ds-icon { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-nav__item .ds-icon { color: var(--nxgov-color-muted); } .ds-nav__item:hover { background: var(--nxgov-color-surface); } .ds-nav__item[aria-current=\"page\"] { background: var(--nxgov-color-surface); color: var(--nxgov-color-accent); box-shadow: var(--nxgov-shadow); } .ds-nav__item[aria-current=\"page\"] .ds-icon { color: var(--nxgov-color-accent); } .ds-nav__item:focus-visible, .ds-nav__sub a:focus-visible { outline: 3px solid var(--nxgov-color-accent); outline-offset: 2px; } .ds-nav__label { flex: 1; } .ds-nav__count { font: 600 0.75rem/1 var(--nxgov-font); padding: 0.25rem 0.5rem; border-radius: var(--nxgov-radius-pill); background: var(--nxgov-color-accent-soft); color: var(--nxgov-color-accent); font-variant-numeric: tabular-nums; } .ds-nav__sub { list-style: none; margin: 0.25rem 0 0.5rem 1.5rem; padding: 0 0 0 0.75rem; border-left: 1px solid var(--nxgov-color-line); } .ds-nav__sub a { display: block; padding: 0.375rem 0.625rem; border-radius: var(--nxgov-radius-sm); color: var(--nxgov-color-muted); font: 400 0.9375rem/1.35 var(--nxgov-font); text-decoration: none; } .ds-nav__sub a:hover { color: var(--nxgov-color-text); background: var(--nxgov-color-surface); } .ds-nav__sub a[aria-current=\"page\"] { color: var(--nxgov-color-accent); background: var(--nxgov-color-accent-soft); font-weight: 700; }"
+    },
+    {
+      "name": "Pestañas de hoja",
+      "kind": "nav",
+      "refersTo": "tab-active",
+      "description": "Tira de hojas del libro sobre un raíl fino; la activa en Cobalt con subrayado de 2px.",
+      "html": "<nav class=\"ds-tabs\" aria-label=\"Hojas\"><a href=\"#\" aria-current=\"page\">Población</a><a href=\"#\">Pirámide</a><a href=\"#\">Hogares</a></nav>",
+      "css": ".ds-tabs { display: flex; gap: 0 0.25rem; border-bottom: 1px solid var(--nxgov-color-line); } .ds-tabs a { padding: 0.625rem 0.875rem; border-bottom: 2px solid transparent; margin-bottom: -1px; color: var(--nxgov-color-muted); font: 600 0.9375rem/1.3 var(--nxgov-font-display); white-space: nowrap; text-decoration: none; } .ds-tabs a:hover { color: var(--nxgov-color-text); } .ds-tabs a[aria-current=\"page\"] { color: var(--nxgov-color-accent); border-bottom-color: var(--nxgov-color-accent); } .ds-tabs a:focus-visible { outline: 3px solid var(--nxgov-color-accent); outline-offset: 2px; border-radius: var(--nxgov-radius-sm); }"
+    },
+    {
+      "name": "Visor de tablero",
+      "kind": "custom",
+      "refersTo": "board",
+      "description": "Marco del iframe de Tableau con resumen en texto, fuente y fecha; escenario 16:11.",
+      "html": "<section class=\"ds-board\"><div class=\"ds-board__info\"><p class=\"ds-board__summary\">La población de Sopó creció de 27.249 a 34.015 habitantes entre 2018 y 2026.</p><p class=\"ds-board__meta\">Fuente: DANE · Corte: octubre de 2026 · <a href=\"#\">Ver libro</a></p></div><div class=\"ds-board__stage\"></div></section>",
+      "css": ".ds-board { max-width: 40rem; background: var(--nxgov-color-surface); border: 1px solid var(--nxgov-color-line); border-radius: var(--nxgov-radius); box-shadow: var(--nxgov-shadow); overflow: hidden; font: 400 1rem/1.6 var(--nxgov-font); color: var(--nxgov-color-text); } .ds-board__info { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.5rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--nxgov-color-line); } .ds-board__summary { flex: 1 1 20rem; margin: 0; max-width: 75ch; } .ds-board__meta { margin: 0; font-size: 0.8125rem; color: var(--nxgov-color-muted); } .ds-board__meta a { font-weight: 700; color: var(--nxgov-color-accent); } .ds-board__meta a:focus-visible { outline: 3px solid var(--nxgov-color-accent); outline-offset: 2px; } .ds-board__stage { aspect-ratio: 16 / 11; background: var(--nxgov-color-neutral-soft); }"
+    },
+    {
+      "name": "Colección (libro)",
+      "kind": "card",
+      "refersTo": "collection-card",
+      "description": "Libro de Tableau con ícono, metadato y lista de hojas enlazadas.",
+      "html": "<article class=\"ds-collection\"><span class=\"ds-collection__icon\"><svg class=\"ds-icon\" aria-hidden=\"true\" viewBox=\"0 0 24 24\"><path d=\"M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6\"/></svg></span><h3 class=\"ds-collection__title\"><a href=\"#\">Indicadores Territorial TerriData</a></h3><p class=\"ds-collection__meta\">12 hojas · DNP</p><ul class=\"ds-collection__list\"><li><a href=\"#\">Demografía</a></li><li><a href=\"#\">Educación</a></li></ul></article>",
+      "css": ".ds-collection { max-width: 20rem; padding: 1.25rem; background: var(--nxgov-color-surface); border: 1px solid var(--nxgov-color-line); border-radius: var(--nxgov-radius); box-shadow: var(--nxgov-shadow); font: 400 1rem/1.6 var(--nxgov-font); } .ds-collection__icon { display: inline-flex; padding: 0.5rem; border-radius: var(--nxgov-radius-sm); background: var(--nxgov-color-accent-soft); color: var(--nxgov-color-accent); } .ds-icon { width: 1.125rem; height: 1.125rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-collection__title { margin: 0.875rem 0 0; font: 600 1.0625rem/1.3 var(--nxgov-font-display); } .ds-collection__title a { color: var(--nxgov-color-text); text-decoration: none; } .ds-collection__title a:hover { color: var(--nxgov-color-accent); } .ds-collection__meta { margin: 0.25rem 0 0.75rem; font-size: 0.8125rem; color: var(--nxgov-color-muted); } .ds-collection__list { list-style: none; margin: 0; padding: 0; font-size: 0.9375rem; } .ds-collection__list a { display: block; padding: 0.25rem 0; color: var(--nxgov-color-accent); text-decoration: none; } .ds-collection__list a:hover { text-decoration: underline; } .ds-collection a:focus-visible { outline: 3px solid var(--nxgov-color-accent); outline-offset: 2px; }"
     }
   ],
   "narrative": {
-    "northStar": "La Ventana Sencilla",
-    "overview": "El portal es una ventana oficial y tranquila a las cifras del municipio, dentro del Kit UI GOV.CO 9.2 en modo restringido. Su firma es la **pestaña-cifra**: cada tema de la barra trae su número, de modo que la barra misma es el resumen de Sopó; al abrir un tema, la cifra y su tablero de Tableau quedan lado a lado en un solo panel pegado a la pestaña.\n\nLa densidad es media y ordenada: fondo gris azulado, superficies blancas con borde fino, un solo color de acción (Cobalt) y un marino oscuro que hace de tinta y de selección fuerte. El color no decora: marca acción, selección, fecha de corte y valoración, y cada valoración va con texto e ícono. Nada se mueve salvo la cifra cuando cambia de tema.\n\nEl chrome GOV.CO (barra superior, cabecera, pie, barra de accesibilidad, volver arriba) lo pone el CDN v5 sin modificar; en el prototipo se simula y no forma parte de este sistema.",
+    "northStar": "La mesa de trabajo despejada",
+    "overview": "El portal es un tablero de producto claro y liviano, en la familia de Mercury, Wise o Monarch: un menú lateral sereno a la izquierda, cifras con su tendencia arriba y los libros de Tableau Public como protagonistas del área principal. Todo vive sobre un suelo gris muy pálido (`ground`), con superficies blancas recortadas por un borde fino y esquinas de 14px. El color casi no habla: Cobalt aparece solo donde hay selección o acción, y verde y rojo solo donde una cifra mejora o empeora.\n\nLa densidad es media: seis tarjetas en tres columnas, un tablero de proporción 16:11 y pestañas por hoja, sin decoración que compita con los datos. Work Sans da cuerpo a títulos, cifras y navegación; Nunito Sans lleva el texto corrido, las fuentes y los metadatos. El chrome GOV.CO v5 (barra superior, pie, barra de accesibilidad, volver arriba) se carga del CDN sin modificar y no forma parte de este sistema; lo único propio es su alineación al contenedor de 1440px.\n\nEl sistema rechaza explícitamente dos extremos: la página-documento (texto largo con tableros escondidos tras un botón) y el tablero oscuro y pesado.",
     "keyCharacteristics": [
-      "La cifra manda: Work Sans en cifras y títulos, Nunito Sans en todo el texto.",
-      "Un solo acento de acción (Cobalt); el marino marca la pestaña activa.",
-      "Amarillo solo para la fecha de corte; verde y rojo solo para la valoración, siempre con texto.",
-      "Plano: profundidad por borde y tono, sin sombras.",
-      "Píldoras para acciones y etiquetas; esquinas suaves para superficies.",
-      "Contenido de terceros (Tableau) detrás de una puerta con aviso, nunca cargado solo."
+      "Suelo gris pálido, superficies blancas, borde fino de 1px, sombra casi imperceptible.",
+      "Cobalt reservado para selección, enlaces y acción; nunca como relleno decorativo.",
+      "Estado de cada cifra con texto + ícono SVG + color suave (nunca solo color).",
+      "Tableros de Tableau visibles sin clic, dentro de un marco con resumen, fuente y fecha.",
+      "Todo alineado a un contenedor de 90rem (1440px), incluido el chrome GOV.CO.",
+      "Tipografía en `rem`, tokens `--nxgov-*` en `:root`, BEM con prefijo `nxgov-`, sin estilos en línea."
     ],
     "rules": [
       {
-        "name": "La Regla de la Voz Única",
-        "body": "Cobalt es el único color de acción. Si algo se puede tocar y no es la pestaña activa, es Cobalt o tiene borde Cobalt al pasar.",
+        "name": "La Regla del Acento Escaso",
+        "body": "Cobalt marca solo lo seleccionado o accionable. Si un elemento no se puede tocar ni está activo, no es Cobalt.",
         "section": "colors"
       },
       {
-        "name": "La Regla del Amarillo con Oficio",
-        "body": "El amarillo solo marca el corte de los datos (y la cifra activa sobre marino). Nunca fondo de sección, nunca alerta.",
+        "name": "La Regla del Estado Triple",
+        "body": "Una mejora o un empeoramiento se dice siempre con palabra (\"Mejora\", \"Empeora\"), ícono SVG de flecha y color; ninguna de las tres señales va sola.",
         "section": "colors"
       },
       {
-        "name": "La Regla de la Valoración Dicha",
-        "body": "Verde y rojo solo acompañan una valoración escrita (\"Favorable\", \"Desfavorable\") y una flecha SVG. Si un indicador no tiene valoración (Población), solo se muestra la dirección en tinta.",
+        "name": "La Regla del Contraste Alto",
+        "body": "En modo `contrast-govco` del CDN solo se redefinen los tokens `--nxgov-color-*` (fondo negro, texto blanco, acento amarillo `#FFE14D`, estados `#7CF2C2` / `#FF9B90`); ningún componente lleva reglas propias de contraste.",
         "section": "colors"
       },
       {
-        "name": "La Regla de los Colores Vetados",
-        "body": "#004884 y #3366CC (mockup v4) no existen en este sistema; su lugar lo ocupa Cobalt.",
-        "section": "colors"
-      },
-      {
-        "name": "La Regla de la Cifra en Work Sans",
-        "body": "Todo número que sea dato (cifra grande, cifra de pestaña) va en Work Sans con cifras tabulares; el texto corrido nunca.",
+        "name": "La Regla de la Cifra Tabular",
+        "body": "Todo número que se compara (valores de tarjeta, contadores del menú) usa `font-variant-numeric: tabular-nums`.",
         "section": "typography"
       },
       {
-        "name": "La Regla del Tamaño Libre",
-        "body": "Sin alturas fijas en texto: la barra de accesibilidad del CDN escribe `font-size` en línea y todo debe crecer con ella.",
+        "name": "La Regla del Rem",
+        "body": "Todo tamaño de texto va en `rem` y ninguna caja de texto tiene altura fija: la barra de accesibilidad del CDN escribe `font-size` en línea y el diseño debe crecer con ella.",
         "section": "typography"
       },
       {
-        "name": "La Regla Plana",
-        "body": "Ninguna superficie lleva sombra. Si algo necesita separarse, gana borde Línea o cambia de capa tonal.",
+        "name": "La Regla de los 1440",
+        "body": "Cabecera, cuerpo, barra superior y pie comparten el mismo eje de 90rem; nada propio se sale de ese contenedor.",
+        "section": "layout"
+      },
+      {
+        "name": "La Regla del Tablero Nativo",
+        "body": "En teléfono el libro de Tableau se muestra a su ancho de escritorio con desplazamiento horizontal y aviso; nunca con `:device=phone`, que Tableau Public entrega en blanco.",
+        "section": "layout"
+      },
+      {
+        "name": "La Regla de lo Plano por Defecto",
+        "body": "En reposo, las superficies son planas; la sombra visible es respuesta a un estado, nunca adorno.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** sacar todo valor de un token `--nxgov-*` en `:root`; tipografía y espacio en `rem`.",
-      "**Do** nombrar todo bloque con prefijo `nxgov-` y BEM estricto; estados con `.nxgov-is-*` o atributos ARIA (`aria-current`, `aria-pressed`).",
-      "**Do** acompañar cada valoración con texto y flecha SVG; el color nunca va solo.",
-      "**Do** poner junto a cada cifra su fuente y fecha de corte, y junto a cada tablero su resumen en texto fuera del iframe.",
-      "**Do** cargar Tableau solo tras clic, detrás de la puerta con aviso de tercero.",
-      "**Do** usar anillo de foco Cobalt de 3px con 3px de separación (amarillo sobre la barra Cobalt).",
-      "**Do** respetar `prefers-reduced-motion`: sin animación ni transición."
+      "**Do** tomar todo color, radio, sombra y duración de los tokens `--nxgov-*` declarados en `:root`.",
+      "**Do** usar el prefijo `nxgov-`, BEM estricto y estados `.nxgov-is-*`; atributos `data-nxgov-*` y eventos `nxgov:<bloque>:<evento>`.",
+      "**Do** mostrar cada tablero de Tableau sin clic, con resumen en texto, fuente, fecha y enlace al libro.",
+      "**Do** acompañar cada estado de cifra con palabra, ícono SVG y color suave.",
+      "**Do** escribir tipografía en `rem` y dejar que el texto crezca sin alturas fijas.",
+      "**Do** alinear todo contenido propio y el chrome GOV.CO al contenedor de 90rem.",
+      "**Do** dar foco visible con contorno Cobalt de 3px y 2px de separación."
     ],
     "donts": [
-      "**Don't** usar #004884 ni #3366CC, ni cargar el CDN v4, Tailwind o Font Awesome.",
-      "**Don't** tocar ni reestilizar el chrome GOV.CO del CDN v5 ni clases `.govco-*`, `.btn`, `.d-*`.",
-      "**Don't** usar `style` o `script` en línea ni manejadores `on*` (CSP estricta).",
-      "**Don't** usar el amarillo fuera de la fecha de corte y la cifra activa, ni verde o rojo fuera de una valoración.",
-      "**Don't** añadir sombras; la profundidad es tonal.",
-      "**Don't** usar `!important` salvo en `.nxgov-sr-only` y `.nxgov-is-hidden`.",
-      "**Don't** fijar alturas a cajas de texto."
+      "**Don't** modificar el chrome GOV.CO del CDN v5 ni las clases `.govco-*`; solo se ajusta su alineación desde contenedores propios.",
+      "**Don't** usar los colores del mockup v4 (`#004884`, `#3366CC`); el acento es Cobalt.",
+      "**Don't** usar estilos o scripts en línea ni manejadores `on*`; la CSP es estricta.",
+      "**Don't** esconder un tablero tras un botón ni convertir la página en un documento de texto largo.",
+      "**Don't** pasar a un tablero oscuro o pesado, ni usar sombras fuertes en reposo.",
+      "**Don't** usar Cobalt como relleno decorativo ni en elementos que no se pueden tocar.",
+      "**Don't** usar fuentes de íconos ni glifos de texto como íconos; solo SVG de trazo.",
+      "**Don't** cargar Tableau con `:device=phone`."
     ]
   }
 }

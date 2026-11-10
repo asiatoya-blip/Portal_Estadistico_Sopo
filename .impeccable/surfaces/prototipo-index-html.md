@@ -5,7 +5,7 @@ primary_target: "prototipo/index.html"
 related_targets: []
 ---
 
-# Surface brief — Portal Estadístico de Sopó (v2, tablero de producto)
+# Surface brief — Portal Estadístico de Sopó (v3, tablero moderno)
 
 Scope: `prototipo/index.html`. Mode: Operate. Reemplaza la v1 "Temas que juntan cifra y tablero" (rechazada por el
 usuario el 2026-11-10: tableros ocultos tras botón, chrome GOV.CO simulado, diseño soso).
