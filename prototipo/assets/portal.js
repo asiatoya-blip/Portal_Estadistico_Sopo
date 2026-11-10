@@ -28,7 +28,7 @@
     }
     // La pestaña activa queda a la vista dentro de la tira desplazable
     var tab = view.querySelector('.nxgov-tabs__link[aria-current]');
-    if (tab) { var strip = tab.closest('.nxgov-tabs'); strip.scrollLeft = tab.offsetLeft - (strip.clientWidth - tab.offsetWidth) / 2; }
+    if (tab) { var strip = tab.closest('.nxgov-tabs'); if (strip.scrollWidth > strip.clientWidth) strip.scrollLeft = Math.max(0, tab.offsetLeft - 24); }
     var heading = view.querySelector('h1, h2');
     document.title = (view.id === 'resumen' ? '' : heading.textContent + ' · ') + 'Portal Estadístico de Sopó';
     document.dispatchEvent(new CustomEvent('nxgov:views:change', { detail: { vista: view.id } }));
@@ -50,8 +50,12 @@
     if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
   });
 
-  window.addEventListener('popstate', function () { show(location.hash, false); });
+  window.addEventListener('popstate', function () { show(location.hash, false); window.scrollTo(0, 0); });
   if (menu && narrow.matches) menu.open = false;
+  // En teléfono, Tableau entrega su diseño para teléfono (lo genera solo si el libro no trae uno)
+  if (window.matchMedia('(max-width: 40rem)').matches) {
+    document.querySelectorAll('.nxgov-board__frame').forEach(function (f) { f.src = f.getAttribute('src') + '&:device=phone'; });
+  }
   show(location.hash, true);
   // El ancla nativa saltaría por encima de la cabecera y la barra GOV.CO; el navegador la aplica tras 'load'
   if (location.hash) { window.scrollTo(0, 0); window.addEventListener('load', function () { window.scrollTo(0, 0); }); }

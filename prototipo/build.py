@@ -11,6 +11,7 @@ CDN = "https://cdn.www.gov.co/layout-govco-v5"
 HOJAS = {h["id"]: (g, h) for g in D["grupos"] for h in g["hojas"]}
 ESTADO = {"mejora": "Mejora", "empeora": "Empeora", "estable": "Sin valoración"}
 FLECHA = {"sube": "M12 19V5M5 12l7-7 7 7", "baja": "M12 5v14M5 12l7 7 7-7"}
+DERECHA, IZQUIERDA, CHEVRON = "M5 12h14M13 6l6 6-6 6", "M19 12H5M11 6l-6 6 6 6", "M6 9l6 6 6-6"
 # Íconos de trazo propios (24×24), uno por entrada del menú
 ICONO = {
     "resumen": "M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z",
@@ -54,16 +55,18 @@ def kpi(k):
     puntos, (lx, ly), desc = tendencia(k["serie"])
     area = f"4,44 {puntos} 156,44"
     sentido = "baja" if k["cambio"].startswith("−") else "sube"
-    h = HOJAS[k["hoja"]][1]
+    h = HOJAS[k["hoja"]][1] if k["hoja"] else None
+    tag, attrs = ("a", f' href="#{h["id"]}"') if h else ("article", "")
+    ir = f' <span class="nxgov-kpi__go">· Ver tablero<span class="nxgov-sr-only"> de {e(h["titulo"])}</span></span>' if h else ""
     return f"""
-          <a class="nxgov-kpi nxgov-kpi--{k['estado']}" href="#{h['id']}">
+          <{tag} class="nxgov-kpi nxgov-kpi--{k['estado']}"{attrs}>
             <span class="nxgov-kpi__top"><span class="nxgov-kpi__label">{e(k['etiqueta'])}</span><span class="nxgov-kpi__chip">{ESTADO[k['estado']]}</span></span>
             <span class="nxgov-kpi__value">{e(k['valor'])}</span>
             <span class="nxgov-kpi__unit">{e(k['unidad'])}</span>
             <svg class="nxgov-kpi__trend" viewBox="0 0 160 44" preserveAspectRatio="none" role="img" aria-label="{e(desc)}"><polygon points="{area}"/><polyline points="{puntos}"/><circle cx="{lx:.1f}" cy="{ly:.1f}" r="3"/></svg>
             <span class="nxgov-kpi__change">{svg(FLECHA[sentido])}{e(k['cambio'])}</span>
-            <span class="nxgov-kpi__source">{e(k['fuente'])} · <span class="nxgov-kpi__go">Ver tablero<span class="nxgov-sr-only"> de {e(h['titulo'])}</span></span></span>
-          </a>"""
+            <span class="nxgov-kpi__source">{e(k['fuente'])}{ir}</span>
+          </{tag}>"""
 
 
 def iframe(h):
@@ -89,8 +92,8 @@ def vista_hoja(g, h, i, lista):
     pager = ""
     if prev_h or next_h:
         pager = '<nav class="nxgov-pager" aria-label="Tablero anterior y siguiente">' + \
-            (f'<a class="nxgov-pager__link" href="#{prev_h["id"]}"><span class="nxgov-pager__dir">← Anterior</span>{e(prev_h["titulo"])}</a>' if prev_h else "<span></span>") + \
-            (f'<a class="nxgov-pager__link nxgov-pager__link--next" href="#{next_h["id"]}"><span class="nxgov-pager__dir">Siguiente →</span>{e(next_h["titulo"])}</a>' if next_h else "") + "</nav>"
+            (f'<a class="nxgov-pager__link" href="#{prev_h["id"]}"><span class="nxgov-pager__dir">{svg(IZQUIERDA)}Anterior</span>{e(prev_h["titulo"])}</a>' if prev_h else "<span></span>") + \
+            (f'<a class="nxgov-pager__link nxgov-pager__link--next" href="#{next_h["id"]}"><span class="nxgov-pager__dir">Siguiente{svg(DERECHA)}</span>{e(next_h["titulo"])}</a>' if next_h else "") + "</nav>"
     return f"""
         <section class="nxgov-view" id="{h['id']}" aria-labelledby="{h['id']}-h" data-nxgov-group="{e(g['nombre'])}">
           <header class="nxgov-view__head">
@@ -175,7 +178,7 @@ pagina = f"""<!doctype html>
   <div class="nxgov-container nxgov-shell">
     <aside class="nxgov-nav">
       <details class="nxgov-nav__menu" open>
-        <summary class="nxgov-nav__toggle">Menú de tableros</summary>
+        <summary class="nxgov-nav__toggle">Menú de tableros{svg(CHEVRON)}</summary>
         <nav aria-label="Tableros">{menu()}</nav>
       </details>
       <p class="nxgov-nav__note">Fuentes: TerriData (DNP) y libros de la Alcaldía en Tableau Public.</p>
@@ -183,8 +186,8 @@ pagina = f"""<!doctype html>
     <main class="nxgov-main" id="contenido">
       <section class="nxgov-view nxgov-view--home" id="resumen" aria-labelledby="resumen-h">
         <header class="nxgov-home__head">
-          <h1 class="nxgov-home__title" id="resumen-h">¿Cómo va Sopó?</h1>
-          <p class="nxgov-home__lead">Cifras oficiales del municipio con su fuente y su tendencia. Toca una cifra para ver su tablero.</p>
+          <div><h1 class="nxgov-home__title" id="resumen-h">¿Cómo va Sopó?</h1>
+          <p class="nxgov-home__lead">Cifras oficiales del municipio con su fuente y su tendencia. Las cifras con tablero se abren al tocarlas.</p></div>
           <ul class="nxgov-pulse" aria-label="Estado frente al año anterior">
             <li class="nxgov-pulse__item nxgov-pulse__item--mejora"><strong>{mejoran}</strong> mejoraron</li>
             <li class="nxgov-pulse__item nxgov-pulse__item--empeora"><strong>{empeoran}</strong> empeoraron</li>
@@ -197,9 +200,12 @@ pagina = f"""<!doctype html>
         <section class="nxgov-feature" aria-labelledby="destacado-h">
           <div class="nxgov-section-head">
             <h2 class="nxgov-section-head__title" id="destacado-h">Tablero destacado: {e(dest['titulo'])}</h2>
-            <a class="nxgov-link" href="#{dest['id']}">Abrir en el visor →</a>
+            <a class="nxgov-link" href="#{dest['id']}">Abrir en el visor{svg(DERECHA)}</a>
           </div>
-          <div class="nxgov-board nxgov-board--feature"><div class="nxgov-board__stage">{iframe(dest)}</div></div>
+          <div class="nxgov-board nxgov-board--feature">
+            <div class="nxgov-board__info">{resumen(dest)}<p class="nxgov-view__meta">Fuente: {e(dest['fuente'])} · Corte: {e(D['corte'])} · <a href="{e(url(dest, False))}" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a></p></div>
+            <div class="nxgov-board__stage">{iframe(dest)}</div>
+          </div>
         </section>
         <section aria-labelledby="explorar-h">
           <div class="nxgov-section-head"><h2 class="nxgov-section-head__title" id="explorar-h">Explorar tableros</h2></div>
