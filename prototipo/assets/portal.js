@@ -52,10 +52,6 @@
 
   window.addEventListener('popstate', function () { show(location.hash, false); window.scrollTo(0, 0); });
   if (menu && narrow.matches) menu.open = false;
-  // En teléfono, Tableau entrega su diseño para teléfono (lo genera solo si el libro no trae uno)
-  if (window.matchMedia('(max-width: 40rem)').matches) {
-    document.querySelectorAll('.nxgov-board__frame').forEach(function (f) { f.src = f.getAttribute('src') + '&:device=phone'; });
-  }
   show(location.hash, true);
   // El ancla nativa saltaría por encima de la cabecera y la barra GOV.CO; el navegador la aplica tras 'load'
   if (location.hash) { window.scrollTo(0, 0); window.addEventListener('load', function () { window.scrollTo(0, 0); }); }

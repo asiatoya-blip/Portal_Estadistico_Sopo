@@ -159,6 +159,7 @@ a.nxgov-kpi:hover { transform: translateY(-2px); }
 .nxgov-view__summary--pending { color: var(--nxgov-color-muted); font-style: italic; }
 .nxgov-view__meta { margin: 0; font-size: 0.8125rem; color: var(--nxgov-color-muted); }
 .nxgov-board__stage { position: relative; aspect-ratio: 16 / 11; max-height: 85vh; background: var(--nxgov-color-neutral-soft); }
+.nxgov-board__hint { display: none; }
 .nxgov-board__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: var(--nxgov-color-surface); }
 .nxgov-pager { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
 .nxgov-pager__link { display: flex; flex-direction: column; min-width: 12rem; padding: 0.75rem 1rem; background: var(--nxgov-color-surface); border: 1px solid var(--nxgov-color-line); border-radius: var(--nxgov-radius-sm); font: 600 0.9375rem/1.3 var(--nxgov-font-display); color: var(--nxgov-color-text); text-decoration: none; }
@@ -193,7 +194,9 @@ a.nxgov-kpi:hover { transform: translateY(-2px); }
 @media (max-width: 40rem) {
   .nxgov-kpis, .nxgov-collections { grid-template-columns: minmax(0, 1fr); }
   .nxgov-header__name { font-size: 1rem; }
-  .nxgov-board__stage { aspect-ratio: 3 / 4; }
+  .nxgov-board__hint { display: block; margin: 0; padding: 0.5rem 1.25rem; font-size: 0.8125rem; color: var(--nxgov-color-muted); background: var(--nxgov-color-neutral-soft); }
+  .nxgov-board__stage { aspect-ratio: auto; height: 34rem; max-height: none; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .nxgov-board__frame { width: 60rem; }
   .nxgov-tabs { overflow-x: auto; scrollbar-width: none; scroll-padding-inline: 1.5rem; -webkit-mask-image: linear-gradient(90deg, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent); mask-image: linear-gradient(90deg, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent); }
   .nxgov-tabs__list { flex-wrap: nowrap; padding-inline: 1rem; }
   .nxgov-pager { flex-direction: column; }

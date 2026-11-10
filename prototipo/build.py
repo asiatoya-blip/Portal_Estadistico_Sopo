@@ -106,6 +106,7 @@ def vista_hoja(g, h, i, lista):
           {tabs}
           <div class="nxgov-board">
             <div class="nxgov-board__info">{resumen(h)}<p class="nxgov-view__meta">Fuente: {e(h['fuente'])} · Corte: {e(D['corte'])}</p></div>
+            <p class="nxgov-board__hint">Desliza para ver el tablero completo o ábrelo en Tableau Public.</p>
             <div class="nxgov-board__stage">{iframe(h)}</div>
           </div>
           {pager}
@@ -204,6 +205,7 @@ pagina = f"""<!doctype html>
           </div>
           <div class="nxgov-board nxgov-board--feature">
             <div class="nxgov-board__info">{resumen(dest)}<p class="nxgov-view__meta">Fuente: {e(dest['fuente'])} · Corte: {e(D['corte'])} · <a href="{e(url(dest, False))}" rel="noopener" target="_blank">Abrir en Tableau Public<span class="nxgov-sr-only"> (otra pestaña)</span></a></p></div>
+            <p class="nxgov-board__hint">Desliza para ver el tablero completo o ábrelo en Tableau Public.</p>
             <div class="nxgov-board__stage">{iframe(dest)}</div>
           </div>
         </section>
